@@ -21,6 +21,7 @@ const config: Config = {
         
           "color-primary": "var(--color-primary)",
           "color-primary-light": "var( --color-primary-light)",
+          "color-primary-dark": "var( --color-primary-dark)",
           "color-title": "var(--text-color-title)",
           "color-subtitle": "var(--text-color-subtitle)",
           "shadow-color": "var(--shadow-color)",
