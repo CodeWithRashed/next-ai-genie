@@ -10,13 +10,11 @@ import Image from "next/image";
 
 
 const Login = () => {
-
-
   return (
     // Form Container
-    <div className="grid lg:grid-cols-2 h-screen items-center">
+    <div className="grid h-screen lg:grid-cols-2 items-center">
       {/* Input Container Start*/}
-      <div className="h-full my-10 flex flex-col justify-center px-10 lg:shadow-[rgba(0,0,15,0.5)_10px_0px_20px_0px]">
+      <div className="h-full my-10 lg:my-0 flex flex-col justify-center px-10 lg:shadow-[rgba(0,0,15,0.5)_10px_0px_20px_0px]">
         {/* Form Logo */}
 
         <div className="logo flex w-full flex-col justify-center items-center mb-10">
@@ -156,8 +154,8 @@ const Login = () => {
       {/* Input Container End*/}
 
       {/* Image Container Start*/}
-      <div className="lg:block hidden">
-        <Image src={signInImage} alt="login-banner-image" />
+      <div className="lg:flex lg:justify-center lg:items-center hidden">
+        <Image height={500} width={500} src={signInImage} alt="login-banner-image" className="object-cover"/>
       </div>
       {/* Image Container End*/}
     </div>

@@ -18,7 +18,7 @@ const Registration = () => {
     // Form Container
     <div className="grid lg:grid-cols-2 h-screen items-center">
       {/* Input Container Start*/}
-      <div className="h-full flex my-10 flex-col justify-center px-10 lg:shadow-[rgba(0,0,15,0.5)_10px_0px_20px_0px]">
+      <div className="h-full my-10 lg:my-0 flex flex-col justify-center px-10 lg:shadow-[rgba(0,0,15,0.5)_10px_0px_20px_0px]">
         {/* Form Logo */}
 
         <div className="logo flex w-full flex-col justify-center items-center">
@@ -27,12 +27,15 @@ const Registration = () => {
               <Image alt="ai genie logo" width={200} height={150} className="object-cover" src={Logo} />
             </Link>
           </div>
-          <p className="my-2 text-lg text-color-subtitle">Create an Account</p>
+          <p className="my-2 text-lg text-color-subtitle">Create An Account</p>
         </div>
 
         <form  className="space-y-2">
+          {/* Input Group Container */}
+          <div className="group-container lg:flex gap-3">
+
           {/* input group start */}
-          <div className="flex flex-col">
+          <div className="lg:w-3/4 flex flex-col">
             <div className="input-container relative">
               {/* Indicator Icon */}
               <div className="cta absolute bottom-0 right-0 flex gap-2 items-center">
@@ -56,19 +59,19 @@ const Registration = () => {
           {/* input group end */}
 
           {/* input group start */}
-          <div className="flex flex-col">
+          <div className=" flex flex-col">
             <div className="input-container relative">
               <label htmlFor="image" className="block mb-2">
-                Choose File:
+                Profile Image:
               </label>
               <input
                 type="file"
                 name="image"
-                className="h-10 w-full file:h-full file:border-0 file:bg-color-primary file:text-white  bg-grey-bg text-color-subtitle focus:border-color-primary outline-none border-2 border-grey-bg rounded-main  bg-gray-bg"
+                className="h-10 lg:w-[140px] w-full file:h-10  file:border-0 file:bg-color-primary file:text-white  bg-grey-bg text-color-subtitle focus:border-color-primary outline-none border-2 border-grey-bg rounded-main  bg-gray-bg"
               />
               {/* Indicator Icon */}
-              <div className="cta absolute bottom-0 right-0 flex gap-2 items-center">
-                <div className="text-white bg-color-primary p-3 h-10 rounded-main">
+              <div className="cta h-10 absolute bottom-0 right-0 flex gap-2 items-center">
+                <div className="text-white bg-color-primary p-3 h-10 rounded-r-main">
                   <TbPhotoPlus />
                 </div>
               </div>
@@ -77,6 +80,8 @@ const Registration = () => {
 
           </div>
           {/* input group end */}
+          </div>
+
 
           {/* input group start */}
           <div className="flex flex-col">
@@ -196,8 +201,8 @@ const Registration = () => {
       {/* Input Container End*/}
 
       {/* Image Container Start*/}
-      <div className="hidden lg:block">
-        <Image src={signUpImage} alt="login banner image" />
+      <div className="hidden lg:flex lg:justify-center lg:items-center">
+        <Image width={500} height={500} src={signUpImage} alt="login banner image" />
       </div>
       {/* Image Container End*/}
     </div>
