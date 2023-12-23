@@ -10,14 +10,14 @@ const HomeBanner = () => {
       <div className="grid lg:grid-cols-2 lg:gap-3 h-full lg:justify-between justify-center items-center">
         {/* Banner Text Content */}
         <div className="text-center lg:space-y-5 lg:text-left space-y-3 md:order-first order-last">
-          <h1 className="leading-normal font-bold text-color-title text-6xl ">
-            AI Genie One of the Best Generative <br />
+          <h1 className="leading-normal font-bold text-color-title text-2xl md:text-5xl lg:text-6xl ">
+            AI Genie One of the Best Generative < br />
             AI Tool
           </h1>
-          <p className="text-color-subtitle">No Credit Card Required</p>
-          <div className="cta flex gap-3">
-           <ButtonPrimary >Free Trial</ButtonPrimary>
-           <ButtonOutline>Watch How It Works</ButtonOutline>
+          <p className="text-color-subtitle py-5">No Credit Card Required</p>
+          <div className="cta mx-auto w-4/5 lg:w-full flex flex-col lg:flex-row gap-3">
+            <ButtonPrimary>Free Trial</ButtonPrimary>
+            <ButtonOutline>Watch How It Works</ButtonOutline>
           </div>
         </div>
 
