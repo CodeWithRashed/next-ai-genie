@@ -5,14 +5,7 @@
 
 :root{
   --color-primary: #5319A6;
-  --color-primary-light: #eee1ff;
-  --color-secondary: #42B4EE;
-  --btn-primary-bg: #42B4EE;
-  --btn-secondary-bg: #ecf7fd;
-  --btn-primary-text: #FFFFFF;
-  --btn-secondary-text: #42B4EE;
-  --card-primary-bg: #ecf7fd;
-  --card-secondary-bg: #5319A6;
+  --color-primary-light: #F2EBFB;
   --text-color-title: #051114;
   --text-color-subtitle: #51565E;
   --shadow-color: rgba(196,185,228, 1);

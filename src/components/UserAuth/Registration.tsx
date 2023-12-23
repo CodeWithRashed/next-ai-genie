@@ -67,7 +67,7 @@ const Registration = () => {
               <input
                 type="file"
                 name="image"
-                className="h-10 lg:w-[140px] w-full file:h-10  file:border-0 file:bg-color-primary file:text-white  bg-grey-bg text-color-subtitle focus:border-color-primary outline-none border-2 border-grey-bg rounded-main  bg-gray-bg"
+                className="h-10 lg:w-[140px] w-full file:h-10  file:border-0 file:bg-color-primary file:text-white  bg-color-primary text-color-subtitle focus:border-color-primary outline-none  rounded-main"
               />
               {/* Indicator Icon */}
               <div className="cta h-10 absolute bottom-0 right-0 flex gap-2 items-center">
