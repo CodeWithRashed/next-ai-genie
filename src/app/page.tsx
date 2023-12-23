@@ -2,9 +2,13 @@ import Navbar from "@/components/Navbar/Navbar"
 
 export default function Home() {
   return (
-    <main className="homepage">
+
+      <header className="header bg-[#F9FDFF]">
       <Navbar></Navbar>
-<h1>Homepage</h1>
-    </main>
+
+
+      </header>
+
+
   )
 }
