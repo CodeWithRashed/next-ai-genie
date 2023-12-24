@@ -1,6 +1,7 @@
 import HomeBanner from "@/components/HomeBanner/HomeBanner";
 import Navbar from "@/components/Navbar/Navbar";
 import FeatureSlider from "@/components/Sections/FeatureSection/FeatureSlider";
+import PricingSection from "@/components/Sections/PricingSection/PricingSection";
 import FeedbackSection from "@/components/Sections/ReviewSection/FeedbackSection";
 import WhyChooseUs from "@/components/Sections/WhyChooseUs/WhyChooseUs";
 import SectionTitle from "@/components/Shared/SectionTitle";
@@ -33,6 +34,13 @@ export default function Home() {
     <div  className=" max-w-[1240px] px-5 mx-auto">
       <SectionTitle title="Feedback" subtitle="See what other people say"></SectionTitle>
       <FeedbackSection></FeedbackSection>
+    </div>
+    </section>
+
+    <section id="testimonials" className="my-20 bg-[#F9FDFF] py-20">
+    <div  className=" max-w-[1240px] px-5 mx-auto">
+      <SectionTitle title="Pricing" subtitle="Choose the best package for you"></SectionTitle>
+      <PricingSection></PricingSection>
     </div>
     </section>
     </main>
