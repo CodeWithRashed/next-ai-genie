@@ -1,3 +1,4 @@
+import { FooterSection } from "@/components/Footer/Footer";
 import HomeBanner from "@/components/HomeBanner/HomeBanner";
 import Navbar from "@/components/Navbar/Navbar";
 import Contact from "@/components/Sections/Contact/Contact";
@@ -52,9 +53,15 @@ export default function Home() {
     </div>
     </section>
 
-    <section id="contact" className="my-10 bg-[#FFF]">
+    <section id="newsletter" className="my-10 bg-[#FFF]">
     <div  className=" max-w-[1240px] px-5 mx-auto">
       <Subscribe/>
+    </div>
+    </section>
+
+    <section id="footer" className="py-10 bg-color-primary">
+    <div  className=" max-w-[1240px] px-5 mx-auto">
+      <FooterSection/>
     </div>
     </section>
     </main>
