@@ -1,6 +1,6 @@
 "use client";
+import { FaRegArrowAltCircleRight, FaRegArrowAltCircleLeft } from "react-icons/fa";
 
-import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -66,7 +66,7 @@ export default function FeatureSlider() {
             }}
             className="cursor-pointer swiper-button-prev swiper-button"
           >
-            Left
+            <FaRegArrowAltCircleLeft/>
           </button>
           <button
             onClick={() => {
@@ -74,7 +74,7 @@ export default function FeatureSlider() {
             }}
             className="cursor-pointer swiper-button-next swiper-button"
           >
-            Left
+            <FaRegArrowAltCircleRight/>
           </button>
         </div>
       </Swiper>

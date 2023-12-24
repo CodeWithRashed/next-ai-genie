@@ -15,22 +15,27 @@
   }
   
   .swiper-button-prev:active {
-    background-color: aqua;
+    background-color: var(--color-primary);
    padding: 3px;
+   border-radius: 50%;
+   color:#fff
   }
   
   .swiper-button-next:active {
-    background-color: aqua;
+    background-color: var(--color-primary);
     padding: 3px;
+    border-radius: 50%;
+    color:#fff
   }
   .swiper-button-next {
-    background-color: aqua;
+    color:var(--color-primary);
+    background-color: transparent;
    padding: 3px;
   }
   
   .swiper-button-prev {
-   background-color: aqua;
-   padding: 3px;
+    color:var(--color-primary);
+    background-color: transparent;
   }
   
   .swiper-pagination {
