@@ -4,6 +4,7 @@ import Contact from "@/components/Sections/Contact/Contact";
 import FeatureSlider from "@/components/Sections/FeatureSection/FeatureSlider";
 import PricingSection from "@/components/Sections/PricingSection/PricingSection";
 import FeedbackSection from "@/components/Sections/ReviewSection/FeedbackSection";
+import Subscribe from "@/components/Sections/Subscribe/Subscribe";
 import WhyChooseUs from "@/components/Sections/WhyChooseUs/WhyChooseUs";
 import SectionTitle from "@/components/Shared/SectionTitle";
 
@@ -48,6 +49,12 @@ export default function Home() {
     <section id="contact" className="my-20 bg-[#F9FDFF] py-20">
     <div  className=" max-w-[1240px] px-5 mx-auto">
       <Contact/>
+    </div>
+    </section>
+
+    <section id="contact" className="my-10 bg-[#FFF]">
+    <div  className=" max-w-[1240px] px-5 mx-auto">
+      <Subscribe/>
     </div>
     </section>
     </main>
