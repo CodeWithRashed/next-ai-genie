@@ -68,7 +68,7 @@ export const MobileDropdownMenu = () => {
             </li>
             <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
               <Link
-                href="#Contact"
+                href="#contact"
                 className={`text-color-primary text-lg font-normal`}
               >
                 Contact

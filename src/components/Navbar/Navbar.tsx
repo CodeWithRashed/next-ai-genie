@@ -32,7 +32,7 @@ const Navbar = () => {
       </li>
       <li className="flex flex-col">
         <Link
-          href="#Contact"
+          href="#contact"
           className={`text-color-primary text-lg font-normal`}
         >
           Contact
