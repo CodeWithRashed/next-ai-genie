@@ -1,14 +1,8 @@
 import Link from "next/link";
 import logo from "../../assets/logo.png";
-import user from "../../assets/user1.jpg";
 import Image from "next/image";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { RiMenu3Fill } from "react-icons/ri";
+import {MobileDropdownMenu, ProfileDropdownMenu} from "../ui/DropdownMenu";
+
 const Navbar = () => {
   const isActive = false;
   //Menu Items Desktop
@@ -21,7 +15,7 @@ const Navbar = () => {
       </li>
       <li className="flex flex-col items-center justify-center">
         <Link
-          href="#Pricing"
+          href="#pricing"
           className={`text-color-primary text-lg font-normal`}
         >
           Pricing
@@ -78,54 +72,7 @@ const Navbar = () => {
       <div className="col-span-4 flex justify-end items-center gap-3">
         {/* Mobile Nav Start */}
         <div className="lg:hidden">
-          <DropdownMenu>
-            <DropdownMenuTrigger className="rounded-full hover:text-color-primary focus:text-color-primary p-2">
-             <RiMenu3Fill className="text-xl"/>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="flex bg-white mt-5 mr-2 w-52 lg:flex-row flex-col justify-center items-center gap-4 text-color-subtitle  font-bold">
-              <DropdownMenuItem className="hover:bg-color-primary-light w-full">
-                <Link
-                  href="/"
-                  className={`text-color-primary text-lg font-normal `}
-                >
-                  Home
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-color-primary-light w-full">
-                <Link
-                  href="#Pricing"
-                  className={`text-color-primary text-lg font-normal`}
-                >
-                  Pricing
-                </Link>
-              </DropdownMenuItem>
-
-              <DropdownMenuItem className="hover:bg-color-primary-light w-full">
-                <Link
-                  href="#testimonials"
-                  className={`text-color-primary text-lg font-normal`}
-                >
-                  Testimonials
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-color-primary-light w-full">
-                <Link
-                  href="#Contact"
-                  className={`text-color-primary text-lg font-normal`}
-                >
-                  Contact
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-color-primary-light w-full">
-                <Link
-                  href="/login"
-                  className={`text-color-primary text-lg font-normal`}
-                >
-                  Login
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+        <MobileDropdownMenu/>
         </div>
         {/* Mobile Nav End */}
 
@@ -140,33 +87,7 @@ const Navbar = () => {
         </div>
 
         <div className="active-user flex justify-center items-center">
-          <DropdownMenu>
-            <DropdownMenuTrigger className="rounded-full overflow-hidden border-2 border-color-primary">
-              <div>
-                <Image
-                  height={40}
-                  width={40}
-                  className="object-cover"
-                  src={user}
-                  alt="ai genie logo"
-                />
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="mr-2 mt-5">
-              <DropdownMenuItem className="hover:bg-color-primary-light">
-                Profile
-              </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-color-primary-light">
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-color-primary-light">
-                Team
-              </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-color-primary-light">
-                Subscription
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <ProfileDropdownMenu/>
         </div>
       </div>
     </div>
