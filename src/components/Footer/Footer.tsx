@@ -9,7 +9,7 @@ export function FooterSection() {
       {/* Footer Container */}
       <div className="footer-container flex flex-col">
         {/* Footer Top */}
-        <div className="footer-top flex justify-between">
+        <div className="footer-top flex-col lg:flex-row flex justify-between">
           <div className="flex lg:justify-start justify-center">
             <Image
               width={160}
@@ -19,7 +19,7 @@ export function FooterSection() {
               className="w-48"
             />
           </div>
-          <ul className="flex justify-center gap-5 text-xl text-color-title ">
+          <ul className="flex justify-center gap-5 text-xl text-color-title mt-10 lg:mt-0">
             <li className="bg-white p-2 rounded-main h-fit  hover:text-color-primary group transition-all ease-in-out">
               <IoLogoGithub className="group-hover:scale-105"></IoLogoGithub>
             </li>
@@ -33,9 +33,9 @@ export function FooterSection() {
         </div>
 
         {/* Footer Bottom */}
-        <div className="footer-bottom flex justify-between text-white mt-8">
+        <div className="footer-bottom flex lg:flex-row flex-col justify-between text-white mt-8">
           <nav>
-            <ul className="flex gap-4 text-white">
+            <ul className="flex gap-4 text-white flex-wrap justify-center items-center">
               <li className="flex flex-col">
                 <Link href="/">Home</Link>
               </li>
@@ -55,7 +55,7 @@ export function FooterSection() {
             </ul>
           </nav>
           {/* Copyright */}
-          <p> &copy; 2024 AI Genie</p>
+          <p className="text-center lg:text-left mt-5 lg:mt-0"> &copy; 2024 AI Genie</p>
         </div>
       </div>
     </footer>

@@ -5,7 +5,7 @@ const WhyChooseUs = () => {
   return (
     <div className="pt-10">
       <div className="grid lg:grid-cols-2 justify-center lg:justify-between mx-auto key-point-container">
-        <div className="image lg:flex  lg:justify-start">
+        <div className="image lg:flex  lg:justify-start mb-8 lg:mb-0">
           <Image
             width={400}
             height={450}

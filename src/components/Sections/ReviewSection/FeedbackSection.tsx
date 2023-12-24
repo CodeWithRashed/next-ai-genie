@@ -10,7 +10,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 
 const FeedbackSection = () => {
   return (
-<div>
+<div className="mt-10">
 
       <div className="grid lg:grid-cols-3">
         {/* Review 1 */}

@@ -5,14 +5,14 @@ const Contact = () => {
   return (
     <div>
       {/* Contact Container */}
-      <div className="grid lg:grid-cols-2 gap-10 p-12 rounded-main">
+      <div className="grid lg:grid-cols-2 gap-10 rounded-main">
         {/* Text Content */}
         <div className="space-y-6">
           <div className="space-y-2">
             <h1 className="text-3xl font-medium text-color-primary">
               Get In Touch
             </h1>
-            <p>We are here for you! How can we help?</p>
+            <p>We are here for you! <span className="hidden lg:inline-block">How can we help?</span></p>
           </div>
 
           <div className="space-y-6">
@@ -37,7 +37,7 @@ const Contact = () => {
         </div>
 
         {/* Image Container */}
-        <div className="image-container">
+        <div className="image-container hidden lg:block">
           <Image
             src={contactBanner}
             width={500}

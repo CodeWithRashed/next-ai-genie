@@ -20,7 +20,7 @@ export default function Home() {
     </header>
     <section id="whyChooseUs" className="my-20 max-w-[1240px] px-5 mx-auto">
     <h3 className="text-lg text-color-subtitle text-center">Why AI Genie</h3>
-      <SectionTitle title="Why Choose Us" subtitle=""></SectionTitle>
+      <SectionTitle title="Why Us" subtitle=""></SectionTitle>
      
       <WhyChooseUs></WhyChooseUs>
     </section>
@@ -42,7 +42,7 @@ export default function Home() {
 
     <section id="pricing" className="my-20 bg-[#FFF] py-20">
     <div  className=" max-w-[1240px] px-5 mx-auto">
-      <SectionTitle title="Pricing" subtitle="Choose the best package for you"></SectionTitle>
+      <SectionTitle title="Pricing" subtitle="Best package for you"></SectionTitle>
       <PricingSection></PricingSection>
     </div>
     </section>
