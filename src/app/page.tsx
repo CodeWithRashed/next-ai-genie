@@ -1,5 +1,6 @@
 import HomeBanner from "@/components/HomeBanner/HomeBanner";
 import Navbar from "@/components/Navbar/Navbar";
+import Contact from "@/components/Sections/Contact/Contact";
 import FeatureSlider from "@/components/Sections/FeatureSection/FeatureSlider";
 import PricingSection from "@/components/Sections/PricingSection/PricingSection";
 import FeedbackSection from "@/components/Sections/ReviewSection/FeedbackSection";
@@ -37,10 +38,16 @@ export default function Home() {
     </div>
     </section>
 
-    <section id="testimonials" className="my-20 bg-[#F9FDFF] py-20">
+    <section id="pricing" className="my-20 bg-[#FFF] py-20">
     <div  className=" max-w-[1240px] px-5 mx-auto">
       <SectionTitle title="Pricing" subtitle="Choose the best package for you"></SectionTitle>
       <PricingSection></PricingSection>
+    </div>
+    </section>
+
+    <section id="contact" className="my-20 bg-[#F9FDFF] py-20">
+    <div  className=" max-w-[1240px] px-5 mx-auto">
+      <Contact/>
     </div>
     </section>
     </main>
