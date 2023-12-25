@@ -10,6 +10,8 @@ import "./FeatureSlider.css";
 
 // import required modules
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+import Image from "next/image";
+import { ButtonPrimary } from "@/components/ui/Button";
 let swiperInstance:any;
 
 
@@ -44,8 +46,32 @@ export default function FeatureSlider() {
         modules={[EffectCoverflow, Pagination, Navigation]}
         className="mySwiper "
       >
-        <SwiperSlide className="shadow-2xl mx-5 rounded-main">
-          <div className="border-2 border-red-300"></div>
+        <SwiperSlide className="shadow-2xl mx-5 rounded-main p-8">
+          <div className="card-container flex flex-col justify-between">
+            {/* card image */}
+            <div className="image h-20 w-20 mx-auto">
+              <Image
+              width={80}
+              height={80}
+              src="https://i.ibb.co/JBvC62X/feature-icon.png"
+              alt="feature icon"
+              className="object-cover"
+              />
+
+            </div>
+
+            {/* card content */}
+            <div className="content my-8 space-y-3">
+
+              <h1 className="text-2xl text-color-title font-bold">Create Content</h1>
+              <p className="text-sm text-color-subtitle">Create human like articles with AI Genie. Create human like articles with AI Genie.  </p>
+            </div>
+
+            {/* card cta */}
+            <div className="cta">
+              <ButtonPrimary>Get Started</ButtonPrimary>
+            </div>
+          </div>
         </SwiperSlide>
         <SwiperSlide className="shadow-2xl mx-5 rounded-main">
           <div className="shadow-lg"></div>
