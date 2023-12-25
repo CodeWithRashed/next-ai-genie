@@ -4,7 +4,7 @@
 
 
 :root{
-  --color-primary: rgb(84, 26, 166);
+  --color-primary: #541aa6;
   --color-primary-light: rgba(84, 26, 166, 0.1);
   --color-primary-dark: rgba(84, 26, 166, 0.9);
   --text-color-title: #051114;

@@ -1,10 +1,4 @@
 import Image from "next/image";
-import user1 from "../../../assets/user1.jpg";
-import user2 from "../../../assets/user2.jpg";
-import user3 from "../../../assets/user3.jpg";
-import user4 from "../../../assets/user4.jpg";
-import user5 from "../../../assets/user5.jpg";
-import user6 from "../../../assets/user6.jpg";
 import Link from "next/link";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
@@ -34,7 +28,9 @@ const FeedbackSection = () => {
             {/* Image */}
             <div className="flex items-center gap-3">
               <Image
-                src={user1}
+                src="https://i.ibb.co/sRJYQrx/profile-pic-2.png"
+                width={48}
+                height={48}
                 alt="Avatar 1"
                 className="w-12 h-12 rounded-full object-cover"
                 />

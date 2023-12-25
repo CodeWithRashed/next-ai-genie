@@ -1,10 +1,11 @@
+
 import Link from "next/link";
 import logo from "../../assets/logo.png";
 import Image from "next/image";
 import {MobileDropdownMenu, ProfileDropdownMenu} from "../ui/DropdownMenu";
 
+
 const Navbar = () => {
-  const isActive = false;
   //Menu Items Desktop
   const menuItems = (
     <ul className="flex lg:flex-row flex-col w-full justify-center items-center gap-4 text-color-subtitle  font-bold">

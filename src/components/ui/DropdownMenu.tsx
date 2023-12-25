@@ -2,7 +2,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { CiMenuFries } from "react-icons/ci";
-import user from "../../assets/user1.jpg";
 import Image from "next/image";
 export const MobileDropdownMenu = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -121,7 +120,7 @@ export const ProfileDropdownMenu = () => {
         <Image
           width={40}
           height={40}
-          src={user}
+          src="https://i.ibb.co/sRJYQrx/profile-pic-2.png"
           alt="user image"
           className="rounded-full object-cover"
         />

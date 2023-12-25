@@ -35,7 +35,7 @@ const WhyChooseUs = () => {
                 </div>
               </div>
               <div>
-                <h1 className="text-2xl text-color-title font-bold">Secure & Safe</h1>
+                <h1 className="text-xl text-color-title font-bold">Secure & Safe</h1>
                 <p className="text-sm text-color-subtitle">
                   All your personal information is securely stored in the cloud.
                 </p>
@@ -48,7 +48,7 @@ const WhyChooseUs = () => {
                 </div>
               </div>
               <div>
-                <h1 className="text-2xl text-color-title font-bold">
+                <h1 className="text-xl text-color-title font-bold">
                   API for Developers
                 </h1>
                 <p className="text-sm text-color-subtitle">
