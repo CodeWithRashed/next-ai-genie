@@ -1,3 +1,4 @@
+import AdminDashboardNav from "@/components/NavigationMenus/DashboardNav/AdminDashboardNav";
 import UserDashboardNavbar from "@/components/NavigationMenus/DashboardNav/UserDashboardNavbar";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -19,7 +20,7 @@ export default function RootLayout({
         <nav className="flex flex-col justify-between">
           <div>
             {/* //Dashboard// */}
-            <Link href="/dashboard" className="flex gap-2 items-center">
+            <Link href="/dashboard" className="px-3 flex gap-2 items-center">
               <MdDashboard className="h-5 w-5" />
               Dashboard
             </Link>
@@ -27,7 +28,8 @@ export default function RootLayout({
           </div>
           <div className="h-[90vh]">
 
-          <UserDashboardNavbar />
+          {/* <UserDashboardNavbar /> */}
+          <AdminDashboardNav/>
           </div>
         </nav>
       </div>
