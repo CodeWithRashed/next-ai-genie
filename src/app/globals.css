@@ -12,3 +12,7 @@
   --shadow-color: rgba(196,185,228, 1);
   --grey-bg: #EEEEEE;
 }
+
+html{
+  scroll-behavior: smooth;
+}
