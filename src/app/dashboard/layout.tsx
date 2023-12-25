@@ -28,7 +28,7 @@ export default function RootLayout({
             <hr className="my-3" />
           </div>
           <div className="h-[90vh]">
-            {/* <UserDashboardNavbar /> */}
+            <UserDashboardNavbar />
             <AdminDashboardNav />
           </div>
         </nav>

@@ -7,12 +7,12 @@ import { FaEye, FaUser } from "react-icons/fa";
 import { TbPhotoPlus } from "react-icons/tb";
 import Link from "next/link";
 import Image from "next/image";
-
-
+import { RegisterUser } from "@/app/actions";
 
 
 
 const Registration = () => {
+
 
   return (
     // Form Container
@@ -30,7 +30,7 @@ const Registration = () => {
           <p className="my-2 text-lg text-color-subtitle">Create An Account</p>
         </div>
 
-        <form  className="space-y-2">
+        <form action={RegisterUser}  className="space-y-2">
           {/* Input Group Container */}
           <div className="group-container lg:flex gap-3">
 
