@@ -8,6 +8,7 @@ import { TbPhotoPlus } from "react-icons/tb";
 import Link from "next/link";
 import Image from "next/image";
 import { RegisterUser } from "@/app/actions";
+import { SignUpButton } from "../Buttons/Buttons";
 
 
 
@@ -139,12 +140,7 @@ const Registration = () => {
           </div>
 
           {/* input group end */}
-          <button
-            type="submit"
-            className="flex justify-center items-center h-10 bg-color-primary font-Inter font-bold px-4 py-2 rounded-main text-white w-full !mt-5"
-          >
-            Sign Up
-          </button>
+        <SignUpButton/>
         </form>
 
        
