@@ -1,5 +1,8 @@
 "use client";
-import { FaRegArrowAltCircleRight, FaRegArrowAltCircleLeft } from "react-icons/fa";
+import {
+  FaRegArrowAltCircleRight,
+  FaRegArrowAltCircleLeft,
+} from "react-icons/fa";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,10 +15,47 @@ import "./FeatureSlider.css";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 import Image from "next/image";
 import { ButtonPrimary } from "@/components/ui/Button";
-let swiperInstance:any;
-
+import Link from "next/link";
+let swiperInstance: any;
 
 export default function FeatureSlider() {
+  const servicesData = {
+    services: [
+      {
+        name: "Image Generation",
+        description: "Converts textual descriptions or prompts into images.",
+        icon: "https://i.ibb.co/cXwCXTr/feature-icon5.png",
+      },
+      {
+        name: "Text-to-Audio",
+        description: "Converts text into spoken audio files in ease.",
+        icon: "https://i.ibb.co/bKQRT5W/feature-icon4.png",
+      },
+      {
+        name: "AI Assistant",
+        description:
+          "Provides assistance and performs tasks based on user input.",
+        icon: "https://i.ibb.co/JBvC62X/feature-icon.png",
+      },
+      {
+        name: "Code Assistant",
+        description: "Assists developers in writing and understanding code.",
+        icon: "https://i.ibb.co/f9dF9cs/feature-icon3.png",
+      },
+      {
+        name: "English Helper",
+        description:
+          "Assists in language learning, grammar, and Translation",
+        icon: "https://i.ibb.co/GPnhdrF/feature-icon2.png",
+      },
+      {
+        name: "Article Summarizer",
+        description:
+          "Summarizes lengthy articles or documents into concise versions.",
+        icon: "https://i.ibb.co/xmchZ4t/feature-icon1.png",
+      },
+    ],
+  };
 
   const pagination = {
     clickable: true,
@@ -27,7 +67,6 @@ export default function FeatureSlider() {
   return (
     <div className="py-10">
       <Swiper
-        
         centeredSlides={true}
         grabCursor={true}
         loop={true}
@@ -46,45 +85,43 @@ export default function FeatureSlider() {
         modules={[EffectCoverflow, Pagination, Navigation]}
         className="mySwiper "
       >
-        <SwiperSlide className="shadow-2xl mx-5 rounded-main p-8">
-          <div className="card-container flex flex-col justify-between">
-            {/* card image */}
-            <div className="image h-20 w-20 mx-auto">
-              <Image
-              width={80}
-              height={80}
-              src="https://i.ibb.co/JBvC62X/feature-icon.png"
-              alt="feature icon"
-              className="object-cover"
-              />
+        {servicesData.services.map((service, index) => (
+          <SwiperSlide key={index} className="shadow-2xl mx-5 rounded-main p-8">
+            <div className="card-container flex flex-col justify-between">
+              {/* card image */}
+              <div className="image h-20 w-20 mx-auto">
+                <Image
+                  width={80}
+                  height={80}
+                  src={service.icon}
+                  alt="feature icon"
+                  className="object-cover"
+                />
+              </div>
 
+              {/* card content */}
+              <div className="content my-8 space-y-3">
+                <h1 className="text-2xl text-color-title font-bold">
+                  {service.name}
+                </h1>
+                <p className="text-sm text-color-subtitle">
+                  {service.description}{" "}
+                </p>
+              </div>
+
+              {/* card cta */}
+              <div className="cta">
+                <Link
+                  href="/dashboard"
+                  className="bg-color-primary hover:bg-color-primary-dark px-5 py-2 rounded-main text-white"
+                >
+                  Get Started
+                </Link>
+              </div>
             </div>
+          </SwiperSlide>
+        ))}
 
-            {/* card content */}
-            <div className="content my-8 space-y-3">
-
-              <h1 className="text-2xl text-color-title font-bold">Create Content</h1>
-              <p className="text-sm text-color-subtitle">Create human like articles with AI Genie. Create human like articles with AI Genie.  </p>
-            </div>
-
-            {/* card cta */}
-            <div className="cta">
-              <ButtonPrimary>Get Started</ButtonPrimary>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className="shadow-2xl mx-5 rounded-main">
-          <div className="shadow-lg"></div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="shadow-lg"></div>
-        </SwiperSlide>
-        <SwiperSlide className="shadow-2xl mx-5 rounded-main">
-          <div className="shadow-lg"></div>
-        </SwiperSlide>
-        <SwiperSlide className="shadow-2xl mx-5 rounded-main">
-          <div className="shadow-lg"></div>
-        </SwiperSlide>
         <div className="control-btn relative z-30 hidden lg:flex justify-between items-center">
           <button
             onClick={() => {
@@ -92,7 +129,7 @@ export default function FeatureSlider() {
             }}
             className="cursor-pointer swiper-button-prev swiper-button"
           >
-            <FaRegArrowAltCircleLeft/>
+            <FaRegArrowAltCircleLeft />
           </button>
           <button
             onClick={() => {
@@ -100,7 +137,7 @@ export default function FeatureSlider() {
             }}
             className="cursor-pointer swiper-button-next swiper-button"
           >
-            <FaRegArrowAltCircleRight/>
+            <FaRegArrowAltCircleRight />
           </button>
         </div>
       </Swiper>
