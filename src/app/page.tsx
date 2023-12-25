@@ -12,58 +12,79 @@ import SectionTitle from "@/components/Shared/SectionTitle";
 export default function Home() {
   return (
     <main>
-    <header className="header bg-[#F9FDFF] mb-20" id="home">
-      <div className="max-w-[1240px] px-5 mx-auto">
-      <Navbar></Navbar>
-      <HomeBanner></HomeBanner>
-      </div>
-    </header>
-    <section id="whyChooseUs" className="my-20 max-w-[1240px] px-5 mx-auto">
-    <h3 className="text-lg text-color-subtitle text-center">Why AI Genie</h3>
-      <SectionTitle title="Why Us" subtitle=""></SectionTitle>
-     
-      <WhyChooseUs></WhyChooseUs>
-    </section>
+      <header className="header bg-[#F9FDFF] mb-20" id="home">
+        <div className="max-w-[1240px] px-5 mx-auto">
+          <Navbar></Navbar>
+          <HomeBanner></HomeBanner>
+        </div>
+      </header>
+      <section id="whyChooseUs" className="my-20 max-w-[1240px] px-5 mx-auto">
+        <div className="py-10">
+          <h3 className="text-lg text-color-subtitle text-center">
+            Why AI Genie
+          </h3>
+          <SectionTitle title="Why Us" subtitle=""></SectionTitle>
+          <WhyChooseUs></WhyChooseUs>
+        </div>
+      </section>
 
-    <section id="features" className="my-20 bg-[#F9FDFF] py-20">
-    <div  className=" max-w-[1240px] px-5 mx-auto">
-      <SectionTitle title="Features" subtitle="Get all features in one place"></SectionTitle>
-      <FeatureSlider></FeatureSlider>
+      <section id="features" className="my-20 bg-[#F9FDFF]">
+        <div className=" max-w-[1240px] px-5 mx-auto">
+          <div className="py-10">
+            <SectionTitle
+              title="Features"
+              subtitle="Get all features in one place"
+            ></SectionTitle>
+            <FeatureSlider></FeatureSlider>
+          </div>
+        </div>
+      </section>
 
-    </div>
-    </section>
+      <section id="testimonials" className="my-20 bg-[#FFF]">
+        <div className=" max-w-[1240px] px-5 mx-auto">
+          <div className="py-10">
+            <SectionTitle
+              title="Feedback"
+              subtitle="See what other people say"
+            ></SectionTitle>
+            <FeedbackSection></FeedbackSection>
+          </div>
+        </div>
+      </section>
 
-    <section id="testimonials" className="my-20 bg-[#FFF] py-20">
-    <div  className=" max-w-[1240px] px-5 mx-auto">
-      <SectionTitle title="Feedback" subtitle="See what other people say"></SectionTitle>
-      <FeedbackSection></FeedbackSection>
-    </div>
-    </section>
+      <section id="pricing" className="my-20 bg-[#FFF]">
+        <div className=" max-w-[1240px] px-5 mx-auto">
+          <div className="py-10">
+            <SectionTitle
+              title="Pricing"
+              subtitle="Best package for you"
+            ></SectionTitle>
+            <PricingSection></PricingSection>
+          </div>
+        </div>
+      </section>
 
-    <section id="pricing" className="my-20 bg-[#FFF] py-20">
-    <div  className=" max-w-[1240px] px-5 mx-auto">
-      <SectionTitle title="Pricing" subtitle="Best package for you"></SectionTitle>
-      <PricingSection></PricingSection>
-    </div>
-    </section>
+      <section id="contact" className="my-20 bg-[#F9FDFF]">
+        <div className=" max-w-[1240px] px-5 mx-auto">
+          <div className="py-10">
+            <Contact />
+          </div>
+        </div>
+      </section>
 
-    <section id="contact" className="my-20 bg-[#F9FDFF] py-20">
-    <div  className=" max-w-[1240px] px-5 mx-auto">
-      <Contact/>
-    </div>
-    </section>
+      <section id="newsletter" className="my-20 bg-[#FFF]">
+        <div className=" max-w-[1240px] px-5 mx-auto">
+          <div className="py-10">
+            <Subscribe />
+          </div>
+        </div>
+      </section>
 
-    <section id="newsletter" className="my-10 bg-[#FFF]">
-    <div  className=" max-w-[1240px] px-5 mx-auto">
-      <Subscribe/>
-    </div>
-    </section>
-
-    <section id="footer" className="py-10 bg-color-primary">
-    <div  className=" max-w-[1240px] px-5 mx-auto">
-      <FooterSection/>
-    </div>
-    </section>
+      <section id="footer" className="py-20 bg-color-primary">
+        <div className=" max-w-[1240px] px-5 mx-auto">
+          <FooterSection />
+        </div>
+      </section>
     </main>
   );
 }

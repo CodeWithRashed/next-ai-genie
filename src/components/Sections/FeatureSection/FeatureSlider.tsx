@@ -25,7 +25,7 @@ export default function FeatureSlider() {
   };
 
   return (
-    <div >
+    <div className="py-10">
       <Swiper
         
         centeredSlides={true}
