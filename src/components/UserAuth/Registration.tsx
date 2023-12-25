@@ -1,20 +1,11 @@
-
 import Logo from "../../assets/logo.png";
 import signUpImage from "../../assets/sign_up.png";
-import { RiLockPasswordFill } from "react-icons/ri";
-import { MdEmail } from "react-icons/md";
-import { FaEye, FaUser } from "react-icons/fa";
-import { TbPhotoPlus } from "react-icons/tb";
+
 import Link from "next/link";
 import Image from "next/image";
-import { RegisterUser } from "@/app/actions";
-import { SignUpButton } from "../Buttons/Buttons";
-
-
+import { UserRegisterFrom } from "../Forms/Forms";
 
 const Registration = () => {
-
-
   return (
     // Form Container
     <div className="grid lg:grid-cols-2 h-screen items-center">
@@ -23,142 +14,38 @@ const Registration = () => {
         {/* Form Logo */}
 
         <div className="logo flex w-full flex-col justify-center items-center">
-        <div className="image">
+          <div className="image">
             <Link href="/">
-              <Image alt="ai genie logo" width={200} height={150} className="object-cover" src={Logo} />
+              <Image
+                alt="ai genie logo"
+                width={200}
+                height={150}
+                className="object-cover"
+                src={Logo}
+              />
             </Link>
           </div>
           <p className="my-2 text-lg text-color-subtitle">Create An Account</p>
         </div>
 
-        <form action={RegisterUser}  className="space-y-2">
-          {/* Input Group Container */}
-          <div className="group-container lg:flex gap-3">
+        <UserRegisterFrom />
 
-          {/* input group start */}
-          <div className="lg:w-3/4 flex flex-col">
-            <div className="input-container relative">
-              {/* Indicator Icon */}
-              <div className="cta absolute bottom-0 right-0 flex gap-2 items-center">
-                <div className="text-white bg-color-primary p-3 h-10 rounded-main">
-                  <FaUser />
-                </div>
-              </div>
-              <div className="inputs">
-                <label htmlFor="name" className="block mb-2">
-                  Name:
-                </label>
-                <input
-                  name="name"
-                  className="h-10 w-full bg-grey-bg text-color-subtitle focus:border-color-primary outline-none border-2 border-grey-bg rounded-main py-2 px-3 bg-gray-bg"
-                  placeholder="John Doe"
-                />
-              </div>
-            </div>
-
-          </div>
-          {/* input group end */}
-
-          {/* input group start */}
-          <div className=" flex flex-col">
-            <div className="input-container relative">
-              <label htmlFor="image" className="block mb-2">
-                Profile Image:
-              </label>
-              <input
-                type="file"
-                name="image"
-                className="h-10 lg:w-[140px] w-full file:h-10  file:border-0 file:bg-color-primary file:text-white  bg-color-primary text-color-subtitle focus:border-color-primary outline-none  rounded-main"
-              />
-              {/* Indicator Icon */}
-              <div className="cta h-10 absolute bottom-0 right-0 flex gap-2 items-center">
-                <div className="text-white bg-color-primary p-3 h-10 rounded-r-main">
-                  <TbPhotoPlus />
-                </div>
-              </div>
-            </div>
-
-
-          </div>
-          {/* input group end */}
-          </div>
-
-
-          {/* input group start */}
-          <div className="flex flex-col">
-            <div className="input-container relative">
-              {/* Indicator Icon */}
-              <div className="cta absolute bottom-0 right-0 flex gap-2 items-center">
-                <div className="text-white bg-color-primary p-3 h-10 rounded-main">
-                  <MdEmail />
-                </div>
-              </div>
-              <div className="inputs">
-                <label htmlFor="email" className="block mb-2">
-                  Email:
-                </label>
-                <input
-                  name="email"
-                  className="h-10 w-full bg-grey-bg text-color-subtitle  focus:border-color-primary outline-none border-2 border-grey-bg rounded-main py-2 px-3 bg-gray-bg"
-                  placeholder="john.doe@gmail.com"
-                />
-              </div>
-            </div>
-
-         
-          </div>
-          {/* input group end */}
-
-          {/* input group start */}
-          <div className="flex flex-col ">
-            <div className="input-container relative">
-              {/* Password Indicator and CTA */}
-              <div className="cta absolute bottom-0 right-0 flex gap-2 items-center">
-                <div
-                  className="hover:bg-color-subtitle p-2 rounded-full hover:text-white transition-all ease-in-out"
-                
-                >
-                  <FaEye />
-                </div>
-                <div className="text-white bg-color-primary p-3 h-10 rounded-main">
-                  <RiLockPasswordFill />
-                </div>
-              </div>
-              <div className="input-container">
-                <label htmlFor="password" className="block mb-2">
-                  Password:
-                </label>
-                <input
-                  name="password"
-                  type="password"
-                  className="h-10 w-full bg-grey-bg text-color-subtitle  focus:border-color-primary outline-none border-2 border-grey-bg rounded-main py-2 px-3 bg-gray-bg"
-                  placeholder="Enter Password"
-                />
-              </div>
-            </div>
-
-          </div>
-
-          {/* input group end */}
-        <SignUpButton/>
-        </form>
-
-       
         <div className="text-center">
           <p className="mt-2 text-sm text-color-subtitle ">
             Already have an account?
             <Link
-             href="/login"
+              href="/login"
               className="ml-2 text-blue-600 decoration-2 hover:underline font-medium"
             >
               Sign in here
             </Link>
           </p>
+       
         </div>
         <div className=" py-6 flex items-center text-sm text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:me-6 after:flex-[1_1_0%] after:border-t after:ms-6">
           Or
         </div>
-         {/* Google Button Start */}
+        {/* Google Button Start */}
         <div className="grid h-10 !rounded-main overflow-hidden">
           <button
             type="button"
@@ -198,12 +85,16 @@ const Registration = () => {
 
       {/* Image Container Start*/}
       <div className="hidden lg:flex lg:justify-center lg:items-center">
-        <Image width={500} height={500} src={signUpImage} alt="login banner image" />
+        <Image
+          width={500}
+          height={500}
+          src={signUpImage}
+          alt="login banner image"
+        />
       </div>
       {/* Image Container End*/}
     </div>
   );
 };
-
 
 export default Registration;
