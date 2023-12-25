@@ -112,7 +112,7 @@ export const ProfileDropdownMenu = () => {
   }, []);
 
   return (
-    <div id="profile-menu">
+    <div id="profile-menu" >
       <button
         onClick={toggleProfileMenu}
         className={`border-2 h-10 w-10 border-color-subtitle text-color-title rounded-full overflow-hidden flex justify-center items-center active:scale-105`}
@@ -128,7 +128,7 @@ export const ProfileDropdownMenu = () => {
       {isProfileMenuOpen && (
         <div
           onClick={toggleProfileMenu}
-          className="absolute right-0 bg-white p-5"
+          className="absolute right-0 bg-white p-5 mr-5 mt-5"
         >
           <ul className="flex flex-col w-full justify-center items-center gap-4 text-color-subtitle font-bold">
             <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
