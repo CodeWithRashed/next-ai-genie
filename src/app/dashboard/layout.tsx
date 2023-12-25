@@ -1,4 +1,5 @@
 import AdminDashboardNav from "@/components/NavigationMenus/DashboardNav/AdminDashboardNav";
+import DashboardTopNavigation from "@/components/NavigationMenus/DashboardNav/DashboardTopNavigation";
 import UserDashboardNavbar from "@/components/NavigationMenus/DashboardNav/UserDashboardNavbar";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -15,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="grid grid-cols-12 gap-5 h-screen overflow-hidden">
+    <main className="grid grid-cols-12 h-screen overflow-hidden">
       <div className="sidebar col-span-3 px-5 py-5 bg-gray-50">
         <nav className="flex flex-col justify-between">
           <div>
@@ -27,13 +28,17 @@ export default function RootLayout({
             <hr className="my-3" />
           </div>
           <div className="h-[90vh]">
-
-          {/* <UserDashboardNavbar /> */}
-          <AdminDashboardNav/>
+            {/* <UserDashboardNavbar /> */}
+            <AdminDashboardNav />
           </div>
         </nav>
       </div>
-      <div className="col-span-9 py-5">{children}</div>
+      <div className="col-span-9 ">
+        <div >
+          <DashboardTopNavigation/>
+        </div>
+        <div className="py-5 px-5">{children}</div>
+      </div>
     </main>
   );
 }
