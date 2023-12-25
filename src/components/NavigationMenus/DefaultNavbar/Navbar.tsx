@@ -1,8 +1,8 @@
 
 import Link from "next/link";
-import logo from "../../assets/logo.png";
+import logo from "../../../assets/logo.png";
 import Image from "next/image";
-import {MobileDropdownMenu, ProfileDropdownMenu} from "../ui/DropdownMenu";
+import {MobileDropdownMenu, ProfileDropdownMenu} from "../../ui/DropdownMenu";
 
 
 const Navbar = () => {

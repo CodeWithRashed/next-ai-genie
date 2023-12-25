@@ -1,6 +1,6 @@
 import { FooterSection } from "@/components/Footer/Footer";
 import HomeBanner from "@/components/HomeBanner/HomeBanner";
-import Navbar from "@/components/Navbar/Navbar";
+import Navbar from "@/components/NavigationMenus/DefaultNavbar/Navbar";
 import Contact from "@/components/Sections/Contact/Contact";
 import FeatureSlider from "@/components/Sections/FeatureSection/FeatureSlider";
 import PricingSection from "@/components/Sections/PricingSection/PricingSection";
