@@ -37,7 +37,7 @@ export default function UserDashboardNavbar() {
       </Link>
 
       {/* //Text to Audio// */}
-      <Link href="/dashboard/summarizer" className="flex gap-2 items-center">
+      <Link href="/dashboard/text-to-audio" className="flex gap-2 items-center">
         <SiAudiomack className="h-5 w-5" />
         Text to Audio
       </Link>
