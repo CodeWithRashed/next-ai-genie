@@ -35,3 +35,19 @@ export async function RegisterUser(prevState: any, formData: FormData) {
     return "Something went wrong! Try Again!";
   }
 }
+
+export async function LoginUser(prevState: any, formData: FormData) {
+  try {
+    const name = formData.get("name");
+    const password = formData.get("password") as string;
+
+    let rawFormData = {
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
+
+    console.log(rawFormData);
+  } catch (error) {
+    return "Something went wrong! Try Again!";
+  }
+}
