@@ -95,7 +95,7 @@ const Navbar = async () => {
         )}
 
         <div className="active-user flex justify-center items-center">
-          {session?.user && <ProfileDropdownMenu user={session?.user} />}
+          {session?.user && <ProfileDropdownMenu/>}
         </div>
       </div>
     </div>

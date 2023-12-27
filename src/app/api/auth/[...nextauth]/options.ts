@@ -12,13 +12,14 @@ export const options: NextAuthOptions = {
   },
   providers: [
     GoogleProvider({
-      profile(profile) {
+      profile: async (profile) => {
+        const userInDatabase = await User.findOne({ email: profile.email });
         return {
           id: profile.sub,
           name: `${profile.given_name} ${profile.family_name}`,
           email: profile.email,
           image: profile.picture,
-          role: profile.role ? profile.role : "User",
+          role: userInDatabase ? userInDatabase.role : "User",
         };
       },
       clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -27,28 +28,7 @@ export const options: NextAuthOptions = {
 
     CredentialsProvider({
       name: "Credentials",
-      credentials: {
-        name: {
-          label: "name",
-          type: "text",
-        },
-        email: {
-          label: "email",
-          type: "text",
-        },
-        password: {
-          label: "password",
-          type: "password",
-        },
-        role: {
-          label: "role",
-          type: "text",
-        },
-        image: {
-          label: "image",
-          type: "text",
-        },
-      },
+      credentials: {},
       async authorize(credentials: any): Promise<any | null> {
        
         try {
@@ -59,7 +39,8 @@ export const options: NextAuthOptions = {
 
           // Find user by email in your MongoDB database
           const user = await User.findOne({ email: email });
-          console.log(user)
+          console.log("dbuser", user)
+
           // If the user doesn't exist or the password is incorrect, return null
           if (!user) {
             return Promise.resolve(false);
@@ -72,7 +53,13 @@ export const options: NextAuthOptions = {
             if (!validPassword) {
               return Promise.resolve(false);
             }
-            return Promise.resolve(user);
+            return {
+              name: user.name,
+              image: user.image,
+              email: user.email,
+              role: user.role,
+              password:user.password,
+            };
           }
         } catch (err: any) {
           console.log("email auth error");
@@ -82,26 +69,35 @@ export const options: NextAuthOptions = {
   ],
   callbacks: {
     async signIn(profile): Promise<any | null> {
-      console.log(profile);
       connect();
       try {
         // Check if the user already exists in your database
-        const existingUser = await User.findOne({ email: profile.user.email });
-
+        let existingUser = await User.findOne({ email: profile.user.email });
+        console.log("old user", existingUser?._doc);
+    
         if (!existingUser) {
           const newUser = new User({
             name: profile.user.name,
-            image: profile.user.image,
+            image: profile.user.image || profile?.profile?.image,
             email: profile.user.email,
             role: profile.user.role,
             password: "Google User",
           });
-
+          console.log(newUser);
           // Save the new user to the database
           await newUser.save();
+    
+          // Update the existingUser with the newly created user
+          existingUser = newUser;
         }
-
-        return Promise.resolve(true);
+    
+        return {
+          name: existingUser.name,
+          image: existingUser.image,
+          email: existingUser.email,
+          role: existingUser.role,
+          password: existingUser.password,
+        };
       } catch (error) {
         console.error("Google sign-in error:", error);
         return Promise.resolve(false);
@@ -113,7 +109,7 @@ export const options: NextAuthOptions = {
 
     },
     session({ session, token }) {
-      session.user.role = token.role;
+      session.user.role = token?.role || session.user.role;
       return session;
     },
   },
