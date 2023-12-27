@@ -1,6 +1,7 @@
 "use server";
 //IMPORTS
 import { UploadImage } from "@/lib/uploadImage";
+import { signIn } from "next-auth/react";
 
 //INTERFACES
 enum ROLE {

@@ -1,6 +1,9 @@
 "use client";
-import { SignInButton, SignUpButton } from "../Buttons/Buttons";
-import { LoginUser, RegisterUser } from "@/app/actions";
+import {
+  SignInButton,
+  SignUpButton,
+} from "../Buttons/Buttons";
+import {LoginUser, RegisterUser } from "@/app/actions";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { FaEye, FaUser } from "react-icons/fa";
@@ -152,7 +155,7 @@ export const UserLoginFrom = () => {
               Email:
             </label>
             <input
-            required
+              required
               name="email"
               type="email"
               className="h-10 w-full bg-grey-bg text-color-subtitle  focus:border-color-primary outline-none border-2 border-grey-bg rounded-main py-2 px-3 bg-gray-bg"
@@ -180,7 +183,7 @@ export const UserLoginFrom = () => {
               Password:
             </label>
             <input
-            required
+              required
               name="password"
               type="password"
               className="h-10 w-full bg-grey-bg text-color-subtitle  focus:border-color-primary outline-none border-2 border-grey-bg rounded-main py-2 px-3 bg-gray-bg"
