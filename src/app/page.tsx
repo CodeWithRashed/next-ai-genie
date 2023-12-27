@@ -8,10 +8,12 @@ import FeedbackSection from "@/components/Sections/ReviewSection/FeedbackSection
 import Subscribe from "@/components/Sections/Subscribe/Subscribe";
 import WhyChooseUs from "@/components/Sections/WhyChooseUs/WhyChooseUs";
 import SectionTitle from "@/components/Shared/SectionTitle";
+import { Toaster } from "react-hot-toast";
 
 export default function Home() {
   return (
     <main>
+      <Toaster/>
       <header className="header bg-[#F9FDFF] mb-20" id="home">
         <div className="max-w-[1240px] px-5 mx-auto">
           <Navbar></Navbar>

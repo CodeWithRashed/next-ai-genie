@@ -50,28 +50,30 @@ export const options: NextAuthOptions = {
         },
       },
       async authorize(credentials: any): Promise<any | null> {
+       
         try {
-          console.log(credentials);
           connect();
-          // const { username, password } = credentials;
+          console.log(credentials);
+         
+          const { email, password } = credentials;
 
-          // // Find user by email in your MongoDB database
-          // const user = await User.findOne({ email: username });
-
-          // // If the user doesn't exist or the password is incorrect, return null
-          // if (!user) {
-          //   return Promise.resolve(false);
-          // }
-          // if (user) {
-          //   const validPassword = await bcryptjs.compare(
-          //     password,
-          //     user.password
-          //   );
-          //   if (!validPassword) {
-          //     return Promise.resolve(false);
-          //   }
-          //   return Promise.resolve(user);
-          // }
+          // Find user by email in your MongoDB database
+          const user = await User.findOne({ email: email });
+          console.log(user)
+          // If the user doesn't exist or the password is incorrect, return null
+          if (!user) {
+            return Promise.resolve(false);
+          }
+          if (user) {
+            const validPassword = await bcryptjs.compare(
+              password,
+              user.password
+            );
+            if (!validPassword) {
+              return Promise.resolve(false);
+            }
+            return Promise.resolve(user);
+          }
         } catch (err: any) {
           console.log("email auth error");
         }
@@ -89,6 +91,7 @@ export const options: NextAuthOptions = {
         if (!existingUser) {
           const newUser = new User({
             name: profile.user.name,
+            image: profile.user.image,
             email: profile.user.email,
             role: profile.user.role,
             password: "Google User",
@@ -111,8 +114,6 @@ export const options: NextAuthOptions = {
     },
     session({ session, token }) {
       session.user.role = token.role;
-      console.log(session)
-      console.log(session.user.role)
       return session;
     },
   },

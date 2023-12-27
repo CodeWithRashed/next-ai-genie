@@ -3,7 +3,7 @@ import mongoose, { connection } from "mongoose";
 export async function connect() {
     try{
         mongoose.connect(process.env.DATABASE_URI!, {
-            dbName: "next_todo"
+            dbName: "ai_genie"
         })
 
         //On Successful Connection

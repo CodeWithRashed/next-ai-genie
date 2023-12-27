@@ -1,54 +1,41 @@
 "use server";
 //IMPORTS
 import { UploadImage } from "@/lib/uploadImage";
+import axios from "axios";
 import { signIn } from "next-auth/react";
+
 
 //INTERFACES
 enum ROLE {
-  ADMIN = "admin",
-  USER = "user",
+  ADMIN = "Admin",
+  USER = "User",
 }
 export async function RegisterUser(prevState: any, formData: FormData) {
   try {
     const uploadResponse = await UploadImage(formData.get("image"));
     const image = uploadResponse.data.data.url;
 
-    //Check For Name
+    // Check For Name
     const name = formData.get("name");
     const email = formData.get("email");
     const password = formData.get("password") as string;
 
-    //Check Password
-    if (!password) {
-      return "Password is required!";
-    } else if (password?.length < 8) {
-      return "Password must be 8 characters long";
-    }
-    let rawFormData = {
+    // Check Password
+
+    const rawFormData = {
+      name: name,
       image: image,
-      email: formData.get("email"),
-      password: formData.get("password"),
+      email: email,
+      password: password,
       role: ROLE.USER,
     };
 
     console.log(rawFormData);
+
+    const response = axios.post("/api/user/register", rawFormData);
+    console.log("Registration successful:", response);
   } catch (error) {
-    return "Something went wrong! Try Again!";
-  }
-}
 
-export async function LoginUser(prevState: any, formData: FormData) {
-  try {
-    const name = formData.get("name");
-    const password = formData.get("password") as string;
-
-    let rawFormData = {
-      email: formData.get("email"),
-      password: formData.get("password"),
-    };
-
-    console.log(rawFormData);
-  } catch (error) {
     return "Something went wrong! Try Again!";
   }
 }

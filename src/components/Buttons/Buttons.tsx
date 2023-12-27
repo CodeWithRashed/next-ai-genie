@@ -2,28 +2,27 @@
 
 import { signIn } from "next-auth/react";
 import { useState } from "react";
-import { useFormStatus } from "react-dom";
 import { FaSpinner } from "react-icons/fa";
 
-export const SignUpButton = () => {
-  const { pending } = useFormStatus();
+export const SignUpButton = ({ isPending }: { isPending: boolean }) => {
+
   return (
     <button
       type="submit"
       className={`flex justify-center items-center h-10 bg-color-primary font-Inter font-bold px-4 py-2 rounded-main text-white w-full !mt-5`}
     >
-      {pending ? <FaSpinner className="animate-spin" /> : "Sign Up"}
+      {isPending ? <FaSpinner className="animate-spin" /> : "Sign Up"}
     </button>
   );
 };
-export const SignInButton = () => {
-  const { pending } = useFormStatus();
+export const SignInButton = ({ isPending }: { isPending: boolean }) => {
+ 
   return (
     <button
       type="submit"
       className={`flex justify-center items-center h-10 bg-color-primary font-Inter font-bold px-4 py-2 rounded-main text-white w-full !mt-5`}
     >
-      {pending ? <FaSpinner className="animate-spin" /> : "Sign In"}
+      {isPending ? <FaSpinner className="animate-spin" /> : "Sign In"}
     </button>
   );
 };

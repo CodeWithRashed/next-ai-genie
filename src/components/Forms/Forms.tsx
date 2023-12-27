@@ -3,27 +3,73 @@ import {
   SignInButton,
   SignUpButton,
 } from "../Buttons/Buttons";
-import {LoginUser, RegisterUser } from "@/app/actions";
+
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { FaEye, FaUser } from "react-icons/fa";
 import { TbPhotoPlus } from "react-icons/tb";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useFormState } from "react-dom";
-
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { UploadImage } from "@/lib/uploadImage";
+//INTERFACES
+enum ROLE {
+  ADMIN = "admin",
+  USER = "User",
+}
 export const UserRegisterFrom = () => {
-  const [state, formAction] = useFormState(RegisterUser, null);
+  const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
+  const [isPending, setIsPending] = useState(false);
+
   const handleFromSubmit = async (formData: FormData) => {
-    formAction(formData);
-    console.log(state);
-    formRef.current?.reset();
+    setIsPending(true);
+    try {
+      const uploadResponse = await UploadImage(formData.get("image"));
+      const image = uploadResponse.data.data.url;
+      console.log(image)
+      // Check For Name
+      const name = formData.get("name");
+      const email = formData.get("email");
+      const password = formData.get("password") as string;
+
+      const rawFormData = {
+        name: name,
+        image: image,
+        email: email,
+        password: password,
+        role: ROLE.USER,
+      };
+
+      console.log(rawFormData);
+
+      const response = await axios.post("/api/user/register", rawFormData);
+      console.log(response);
+
+      if (response.status === 200) {
+        toast.success('Account Created Successfully!');
+
+        setTimeout(() => {
+          router.push("/login");
+        }, 2000);
+      }
+    } catch (error) {
+      toast.error('Something went wrong! Try Again!');
+      setIsPending(false);
+      return "Something went wrong! Try Again!";
+    } finally {
+      setIsPending(false);
+    }
   };
+
   return (
     <div>
       <form action={handleFromSubmit} className="space-y-2" ref={formRef}>
-        {/* Input Group Container */}
-        <div className="group-container lg:flex gap-3">
+       {/* Input Group Container */}
+       <div className="group-container lg:flex gap-3">
           {/* input group start */}
           <div className="lg:w-3/4 flex flex-col">
             <div className="input-container relative">
@@ -123,20 +169,44 @@ export const UserRegisterFrom = () => {
           </div>
         </div>
 
-        {/* input group end */}
-        <SignUpButton />
-        <p className="text-red-500">{state}</p>
+        <SignUpButton isPending={isPending} />
       </form>
     </div>
   );
 };
+ 
 export const UserLoginFrom = () => {
-  const [state, formAction] = useFormState(LoginUser, null);
+  const router = useRouter()
   const formRef = useRef<HTMLFormElement>(null);
+  const [isPending, setIsPending] = useState(false)
   const handleFromSubmit = async (formData: FormData) => {
-    formAction(formData);
-    console.log(state);
+    setIsPending(true)
+    try {
+      const email = formData.get("email");
+      const password = formData.get("password") as string;
+      const result = await signIn("credentials", {
+        email: email,
+        password: password,
+        redirect: false,
+      });
+      
+      setIsPending(false)
+
+      if (result?.status === 200) {
+        toast.success('Login Successful!');
+      
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
+      }
+      
+    } catch (error) {
+      console.error("Something went wrong! Try Again!", error);
+      setIsPending(false)
+      return "Something went wrong! Try Again!";
+    }
   };
+  
   return (
     <form action={handleFromSubmit} className="space-y-2" ref={formRef}>
       {/* Input Group Container */}
@@ -200,8 +270,8 @@ export const UserLoginFrom = () => {
       </div>
 
       {/* input group end */}
-      <SignInButton />
-      <p className="text-red-500">{state}</p>
+      <SignInButton isPending={isPending}/>
+     
     </form>
   );
 };
