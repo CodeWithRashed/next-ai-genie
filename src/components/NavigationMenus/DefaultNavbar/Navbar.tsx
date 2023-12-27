@@ -1,11 +1,14 @@
-
 import Link from "next/link";
 import logo from "../../../assets/logo.png";
 import Image from "next/image";
-import {MobileDropdownMenu, ProfileDropdownMenu} from "../../ui/DropdownMenu";
+import { MobileDropdownMenu, ProfileDropdownMenu } from "../../ui/DropdownMenu";
+// import { useSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/options";
 
-
-const Navbar = () => {
+const Navbar = async () => {
+  const session = await getServerSession(options);
+  console.log("session data", session);
   //Menu Items Desktop
   const menuItems = (
     <ul className="flex lg:flex-row flex-col w-full justify-center items-center gap-4 text-color-subtitle  font-bold">
@@ -40,12 +43,14 @@ const Navbar = () => {
         </Link>
       </li>
       <li className="flex flex-col">
-        <Link
-          href="/login"
-          className={`text-color-primary text-lg font-normal`}
-        >
-          Login
-        </Link>
+        {!session?.user && (
+          <Link
+            href="/login"
+            className={`text-color-primary text-lg font-normal`}
+          >
+            Login
+          </Link>
+        )}
       </li>
     </ul>
   );
@@ -73,22 +78,24 @@ const Navbar = () => {
       <div className="col-span-4 flex justify-end items-center gap-3">
         {/* Mobile Nav Start */}
         <div className="lg:hidden">
-        <MobileDropdownMenu/>
+          <MobileDropdownMenu user={session?.user}/>
         </div>
         {/* Mobile Nav End */}
 
         {/* CTA BUTTONS */}
-        <div className="cta-buttons flex gap-2">
-          <button className="lg:block hidden hover:bg-color-primary-light text-color-title  border-2  border-color-primary px-5 py-2 rounded-main transition-all ease-in-out">
-            Sign In
-          </button>
-          <button className="lg:block hidden bg-color-primary hover:bg-color-primary-dark px-5 py-2 rounded-main text-white">
-            Free Trial
-          </button>
-        </div>
+        {!session?.user && (
+          <div className="cta-buttons flex gap-2">
+            <button className="lg:block hidden hover:bg-color-primary-light text-color-title  border-2  border-color-primary px-5 py-2 rounded-main transition-all ease-in-out">
+              Sign In
+            </button>
+            <button className="lg:block hidden bg-color-primary hover:bg-color-primary-dark px-5 py-2 rounded-main text-white">
+              Free Trial
+            </button>
+          </div>
+        )}
 
         <div className="active-user flex justify-center items-center">
-          <ProfileDropdownMenu/>
+          {session?.user && <ProfileDropdownMenu user={session?.user} />}
         </div>
       </div>
     </div>

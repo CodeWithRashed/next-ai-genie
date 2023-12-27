@@ -17,7 +17,7 @@ import axios from "axios";
 import { UploadImage } from "@/lib/uploadImage";
 //INTERFACES
 enum ROLE {
-  ADMIN = "admin",
+  ADMIN = "Admin",
   USER = "User",
 }
 export const UserRegisterFrom = () => {

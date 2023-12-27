@@ -2,7 +2,6 @@
 //IMPORTS
 import { UploadImage } from "@/lib/uploadImage";
 import axios from "axios";
-import { signIn } from "next-auth/react";
 
 
 //INTERFACES
@@ -33,7 +32,7 @@ export async function RegisterUser(prevState: any, formData: FormData) {
     console.log(rawFormData);
 
     const response = axios.post("/api/user/register", rawFormData);
-    console.log("Registration successful:", response);
+
   } catch (error) {
 
     return "Something went wrong! Try Again!";

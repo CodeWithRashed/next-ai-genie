@@ -13,8 +13,7 @@ import { Toaster } from "react-hot-toast";
 export default function Home() {
   return (
     <main>
-      <Toaster/>
-      <header className="header bg-[#F9FDFF] mb-20" id="home">
+         <header className="header bg-[#F9FDFF] mb-20" id="home">
         <div className="max-w-[1240px] px-5 mx-auto">
           <Navbar></Navbar>
           <HomeBanner></HomeBanner>

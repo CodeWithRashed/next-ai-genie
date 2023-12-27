@@ -3,7 +3,8 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { CiMenuFries } from "react-icons/ci";
 import Image from "next/image";
-export const MobileDropdownMenu = () => {
+import { signOut } from "next-auth/react";
+export const MobileDropdownMenu = ({ user }: any) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -32,7 +33,6 @@ export const MobileDropdownMenu = () => {
         onClick={toggleMobileMenu}
         className={`border border-color-subtitle text-color-title p-2 rounded-full active:scale-105`}
       >
-        {" "}
         <CiMenuFries />
       </button>
       {isMobileMenuOpen && (
@@ -74,12 +74,14 @@ export const MobileDropdownMenu = () => {
               </Link>
             </li>
             <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
-              <Link
-                href="/login"
-                className={`text-color-primary text-lg font-normal`}
-              >
-                Login
-              </Link>
+              {!user && (
+                <Link
+                  href="/login"
+                  className={`text-color-primary text-lg font-normal`}
+                >
+                  Login
+                </Link>
+              )}
             </li>
           </ul>
         </div>
@@ -112,7 +114,7 @@ export const ProfileDropdownMenu = () => {
   }, []);
 
   return (
-    <div id="profile-menu" >
+    <div id="profile-menu">
       <button
         onClick={toggleProfileMenu}
         className={`border-2 h-10 w-10 border-color-subtitle text-color-title rounded-full overflow-hidden flex justify-center items-center active:scale-105`}
@@ -164,12 +166,14 @@ export const ProfileDropdownMenu = () => {
               </Link>
             </li>
             <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
-              <Link
-                href="/login"
+              <button
+                onClick={() => {
+                  signOut();
+                }}
                 className={`text-color-primary text-lg font-normal`}
               >
-                Login
-              </Link>
+                SignOut
+              </button>
             </li>
           </ul>
         </div>
