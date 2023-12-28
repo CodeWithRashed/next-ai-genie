@@ -20,6 +20,7 @@
     "react-icons": "^4.12.0",
     "react-rating": "^2.0.5",
     "sharp": "^0.33.1",
+    "stripe": "^14.10.0",
     "swiper": "^11.0.5",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7"
