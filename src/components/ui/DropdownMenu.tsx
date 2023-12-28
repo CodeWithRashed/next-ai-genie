@@ -73,6 +73,16 @@ export const MobileDropdownMenu = ({ user }: any) => {
                 Contact
               </Link>
             </li>
+            {user && (
+              <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
+                <Link
+                  href="/dashboard"
+                  className={`text-color-primary text-lg font-normal`}
+                >
+                  Dashboard
+                </Link>
+              </li>
+            )}
             {!user && (
               <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
                 <Link

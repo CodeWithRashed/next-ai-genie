@@ -196,7 +196,7 @@ export const UserLoginFrom = () => {
         toast.success('Login Successful!');
       
         setTimeout(() => {
-          router.push("/");
+          router.push("/dashboard");
         }, 2000);
       }
       

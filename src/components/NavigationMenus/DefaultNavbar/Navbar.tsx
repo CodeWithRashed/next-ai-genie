@@ -34,14 +34,16 @@ const Navbar = async () => {
           Testimonials
         </Link>
       </li>
-      <li className="flex flex-col">
-        <Link
-          href="#contact"
-          className={`text-color-primary text-lg font-normal`}
-        >
-          Contact
-        </Link>
-      </li>
+      {session?.user && (
+              <li className="flex flex-col ">
+                <Link
+                  href="/dashboard"
+                  className={`text-color-primary text-lg font-normal`}
+                >
+                  Dashboard
+                </Link>
+              </li>
+            )}
       <li className="flex flex-col">
         {!session?.user && (
           <Link
