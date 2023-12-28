@@ -2,18 +2,21 @@ import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 // import User from "@/models/userModels";
-import { connect } from "@/db/dbConfig";
+
 import bcryptjs from "bcryptjs";
 import User from "@/models/userModels";
+import { connectToDatabase } from "@/db/dbConfig";
 
 export const options: NextAuthOptions = {
+  
   session: {
     strategy: "jwt",
   },
   providers: [
     GoogleProvider({
       profile: async (profile) => {
-        const userInDatabase = await User.findOne({ email: profile.email });
+        connectToDatabase();
+        const userInDatabase = await User.findOne({ email: profile.email }, { maxTimeMS: 15000 });
         return {
           id: profile.sub,
           name: `${profile.given_name} ${profile.family_name}`,
@@ -32,7 +35,7 @@ export const options: NextAuthOptions = {
       async authorize(credentials: any): Promise<any | null> {
        
         try {
-          connect();
+          connectToDatabase();
           console.log(credentials);
          
           const { email, password } = credentials;
@@ -69,7 +72,7 @@ export const options: NextAuthOptions = {
   ],
   callbacks: {
     async signIn(profile): Promise<any | null> {
-      connect();
+      connectToDatabase();
       try {
         // Check if the user already exists in your database
         let existingUser = await User.findOne({ email: profile.user.email });

@@ -1,8 +1,12 @@
 "use client";
 
+import axios from "axios";
+import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 
 const Checkout = () => {
+    const {data: session} = useSession()
+    console.log(session)
   const searchData = useSearchParams();
   const selectedPackage = searchData.get("package")?.toUpperCase();
   const packageName = selectedPackage;
@@ -19,6 +23,16 @@ const Checkout = () => {
     promptCount = 100;
   }
 
+  const packageData = {
+    packageName,
+    packagePrice,
+    promptCount,
+  };
+
+  const doCheckout = async () => {
+    const res = await axios.post("/api/checkout", packageData);
+    console.log(res);
+  };
   return (
     <div>
       {/* //Order Content// */}
@@ -206,14 +220,17 @@ const Checkout = () => {
                 </div>
               </div>
             )}
-            <button className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">
+            <button
+              onClick={() =>{ doCheckout()}}
+              className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
+            >
               Place Order
             </button>
           </div>
         </div>
       ) : (
         <div className="h-[90vh] w-full">
-            <p>Please Select a Valid Package</p>
+          <p>Please Select a Valid Package</p>
         </div>
       )}
     </div>

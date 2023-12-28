@@ -1,23 +1,23 @@
-import mongoose, { connection } from "mongoose";
+// dbConfig.ts
+import mongoose from "mongoose";
 
-export async function connect() {
-    try{
-        mongoose.connect(process.env.DATABASE_URI!, {
-            dbName: "ai_genie"
-        })
+export const connectToDatabase = async () => {
+  try {
+     mongoose.connect(process.env.DATABASE_URI!, {
+      dbName: "ai_genie",
+    });
 
-        //On Successful Connection
-        connection.on("connected", ()=>{
-            console.log("Connected to Database")
-        })
+    const connection = mongoose.connection;
 
-        //On Error Connection
-        connection.on("error", (err:any)=>{
-            console.log(err)
-            process.exit()
-        })
+    connection.on("connected", () => {
+      console.log("Connected to Database");
+    });
 
-    }catch{
-        console.log("error connecting database")
-    }
-}
+    connection.on("error", (err: any) => {
+      console.log(err);
+      process.exit();
+    });
+  } catch (error) {
+    console.log("Error connecting to the database");
+  }
+};
