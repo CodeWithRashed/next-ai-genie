@@ -1,8 +1,52 @@
-import { NextResponse } from "next/server";
-const stripe = require("stripe")(process.env.STRIPE_SECRET)
 
+import { NextRequest, NextResponse } from "next/server";
+import Stripe from "stripe";
+
+const key = process.env.STRIPE_SECRET_KEY || "";
+
+const stripe = new Stripe(key, {
+  apiVersion: '2023-10-16'
+});
+
+// Backend code
 export const POST = async (request: any) => {
-    const {packageData} = await request.json()
-    // const 
-    return NextResponse.json({url: ""})
-}
+  const requestData = await request.json();
+  try {
+    if (requestData) {
+      const session = await stripe.checkout.sessions.create({
+        submit_type: "pay",
+        mode: "payment",
+        payment_method_types: ["card"],
+        billing_address_collection: "auto",
+       
+        invoice_creation: {
+          enabled: true,
+        },
+        line_items: requestData.map((item: any) => {
+          return {
+            price_data: {
+              currency: "bdt",
+              product_data: {
+                name: item.packageName,
+              },
+              unit_amount: item.packagePrice * 100,
+            },
+            quantity: 1,
+            
+          };
+        }),
+       
+        success_url: `${request.headers.get("origin")}/success`,
+        cancel_url: `${request.headers.get("origin")}/?canceled=true`,
+      });
+      console.log(session)
+      return NextResponse.json({ session });
+    } else {
+      return NextResponse.json({ message: "No Data Found" });
+    }
+  } catch (err: any) {
+    console.log(err);
+    return NextResponse.json(err.message);
+  }
+  };
+  
