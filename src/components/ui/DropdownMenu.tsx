@@ -4,9 +4,11 @@ import React, { useEffect, useState } from "react";
 import { CiMenuFries } from "react-icons/ci";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
-export const MobileDropdownMenu = ({ user }: any) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+import { useSession } from "next-auth/react";
+export const MobileDropdownMenu = () => {
 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState("home");
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -38,69 +40,94 @@ export const MobileDropdownMenu = ({ user }: any) => {
       {isMobileMenuOpen && (
         <div
           onClick={toggleMobileMenu}
-          className="absolute right-0 bg-white p-5"
+          className="absolute right-0 bg-white p-5 mr-5 mt-5"
         >
-          <ul className="flex flex-col w-full justify-center items-center gap-4 text-color-subtitle font-bold">
-            <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
-              <Link
-                href="/"
-                className={`text-color-primary text-lg font-normal `}
-              >
-                Home
-              </Link>
-            </li>
-            <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
-              <Link
-                href="#pricing"
-                className={`text-color-primary text-lg font-normal`}
-              >
-                Pricing
-              </Link>
-            </li>
-            <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
-              <Link
-                href="#testimonials"
-                className={`text-color-primary text-lg font-normal`}
-              >
-                Testimonials
-              </Link>
-            </li>
-            <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
-              <Link
-                href="#contact"
-                className={`text-color-primary text-lg font-normal`}
-              >
-                Contact
-              </Link>
-            </li>
-            {user && (
-              <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
-                <Link
-                  href="/dashboard"
-                  className={`text-color-primary text-lg font-normal`}
-                >
-                  Dashboard
-                </Link>
-              </li>
-            )}
-            {!user && (
-              <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
-                <Link
-                  href="/login"
-                  className={`text-color-primary text-lg font-normal`}
-                >
-                  Login
-                </Link>
-              </li>
-            )}
-          </ul>
+           <ul className="flex lg:flex-row flex-col w-full justify-center items-center gap-4 text-color-subtitle  font-bold">
+      <li className="flex flex-col">
+        <Link
+          onClick={() => {
+            setActiveMenu("home");
+          }}
+          href="/"
+          className={`${
+            activeMenu === "home"
+              ? "text-color-primary text-lg font-normal"
+              : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
+          }`}
+        >
+          Home
+        </Link>
+      </li>
+      <li className="flex flex-col items-center justify-center">
+        <Link
+          onClick={() => {
+            setActiveMenu("features");
+          }}
+          className={`${
+            activeMenu === "features"
+              ? "text-color-primary text-lg font-normal"
+              : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
+          }`}
+          href="#features"
+        >
+          Features
+        </Link>
+      </li>
+      <li className="flex flex-col items-center justify-center">
+        <Link
+          onClick={() => {
+            setActiveMenu("testimonials");
+          }}
+          className={`${
+            activeMenu === "testimonials"
+              ? "text-color-primary text-lg font-normal"
+              : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
+          }`}
+          href="#testimonials"
+        >
+          Testimonials
+        </Link>
+      </li>
+      <li className="flex flex-col items-center justify-center">
+        <Link
+          href="#pricing"
+          onClick={() => {
+            setActiveMenu("pricing");
+          }}
+          className={`${
+            activeMenu === "pricing"
+              ? "text-color-primary text-lg font-normal"
+              : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
+          }`}
+        >
+          Pricing
+        </Link>
+      </li>
+
+      <li className="flex flex-col items-center justify-center">
+        <Link
+          onClick={() => {
+            setActiveMenu("contact");
+          }}
+          className={`${
+            activeMenu === "contact"
+              ? "text-color-primary text-lg font-normal"
+              : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
+          }`}
+          href="#contact"
+        >
+          Contact
+        </Link>
+      </li>
+    </ul>
         </div>
       )}
     </div>
   );
 };
 
-export const ProfileDropdownMenu = ({ user }: any) => {
+export const ProfileDropdownMenu = () => {
+  const {data: session} =useSession()
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
   const toggleProfileMenu = () => {
@@ -132,7 +159,7 @@ export const ProfileDropdownMenu = ({ user }: any) => {
         <Image
           width={40}
           height={40}
-          src={user?.image}
+          src={session?.user?.image}
           alt="user image"
           className="rounded-full object-cover"
         />
@@ -142,27 +169,27 @@ export const ProfileDropdownMenu = ({ user }: any) => {
           onClick={toggleProfileMenu}
           className="absolute right-0 bg-white p-5 mr-5 mt-5"
         >
-          <ul className="flex flex-col w-full justify-center items-center gap-2 text-color-subtitle font-bold">
-            <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
+          <ul className="flex flex-col w-full justify-center items-center gap-2 text-color-subtitle font-bold ">
+            <li className="flex">
               <Link
                 href="/dashboard"
-                className={`text-color-primary text-lg font-normal `}
+              className={`text-color-primary hover:bg-color-primary-light w-full p-2 rounded-main`}
               >
                 Dashboard
               </Link>
             </li>
-            <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
+            <li className="flex">
               <Link
                 href="/dashboard/profile"
-                className={`text-color-primary text-lg font-normal`}
+               className={`text-color-primary hover:bg-color-primary-light w-full p-2 rounded-main`}
               >
                 Profile
               </Link>
             </li>
-            <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
+            <li className="flex">
               <Link
                 href="/dashboard/support"
-                className={`text-color-primary text-lg font-normal`}
+                className={`text-color-primary hover:bg-color-primary-light w-full p-2 rounded-main`}
               >
                 Support
               </Link>

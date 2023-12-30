@@ -14,7 +14,7 @@ const Navbar = () => {
   console.log("session data", session);
   //Menu Items Desktop
   const menuItems = (
-    <ul className="flex lg:flex-row flex-col w-full justify-center items-center gap-4 text-color-subtitle  font-bold">
+    <ul className="flex lg:flex-row flex-col w-full justify-center items-center gap-4 text-color-subtitle  font-bold transition-all ease-in-out">
       <li className="flex flex-col">
         <Link
           onClick={() => {
@@ -24,7 +24,7 @@ const Navbar = () => {
           className={`${
             activeMenu === "home"
               ? "text-color-primary text-lg font-normal"
-              : "text-color-title text-lg font-normal"
+              : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
           }`}
         >
           Home
@@ -38,7 +38,7 @@ const Navbar = () => {
           className={`${
             activeMenu === "features"
               ? "text-color-primary text-lg font-normal"
-              : "text-color-title text-lg font-normal"
+              : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary transition-all ease-in-out"
           }`}
           href="#features"
         >
@@ -53,7 +53,7 @@ const Navbar = () => {
           className={`${
             activeMenu === "testimonials"
               ? "text-color-primary text-lg font-normal"
-              : "text-color-title text-lg font-normal"
+              : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary transition-all ease-in-out"
           }`}
           href="#testimonials"
         >
@@ -69,14 +69,13 @@ const Navbar = () => {
           className={`${
             activeMenu === "pricing"
               ? "text-color-primary text-lg font-normal"
-              : "text-color-title text-lg font-normal"
+              : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary transition-all ease-in-out"
           }`}
         >
           Pricing
         </Link>
       </li>
 
-      
       <li className="flex flex-col items-center justify-center">
         <Link
           onClick={() => {
@@ -85,20 +84,19 @@ const Navbar = () => {
           className={`${
             activeMenu === "contact"
               ? "text-color-primary text-lg font-normal"
-              : "text-color-title text-lg font-normal"
+              : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary transition-all ease-in-out"
           }`}
           href="#contact"
         >
-         Contact
+          Contact
         </Link>
       </li>
-      
     </ul>
   );
 
   return (
     <div className="bg-[#FFF] mx-auto shadow">
-  <div className="fixed w-full pr-4 lg:pr-0 lg:w-[1210px] flex justify-between items-center py-3 backdrop-blur-3xl z-[500]">
+      <div className="fixed w-[90%] md:w-[95%] lg:w-[1200px] flex justify-between items-center py-3 backdrop-blur-3xl z-[500]">
         {/* Nav Start */}
         <div className="logo">
           <Link href="/">
@@ -120,7 +118,7 @@ const Navbar = () => {
         <div className="flex justify-end items-center gap-3">
           {/* Mobile Nav Start */}
           <div className="lg:hidden z-[500]">
-            <MobileDropdownMenu user={session?.user} />
+            <MobileDropdownMenu />
           </div>
           {/* Mobile Nav End */}
 
@@ -149,7 +147,7 @@ const Navbar = () => {
           </div>
 
           <div className="active-user flex justify-center items-center">
-            {session?.user && <ProfileDropdownMenu user={session?.user}/>}
+            {session?.user && <ProfileDropdownMenu />}
           </div>
         </div>
       </div>
