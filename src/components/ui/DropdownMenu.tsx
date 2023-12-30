@@ -28,7 +28,7 @@ export const MobileDropdownMenu = ({ user }: any) => {
   }, []);
 
   return (
-    <div id="mobile-menu">
+    <div id="mobile-menu" className="z-[500">
       <button
         onClick={toggleMobileMenu}
         className={`border border-color-subtitle text-color-title p-2 rounded-full active:scale-105`}
@@ -100,7 +100,7 @@ export const MobileDropdownMenu = ({ user }: any) => {
   );
 };
 
-export const ProfileDropdownMenu = () => {
+export const ProfileDropdownMenu = ({ user }: any) => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
   const toggleProfileMenu = () => {
@@ -132,7 +132,7 @@ export const ProfileDropdownMenu = () => {
         <Image
           width={40}
           height={40}
-          src="https://i.ibb.co/sRJYQrx/profile-pic-2.png"
+          src={user?.image}
           alt="user image"
           className="rounded-full object-cover"
         />
@@ -142,45 +142,38 @@ export const ProfileDropdownMenu = () => {
           onClick={toggleProfileMenu}
           className="absolute right-0 bg-white p-5 mr-5 mt-5"
         >
-          <ul className="flex flex-col w-full justify-center items-center gap-4 text-color-subtitle font-bold">
+          <ul className="flex flex-col w-full justify-center items-center gap-2 text-color-subtitle font-bold">
             <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
               <Link
-                href="/"
+                href="/dashboard"
                 className={`text-color-primary text-lg font-normal `}
               >
-                Home
+                Dashboard
               </Link>
             </li>
             <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
               <Link
-                href="#pricing"
+                href="/dashboard/profile"
                 className={`text-color-primary text-lg font-normal`}
               >
-                Pricing
+                Profile
               </Link>
             </li>
             <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
               <Link
-                href="#testimonials"
+                href="/dashboard/support"
                 className={`text-color-primary text-lg font-normal`}
               >
-                Testimonials
+                Support
               </Link>
             </li>
-            <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
-              <Link
-                href="#Contact"
-                className={`text-color-primary text-lg font-normal`}
-              >
-                Contact
-              </Link>
-            </li>
-            <li className="flex flex-col hover:bg-color-primary-light w-full p-2">
+           
+            <li className="flex  justify-center items-center  w-full p-2">
               <button
                 onClick={() => {
                   signOut();
                 }}
-                className={`text-color-primary text-lg font-normal`}
+                className="bg-color-primary text-white hover:bg-color-primary-dark p-2 rounded-main"
               >
                 SignOut
               </button>
