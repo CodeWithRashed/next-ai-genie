@@ -25,7 +25,7 @@ export const POST = async (request: any) => {
         line_items: requestData.map((item: any) => {
           return {
             price_data: {
-              currency: "bdt",
+              currency: "usd",
               product_data: {
                 name: item.packageName,
               },
@@ -36,7 +36,7 @@ export const POST = async (request: any) => {
           };
         }),
        
-        success_url: `${request.headers.get("origin")}/success`,
+        success_url: `${request.headers.get("origin")}/dashboard?session=${process.env.STRIPE_SESSION_KEY}&packageName=${requestData[0].packageName}&promptCount=${requestData[0].promptCount}&packageFor=${requestData[0].packageFor}&packagePrice=${requestData[0].packagePrice}`,
         cancel_url: `${request.headers.get("origin")}/?canceled=true`,
       });
       console.log(session)

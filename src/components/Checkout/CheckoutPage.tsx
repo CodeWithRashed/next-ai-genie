@@ -13,13 +13,13 @@ const Checkout = () => {
   let promptCount: number;
   let packagePrice: number;
   if (selectedPackage === "FREE") {
-    packagePrice = 1000.0;
+    packagePrice = 0.0;
     promptCount = 3;
   } else if (packageName === "PREMIUM") {
-    packagePrice = 9.99;
+    packagePrice = 9.00;
     promptCount = 10;
-  } else {
-    packagePrice = 19.99;
+  } else  {
+    packagePrice = 19.00;
     promptCount = 100;
   }
 
@@ -27,17 +27,22 @@ const Checkout = () => {
     packageName,
     packagePrice,
     promptCount,
-    packageOwner: session?.user.email
+    packageFor: session?.user.email
   }];
 
   const doCheckout = async () => {
-    const stripe = await getStipePromise();
-    console.log(packageData)
-    const res = await axios.post("/api/checkout", packageData);
-    console.log(res);
-    if (res.data.session) {
-      stripe?.redirectToCheckout({ sessionId: res.data.session.id });
+    if(packageData[0]?.packageName === "FREE"){
+      console.log(packageData)
+    }else{
+      const stripe = await getStipePromise();
+      const res = await axios.post("/api/checkout", packageData);
+      console.log(res);
+      if (res.data.session) {
+        console.log("success payment")
+        stripe?.redirectToCheckout({ sessionId: res.data.session.id });
+      }
     }
+   
   };
   return (
     <div>
