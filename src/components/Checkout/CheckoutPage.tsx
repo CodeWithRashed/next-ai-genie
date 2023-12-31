@@ -5,8 +5,8 @@ import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import getStipePromise from "@/lib/stripe";
 const Checkout = () => {
-    const {data: session} = useSession()
-    console.log(session)
+  const { data: session } = useSession();
+  console.log(session);
   const searchData = useSearchParams();
   const selectedPackage = searchData.get("package")?.toUpperCase();
   const packageName = selectedPackage;
@@ -16,33 +16,34 @@ const Checkout = () => {
     packagePrice = 0.0;
     promptCount = 3;
   } else if (packageName === "PREMIUM") {
-    packagePrice = 9.00;
+    packagePrice = 9.0;
     promptCount = 10;
-  } else  {
-    packagePrice = 19.00;
+  } else {
+    packagePrice = 19.0;
     promptCount = 100;
   }
 
-  const packageData = [{
-    packageName,
-    packagePrice,
-    promptCount,
-    packageFor: session?.user.email
-  }];
+  const packageData = [
+    {
+      packageName,
+      packagePrice,
+      promptCount,
+      packageFor: session?.user.email,
+    },
+  ];
 
   const doCheckout = async () => {
-    if(packageData[0]?.packageName === "FREE"){
-      console.log(packageData)
-    }else{
-      const stripe = await getStipePromise();
-      const res = await axios.post("/api/checkout", packageData);
-      console.log(res);
-      if (res.data.session) {
-        console.log("success payment")
-        stripe?.redirectToCheckout({ sessionId: res.data.session.id });
-      }
+    const stripe = await getStipePromise();
+    const res = await axios.post("/api/checkout", packageData);
+
+    if (res.data.session) {
+      stripe?.redirectToCheckout({
+        sessionId: res.data.session.id,
+      });
+    
+     const paymentId = res.data.session.id
+     console.log(paymentId)
     }
-   
   };
   return (
     <div>
@@ -76,9 +77,11 @@ const Checkout = () => {
             <p className="text-gray-400">
               Complete your order by providing your payment details.
             </p>
-          
+
             <button
-              onClick={() =>{ doCheckout()}}
+              onClick={() => {
+                doCheckout();
+              }}
               className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
             >
               Place Order
