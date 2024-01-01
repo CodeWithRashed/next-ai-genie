@@ -51,7 +51,7 @@ const Checkout = () => {
       {selectedPackage === "FREE" ||
       selectedPackage === "GOLDEN" ||
       selectedPackage === "PREMIUM" ? (
-        <div className="grid lg:grid-cols-2">
+        <div className="flex flex-col py-20">
           <div className="px-4 pt-8">
             <p className="text-xl font-medium">Order Summary</p>
             <p className="text-gray-400">
@@ -89,7 +89,7 @@ const Checkout = () => {
           </div>
         </div>
       ) : (
-        <div className="h-[90vh] w-full">
+        <div className="h-[90vh] w-full flex justify-center items-center">
           <p>Please Select a Valid Package</p>
         </div>
       )}
