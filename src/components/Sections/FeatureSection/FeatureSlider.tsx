@@ -127,7 +127,7 @@ export default function FeatureSlider() {
             onClick={() => {
               swiperInstance.slidePrev();
             }}
-            className="cursor-pointer swiper-button-prev swiper-button"
+            className="cursor-pointer swiper-button-prev swiper-button text-2xl"
           >
             <FaRegArrowAltCircleLeft />
           </button>
@@ -135,7 +135,7 @@ export default function FeatureSlider() {
             onClick={() => {
               swiperInstance.slideNext();
             }}
-            className="cursor-pointer swiper-button-next swiper-button"
+            className="cursor-pointer swiper-button-next swiper-button text-2xl p-3"
           >
             <FaRegArrowAltCircleRight />
           </button>
