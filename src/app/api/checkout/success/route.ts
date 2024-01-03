@@ -26,21 +26,21 @@ export async function POST(request: NextRequest) {
 
         if (reqBody?.packageName == "FREE") {
           selectedPackage = {
-            packageName: "FREE PACKAGE",
+            packageName: "FREE",
             promptCount: 3,
             packageFor: session?.user.email,
             packagePrice: 0,
           };
         } else if (reqBody?.packageName == "PREMIUM") {
           selectedPackage = {
-            packageName: "PREMIUM PACKAGE",
+            packageName: "PREMIUM",
             promptCount: 10,
             packageFor: session?.user.email,
             packagePrice: 9.0,
           };
         } else if (reqBody?.packageName == "GOLDEN") {
           selectedPackage = {
-            packageName: "Golden PACKAGE",
+            packageName: "GOLDEN",
             promptCount: 100,
             packageFor: session?.user.email,
             packagePrice: 19.0,

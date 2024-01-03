@@ -1,8 +1,12 @@
 import Image from "next/image";
 import aiGenieIcon from "../../assets/favicon.png";
-import Link from "next/link";
-const DashboardPage = () => {
+import { GetPackageData } from "../helpers/getPackageData";
+const DashboardPage = async () => {
   const isPro = false;
+  const packageData: any = await GetPackageData();
+
+
+  console.log("PackageData on Dashboard", packageData);
   return (
     <div className="h-[80vh] overflow-scroll grid grid-cols-2 gap-5">
       <div className="flex flex-col">
@@ -13,12 +17,12 @@ const DashboardPage = () => {
             <div className="card shadow-xl  flex flex-col justify-between rounded-main border border-color-primary-light px-5 py-10 transition-all ease-in-out duration-700">
               <div className="card-title space-y-5 ">
                 <h1 className="text-4xl font-bold text-color-primary  text-left transition-all ease-in-out duration-700">
-                  Golden
+                  {packageData?.packageName}
                 </h1>
 
                 <h1>
                   <span className="text-4xl font-medium  transition-all ease-in-out duration-700">
-                    $19.00/
+                    ${packageData?.packagePrice}/
                   </span>
                   mo
                 </h1>
@@ -29,30 +33,37 @@ const DashboardPage = () => {
       </div>
       <div>
         <div>
-        <div className="p-3 border border-color-primary shadow-lg rounded-main">
-          <p>Prompt Details</p>
-          <div className="p-2 cursor-not-allowed">
-            {/* Golden Package Card */}
-            <div className="card shadow-xl  flex flex-col justify-between rounded-main border border-color-primary-light px-5 py-10 transition-all ease-in-out duration-700">
-              <div className="card-title flex gap-5 justify-center items-center">
-                <div className="total-prompt flex flex-col justify-center items-center">
-                  <h1 className=" border-b-2 border-b-color-primary">Total Prompt</h1>
-                <div className="mt-4 text-xl w-10 h-10 flex justify-center items-center rounded-full border-2 border-grey-bg font-bold text-color-primary  text-left transition-all ease-in-out duration-700">
-                 <p>1</p>
+          <div className="p-3 border border-color-primary shadow-lg rounded-main">
+            <p>Prompt Details</p>
+            <div className="p-2 cursor-not-allowed">
+              {/* Golden Package Card */}
+              <div className="card shadow-xl  flex flex-col justify-between rounded-main border border-color-primary-light px-5 py-10 transition-all ease-in-out duration-700">
+                <div className="card-title flex gap-5 justify-center items-center">
+                  <div className="total-prompt flex flex-col justify-center items-center">
+                    <h1 className=" border-b-2 border-b-color-primary">
+                      Total Prompt
+                    </h1>
+                    <div className="mt-4 p-3 text-xl w-12 h-12 flex justify-center items-center rounded-full border-2 border-grey-bg font-bold text-color-primary  text-left transition-all ease-in-out duration-700">
+                      <p>
+                        {packageData?.packageName === "FREE" && "3"}
+                        {packageData?.packageName === "PREMIUM" && "10"}
+                        {packageData?.packageName === "GOLDEN" && "100"}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="available-prompt flex flex-col justify-center items-center">
+                    <h1 className=" border-b-2 border-b-color-primary">
+                      Available Prompt
+                    </h1>
+                    <div className="mt-4 p-3 text-xl w-12 h-12 flex justify-center items-center rounded-full border-2 border-grey-bg font-bold text-color-primary  text-left transition-all ease-in-out duration-700">
+                      <p> {packageData?.promptCount}</p>
+                    </div>
+                  </div>
                 </div>
-                </div>
-                
-                <div className="available-prompt flex flex-col justify-center items-center">
-                <h1 className=" border-b-2 border-b-color-primary">Available Prompt</h1>
-                <div className="mt-4 text-xl w-10 h-10 flex justify-center items-center rounded-full border-2 border-grey-bg font-bold text-color-primary  text-left transition-all ease-in-out duration-700">
-                 <p>1</p>
-                </div>
-                </div>
-               
               </div>
             </div>
           </div>
-        </div>
         </div>
         <div>
           {/* //Upgrade Card// */}
