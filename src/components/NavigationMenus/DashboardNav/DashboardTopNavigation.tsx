@@ -6,7 +6,7 @@ import React from "react";
 const DashboardTopNavigation = async () => {
   const session = await getServerSession(options)
   return (
-    <div className="shadow-lg flex justify-between px-5 py-2">
+    <div className="shadow-lg flex justify-between px-5 py-2 rounded-main">
       <div className="welcome-text">
         <p className="text-color-primary font-bold">Welcome</p>
         <p className="text-color-subtitle">{session?.user.name}</p>

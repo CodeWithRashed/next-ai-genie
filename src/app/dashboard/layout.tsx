@@ -40,7 +40,7 @@ export default async function RootLayout({
         </nav>
       </div>
       <div className="col-span-9 ">
-        <div>
+        <div className="px-5 py-2">
           <DashboardTopNavigation />
         </div>
         <div className="py-5 px-5">{children}</div>
