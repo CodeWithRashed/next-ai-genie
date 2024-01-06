@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import loadingImage from "../../../assets/loading.gif";
 const AiAssistant = () => {
   const [resData, setResData] = useState();

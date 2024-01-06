@@ -22,14 +22,15 @@ export default async function RootLayout({
     <main className="grid grid-cols-12 h-screen overflow-hidden">
       <div className="sidebar col-span-3 px-5 py-5 bg-gray-50">
         <nav className="flex flex-col justify-between">
-          <div>
+          <div className="py-2 rounded-main bg-color-primary text-white">
             {/* //Dashboard// */}
             <Link href="/dashboard" className="px-3 flex gap-2 items-center">
               <MdDashboard className="h-5 w-5" />
               Dashboard
             </Link>
-            <hr className="my-3" />
+          
           </div>
+          <hr className="my-3" />
           <div className="h-[90vh]">
             {session?.user?.role === "Admin" ? (
               <AdminDashboardNav />
