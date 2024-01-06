@@ -6,11 +6,12 @@ import loadingImage from "../../../assets/loading.gif";
 const AiAssistant = () => {
   const [resData, setResData] = useState();
   const [loading, setLoading] = useState(false);
+  const [promptError, setPromptError] = useState("");
   const bigData = true;
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
 
     const prompt = e.target.elements.input.value;
     console.log(prompt);
@@ -18,9 +19,13 @@ const AiAssistant = () => {
     const res = await axios.post("/api/assistant", { prompt });
     const result = res.data.result;
     setResData(result);
-    console.log(res);
-    setLoading(false)
 
+    if (res.data.error) {
+      setPromptError(res.data.error);
+    }
+    e.target.reset();
+    console.log(res);
+    setLoading(false);
   };
 
   return (
@@ -36,12 +41,21 @@ const AiAssistant = () => {
             <Image width={50} height={50} src={loadingImage} alt="Loading" />
           </div>
         ) : (
-          <div>{resData}</div>
+          <div>
+            {promptError ? (
+              <div className="h-[70vh] w-full flex justify-center items-center">
+                You Do Not Have Any Prompt Available
+              </div>
+            ) : (
+              <div> {resData}</div>
+            )}
+          </div>
         )}
       </div>
 
       <form onSubmit={handleSubmit} className="input-container h-16 relative">
         <input
+          required={true}
           name="input"
           type="text"
           className="h-10 bg-grey-bg rounded-main px-3 outline-none focus:border-color-primary  border border-color-primary focus:border-2 w-full  mt-5"
