@@ -1,6 +1,6 @@
 // Import necessary modules and functions
-import { GetPackageData } from "@/app/helpers/getPackageData";
 import { connectToDatabase } from "@/db/dbConfig";
+import { GetPackageData } from "@/helpers/getPackageData";
 import Package from "@/models/packageModels";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";

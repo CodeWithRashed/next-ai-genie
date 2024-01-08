@@ -1,9 +1,9 @@
 "use client";
 // Import necessary dependencies
 import { useEffect } from "react";
-import { savePackage } from "@/app/helpers/savePackageData";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { savePackage } from "@/helpers/savePackageData";
 
 const PaymentSuccess = () => {
   const router = useRouter();

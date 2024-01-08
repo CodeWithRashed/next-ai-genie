@@ -2,7 +2,6 @@
 //IMPORTS
 import { UploadImage } from "@/lib/uploadImage";
 import axios from "axios";
-import { getAiAssistantResponse } from "./helpers/getAiAssistantResponse";
 
 
 //INTERFACES

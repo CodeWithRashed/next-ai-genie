@@ -1,6 +1,6 @@
 import Image from "next/image";
 import aiGenieIcon from "../../assets/favicon.png";
-import { GetPackageData } from "../helpers/getPackageData";
+import { GetPackageData } from "../../helpers/getPackageData";
 const DashboardPage = async () => {
   const isPro = false;
   const packageData: any = await GetPackageData();
