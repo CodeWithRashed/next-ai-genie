@@ -28,6 +28,7 @@ const Support = () => {
 
     const response = await saveSupportRequest(supportRequestData);
     console.log(response);
+    form.reset()
   };
 
   return (
