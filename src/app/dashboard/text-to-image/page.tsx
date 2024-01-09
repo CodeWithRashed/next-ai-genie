@@ -1,8 +1,8 @@
 import ImageGenerationPage from "@/components/DashboardPages/image-generation/ImageGenerationPage";
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Ai Genie | AI ASSISTANT",
-  description: "Your Personal AI Assistant",
+  title: "Ai Genie | Generate Image",
+  description: "Generate Stunning Images!",
 };
 
 const GenerateImagePage = () => {
