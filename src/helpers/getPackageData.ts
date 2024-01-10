@@ -10,7 +10,7 @@ export const GetPackageData = async () => {
         return
     }
 
-    const packageData = await Package.findOne({packageFor: session?.user.email })
+    const packageData = await Package.findOne({packageFor: session?.user.email }).lean()
 
    return packageData
     

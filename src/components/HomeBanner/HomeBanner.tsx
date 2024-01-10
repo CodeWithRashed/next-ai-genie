@@ -1,8 +1,11 @@
 import Image from "next/image";
 import bannerImage from "../../assets/banner.png";
 import { ButtonOutline, ButtonPrimary } from "../ui/Button";
+import Link from "next/link";
+import { GetPackageData } from "@/helpers/getPackageData";
 
-const HomeBanner = () => {
+const HomeBanner = async () => {
+  const packageData = await GetPackageData()
   return (
     <div className="banner hero-section h-screen">
       {/* Banner Content */}
@@ -16,7 +19,10 @@ const HomeBanner = () => {
           </h1>
           <p className="text-color-subtitle py-5">No Credit Card Required</p>
           <div className="cta mx-auto w-4/5 lg:w-full flex flex-col lg:flex-row gap-3">
-            <ButtonPrimary>Free Trial</ButtonPrimary>
+            {
+              !packageData ? <Link href="/checkout?package=free"className="bg-color-primary hover:bg-color-primary-dark px-5 py-2 rounded-main text-white">Free Trial</Link> : <Link href="/dashboard" className="bg-color-primary hover:bg-color-primary-dark px-5 py-2 rounded-main text-white">Dashboard</Link>
+            }
+            
             <ButtonOutline>Watch How It Works</ButtonOutline>
           </div>
         </div>
