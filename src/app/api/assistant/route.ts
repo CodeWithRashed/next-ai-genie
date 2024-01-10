@@ -20,15 +20,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid Request" });
     }
 
-    const previousPackage = await GetPackageData();
+    const previousPackage:any = await GetPackageData();
 
-    if (!previousPackage || previousPackage.promptCount < 1) {
+    if (!previousPackage || previousPackage?.promptCount < 1) {
       return NextResponse.json({ error: "You Do Not have any prompt left!!" });
     }
 
     const updatedDocument = await Package.findOneAndUpdate(
       { packageFor: session?.user.email },
-      { $set: { promptCount: previousPackage.promptCount - 1 } },
+      { $set: { promptCount: previousPackage?.promptCount - 1 } },
       { new: true }
     );
 

@@ -4,7 +4,7 @@ import { GetPackageData } from "@/helpers/getPackageData";
 import Package from "@/models/packageModels";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import responseImage from "../../../assets/contact-image.png"
+import responseImage from "../../../assets/contact-image.png";
 
 // Main POST function
 export async function POST(request: NextRequest) {
@@ -21,15 +21,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid Request" });
     }
 
-    const previousPackage = await GetPackageData();
+    const previousPackage: any = await GetPackageData();
 
-    if (!previousPackage || previousPackage.promptCount < 1) {
+    if (!previousPackage || previousPackage?.promptCount < 1) {
       return NextResponse.json({ error: "You Do Not have any prompt left!!" });
     }
 
     const updatedDocument = await Package.findOneAndUpdate(
       { packageFor: session?.user.email },
-      { $set: { promptCount: previousPackage.promptCount - 1 } },
+      { $set: { promptCount: previousPackage?.promptCount - 1 } },
       { new: true }
     );
 
