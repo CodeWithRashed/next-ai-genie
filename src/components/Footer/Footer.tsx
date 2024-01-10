@@ -10,7 +10,7 @@ export function FooterSection() {
       <div className="footer-container flex flex-col">
         {/* Footer Top */}
         <div className="footer-top flex-col lg:flex-row flex justify-between">
-          <div className="flex lg:justify-start justify-center">
+          <Link href="/" className="flex lg:justify-start justify-center">
             <Image
               width={160}
               height={100}
@@ -18,17 +18,17 @@ export function FooterSection() {
               alt="logo-ct"
               className="w-48"
             />
-          </div>
+          </Link>
           <ul className="flex justify-center gap-5 text-xl text-color-title mt-10 lg:mt-0">
-            <li className="bg-white p-2 rounded-main h-fit  hover:text-color-primary group transition-all ease-in-out">
+            <Link href="https://github.com/codewithrashed" className="bg-white p-2 rounded-main h-fit  hover:text-color-primary group transition-all ease-in-out">
               <IoLogoGithub className="group-hover:scale-105"></IoLogoGithub>
-            </li>
-            <li className="bg-white p-2 rounded-main h-fit  hover:text-color-primary">
+            </Link>
+            <Link href="https://www.youtube.com/@codewithrashed" className="bg-white p-2 rounded-main h-fit  hover:text-color-primary">
               <IoLogoYoutube className="group-hover:scale-105"></IoLogoYoutube>
-            </li>
-            <li className="bg-white p-2 rounded-main h-fit  hover:text-color-primary">
+            </Link>
+            <Link href="https://facebook.com/codetravelgame" className="bg-white p-2 rounded-main h-fit  hover:text-color-primary">
               <IoLogoFacebook className="group-hover:scale-105"></IoLogoFacebook>
-            </li>
+            </Link>
           </ul>
         </div>
 
@@ -49,9 +49,7 @@ export function FooterSection() {
               <li className="flex flex-col">
                 <Link href="#contact">Contact</Link>
               </li>
-              <li className="flex flex-col">
-                <Link href="/login">Login</Link>
-              </li>
+              
             </ul>
           </nav>
           {/* Copyright */}
