@@ -4,11 +4,9 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
 
-const SupportPage = (supportData: any) => {
-  const supportRequests = supportData.supportData;
-  console.log(supportRequests);
+const SupportPage = ({ supportData}:any) => {
+  const supportRequests = supportData;
   const { data: session } = useSession();
-  console.log(session);
   const [isCreateRequest, setIsCreateRequest] = useState(false);
 
   const handleSubmit = async (event: any) => {
@@ -39,7 +37,7 @@ const SupportPage = (supportData: any) => {
         {
           !isCreateRequest && (
             <div>
-              {supportRequests ? (
+              {supportRequests?.length > 0 ? (
                 <div>
                   <table className="w-full text-sm text-left rtl:text-right text-gray-500 rounded-main">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">

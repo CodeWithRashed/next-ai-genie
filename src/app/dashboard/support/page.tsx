@@ -2,13 +2,12 @@ import SupportPage from "@/components/DashboardPages/support/SupportPage"
 import { GetSupportData } from "@/helpers/getSupportRequest"
 
 const SupportRequests = async () => {
-  const supportData = await GetSupportData()
+  let supportData:any = await GetSupportData()
 
 
-console.log(supportData)
   return (
     <div>
-      <SupportPage supportData={supportData} />
+      <SupportPage supportData={supportData}/>
     </div>
   )
 }
