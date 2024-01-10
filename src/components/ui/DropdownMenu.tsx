@@ -6,7 +6,7 @@ import Image from "next/image";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 export const MobileDropdownMenu = () => {
-
+  const { data: session } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState("home");
   const toggleMobileMenu = () => {
@@ -42,84 +42,101 @@ export const MobileDropdownMenu = () => {
           onClick={toggleMobileMenu}
           className="absolute right-0 bg-white p-5 mr-5 mt-5"
         >
-           <ul className="flex lg:flex-row flex-col w-full justify-center items-center gap-4 text-color-subtitle  font-bold">
-      <li className="flex flex-col">
-        <Link
-          onClick={() => {
-            setActiveMenu("home");
-          }}
-          href="/"
-          className={`${
-            activeMenu === "home"
-              ? "text-color-primary text-lg font-normal"
-              : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
-          }`}
-        >
-          Home
-        </Link>
-      </li>
-      <li className="flex flex-col items-center justify-center">
-        <Link
-          onClick={() => {
-            setActiveMenu("features");
-          }}
-          className={`${
-            activeMenu === "features"
-              ? "text-color-primary text-lg font-normal"
-              : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
-          }`}
-          href="#features"
-        >
-          Features
-        </Link>
-      </li>
-      <li className="flex flex-col items-center justify-center">
-        <Link
-          onClick={() => {
-            setActiveMenu("testimonials");
-          }}
-          className={`${
-            activeMenu === "testimonials"
-              ? "text-color-primary text-lg font-normal"
-              : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
-          }`}
-          href="#testimonials"
-        >
-          Testimonials
-        </Link>
-      </li>
-      <li className="flex flex-col items-center justify-center">
-        <Link
-          href="#pricing"
-          onClick={() => {
-            setActiveMenu("pricing");
-          }}
-          className={`${
-            activeMenu === "pricing"
-              ? "text-color-primary text-lg font-normal"
-              : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
-          }`}
-        >
-          Pricing
-        </Link>
-      </li>
+          <ul className="flex lg:flex-row flex-col w-full justify-center items-center gap-4 text-color-subtitle  font-bold">
+            <li className="flex flex-col">
+              <Link
+                onClick={() => {
+                  setActiveMenu("home");
+                }}
+                href="/"
+                className={`${
+                  activeMenu === "home"
+                    ? "text-color-primary text-lg font-normal"
+                    : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
+                }`}
+              >
+                Home
+              </Link>
+            </li>
+            <li className="flex flex-col items-center justify-center">
+              <Link
+                onClick={() => {
+                  setActiveMenu("features");
+                }}
+                className={`${
+                  activeMenu === "features"
+                    ? "text-color-primary text-lg font-normal"
+                    : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
+                }`}
+                href="#features"
+              >
+                Features
+              </Link>
+            </li>
+            <li className="flex flex-col items-center justify-center">
+              <Link
+                onClick={() => {
+                  setActiveMenu("testimonials");
+                }}
+                className={`${
+                  activeMenu === "testimonials"
+                    ? "text-color-primary text-lg font-normal"
+                    : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
+                }`}
+                href="#testimonials"
+              >
+                Testimonials
+              </Link>
+            </li>
+            <li className="flex flex-col items-center justify-center">
+              <Link
+                href="#pricing"
+                onClick={() => {
+                  setActiveMenu("pricing");
+                }}
+                className={`${
+                  activeMenu === "pricing"
+                    ? "text-color-primary text-lg font-normal"
+                    : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
+                }`}
+              >
+                Pricing
+              </Link>
+            </li>
 
-      <li className="flex flex-col items-center justify-center">
-        <Link
-          onClick={() => {
-            setActiveMenu("contact");
-          }}
-          className={`${
-            activeMenu === "contact"
-              ? "text-color-primary text-lg font-normal"
-              : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
-          }`}
-          href="#contact"
-        >
-          Contact
-        </Link>
-      </li>
-    </ul>
+            <li className="flex flex-col items-center justify-center">
+              <Link
+                onClick={() => {
+                  setActiveMenu("contact");
+                }}
+                className={`${
+                  activeMenu === "contact"
+                    ? "text-color-primary text-lg font-normal"
+                    : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
+                }`}
+                href="#contact"
+              >
+                Contact
+              </Link>
+            </li>
+            {!session?.user && (
+              <li className="flex flex-col items-center justify-center">
+                <Link
+                  onClick={() => {
+                    setActiveMenu("login");
+                  }}
+                  className={`${
+                    activeMenu === "login"
+                      ? "text-color-primary text-lg font-normal"
+                      : "text-color-title text-lg font-normal hover:scale-105 hover:text-color-primary"
+                  }`}
+                  href="/login"
+                >
+                  Login
+                </Link>
+              </li>
+            )}
+          </ul>
         </div>
       )}
     </div>
@@ -127,7 +144,7 @@ export const MobileDropdownMenu = () => {
 };
 
 export const ProfileDropdownMenu = () => {
-  const {data: session} =useSession()
+  const { data: session } = useSession();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
   const toggleProfileMenu = () => {
@@ -173,7 +190,7 @@ export const ProfileDropdownMenu = () => {
             <li className="flex">
               <Link
                 href="/dashboard"
-              className={`text-color-primary hover:bg-color-primary-light w-full p-2 rounded-main`}
+                className={`text-color-primary hover:bg-color-primary-light w-full p-2 rounded-main`}
               >
                 Dashboard
               </Link>
@@ -181,7 +198,7 @@ export const ProfileDropdownMenu = () => {
             <li className="flex">
               <Link
                 href="/dashboard/profile"
-               className={`text-color-primary hover:bg-color-primary-light w-full p-2 rounded-main`}
+                className={`text-color-primary hover:bg-color-primary-light w-full p-2 rounded-main`}
               >
                 Profile
               </Link>
@@ -194,7 +211,7 @@ export const ProfileDropdownMenu = () => {
                 Support
               </Link>
             </li>
-           
+
             <li className="flex  justify-center items-center  w-full p-2">
               <button
                 onClick={() => {
