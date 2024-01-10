@@ -35,16 +35,11 @@ export const options: NextAuthOptions = {
       async authorize(credentials: any): Promise<any | null> {
        
         try {
-          connectToDatabase();
-          console.log(credentials);
-         
+          connectToDatabase();         
           const { email, password } = credentials;
 
           // Find user by email in your MongoDB database
           const user = await User.findOne({ email: email });
-          console.log("dbuser", user)
-
-          // If the user doesn't exist or the password is incorrect, return null
           if (!user) {
             return Promise.resolve(false);
           }

@@ -5,6 +5,7 @@ import { CiMenuFries } from "react-icons/ci";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import toast from "react-hot-toast";
 export const MobileDropdownMenu = () => {
   const { data: session } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -215,6 +216,7 @@ export const ProfileDropdownMenu = () => {
             <li className="flex  justify-center items-center  w-full p-2">
               <button
                 onClick={() => {
+                  toast.success('Logout Successfully!');
                   signOut();
                 }}
                 className="bg-color-primary text-white hover:bg-color-primary-dark p-2 rounded-main"

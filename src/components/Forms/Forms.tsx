@@ -1,15 +1,11 @@
 "use client";
-import {
-  SignInButton,
-  SignUpButton,
-} from "../Buttons/Buttons";
+import { SignUpButton } from "../Buttons/Buttons";
 
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
-import { FaEye, FaUser } from "react-icons/fa";
+import { FaEye, FaSpinner, FaUser } from "react-icons/fa";
 import { TbPhotoPlus } from "react-icons/tb";
-import { useRef, useState } from "react";
-import { useFormState } from "react-dom";
+import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -22,19 +18,22 @@ enum ROLE {
 }
 export const UserRegisterFrom = () => {
   const router = useRouter();
-  const formRef = useRef<HTMLFormElement>(null);
+  const [showPassword, setShowPassword] = useState(false);
   const [isPending, setIsPending] = useState(false);
 
-  const handleFromSubmit = async (formData: FormData) => {
+  const handleFromSubmit = async (event: any) => {
+    event.preventDefault();
     setIsPending(true);
+    const form = event.target;
+    const userImage = form.image.files[0];
     try {
-      const uploadResponse = await UploadImage(formData.get("image"));
+      const uploadResponse = await UploadImage(userImage);
       const image = uploadResponse.data.data.url;
-      console.log(image)
+
       // Check For Name
-      const name = formData.get("name");
-      const email = formData.get("email");
-      const password = formData.get("password") as string;
+      const name = form.name.value;
+      const email = form.email.value;
+      const password = form.password.value;
 
       const rawFormData = {
         name: name,
@@ -50,16 +49,12 @@ export const UserRegisterFrom = () => {
       console.log(response);
 
       if (response.status === 200) {
-        toast.success('Account Created Successfully!');
+        toast.success("Account Created Successfully! Redirecting");
 
         setTimeout(() => {
           router.push("/login");
         }, 2000);
       }
-    } catch (error) {
-      toast.error('Something went wrong! Try Again!');
-      setIsPending(false);
-      return "Something went wrong! Try Again!";
     } finally {
       setIsPending(false);
     }
@@ -67,9 +62,9 @@ export const UserRegisterFrom = () => {
 
   return (
     <div>
-      <form action={handleFromSubmit} className="space-y-2" ref={formRef}>
-       {/* Input Group Container */}
-       <div className="group-container lg:flex gap-3">
+      <form onSubmit={handleFromSubmit} className="space-y-2">
+        {/* Input Group Container */}
+        <div className="group-container lg:flex gap-3">
           {/* input group start */}
           <div className="lg:w-3/4 flex flex-col">
             <div className="input-container relative">
@@ -147,8 +142,16 @@ export const UserRegisterFrom = () => {
           <div className="input-container relative">
             {/* Password Indicator and CTA */}
             <div className="cta absolute bottom-0 right-0 flex gap-2 items-center">
-              <div className="hover:bg-color-subtitle p-2 rounded-full hover:text-white transition-all ease-in-out">
-                <FaEye />
+              <div className="hover:bg-color-subtitle rounded-full hover:text-white transition-all ease-in-out">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowPassword(!showPassword);
+                  }}
+                  className="hover:bg-color-subtitle p-2 rounded-full hover:text-white transition-all ease-in-out"
+                >
+                  <FaEye />
+                </button>
               </div>
               <div className="text-white bg-color-primary p-3 h-10 rounded-main">
                 <RiLockPasswordFill />
@@ -161,7 +164,7 @@ export const UserRegisterFrom = () => {
               <input
                 required
                 name="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 className="h-10 w-full bg-grey-bg text-color-subtitle  focus:border-color-primary outline-none border-2 border-grey-bg rounded-main py-2 px-3 bg-gray-bg"
                 placeholder="Enter Password"
               />
@@ -174,41 +177,43 @@ export const UserRegisterFrom = () => {
     </div>
   );
 };
- 
+
 export const UserLoginFrom = () => {
-  const router = useRouter()
-  const formRef = useRef<HTMLFormElement>(null);
-  const [isPending, setIsPending] = useState(false)
-  const handleFromSubmit = async (formData: FormData) => {
-    setIsPending(true)
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+  const [isPending, setIsPending] = useState(false);
+  const [loginError, setLoginError] = useState("");
+  const handleFromSubmit = async (event: any) => {
+    event.preventDefault();
+    setIsPending(true);
+    setLoginError("");
+    const form = event.target;
     try {
-      const email = formData.get("email");
-      const password = formData.get("password") as string;
+      const email = form.email.value;
+      const password = form.password.value;
       const result = await signIn("credentials", {
         email: email,
         password: password,
         redirect: false,
       });
-      
-      setIsPending(false)
-
+      if (result?.error) {
+        setLoginError("Invalid Login Credentials! Try Again!");
+      }
       if (result?.status === 200) {
-        toast.success('Login Successful!');
-      
+        toast.success("Login Successful!");
+
         setTimeout(() => {
           router.push("/dashboard");
         }, 2000);
       }
-      
-    } catch (error) {
-      console.error("Something went wrong! Try Again!", error);
-      setIsPending(false)
-      return "Something went wrong! Try Again!";
+    } finally {
+      console.log(isPending);
+      setIsPending(false);
     }
   };
-  
+
   return (
-    <form action={handleFromSubmit} className="space-y-2" ref={formRef}>
+    <form onSubmit={handleFromSubmit} className="space-y-2">
       {/* Input Group Container */}
 
       {/* input group start */}
@@ -241,9 +246,15 @@ export const UserLoginFrom = () => {
         <div className="input-container relative">
           {/* Password Indicator and CTA */}
           <div className="cta absolute bottom-0 right-0 flex gap-2 items-center">
-            <div className="hover:bg-color-subtitle p-2 rounded-full hover:text-white transition-all ease-in-out">
+            <button
+              type="button"
+              onClick={() => {
+                setShowPassword(!showPassword);
+              }}
+              className="hover:bg-color-subtitle p-2 rounded-full hover:text-white transition-all ease-in-out"
+            >
               <FaEye />
-            </div>
+            </button>
             <div className="text-white bg-color-primary p-3 h-10 rounded-main">
               <RiLockPasswordFill />
             </div>
@@ -255,23 +266,22 @@ export const UserLoginFrom = () => {
             <input
               required
               name="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               className="h-10 w-full bg-grey-bg text-color-subtitle  focus:border-color-primary outline-none border-2 border-grey-bg rounded-main py-2 px-3 bg-gray-bg"
               placeholder="Enter Password"
             />
             {/* Forgot Password */}
           </div>
         </div>
-        <div className="text-right mt-2">
-          <button className="ml-2 text-blue-600 decoration-2 hover:underline font-normal">
-            Forgotten Password
-          </button>
-        </div>
       </div>
-
+      {loginError && <p className="text-red-500 text-center">{loginError}</p>}
       {/* input group end */}
-      <SignInButton isPending={isPending}/>
-     
+      <button
+        type="submit"
+        className={`flex justify-center items-center h-10 bg-color-primary font-Inter font-bold px-4 py-2 rounded-main text-white w-full !mt-5`}
+      >
+        {isPending ? <FaSpinner className="animate-spin" /> : "Sign In"}
+      </button>
     </form>
   );
 };
