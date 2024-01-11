@@ -4,6 +4,7 @@ import { connectToDatabase } from "@/db/dbConfig"
 import User from "@/models/userModels"
 
 export const GetUserData = async () => {
+    connectToDatabase()
     const session = await getServerSession(options)
     if(!session){
         return
