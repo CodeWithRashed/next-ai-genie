@@ -16,7 +16,7 @@ export const GetSupportData = cache(async () => {
     }
 
     const supportData = await Support.find(searchQuery)
-      .select("-_id email name message subject status")
+      .select("-_id email name message subject status image")
       .lean();
     return supportData;
   } catch (error) {

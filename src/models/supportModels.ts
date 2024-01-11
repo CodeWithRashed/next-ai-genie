@@ -9,6 +9,10 @@ const supportSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+    required: true,
+  },
   subject: {
     type: String,
     required: true,

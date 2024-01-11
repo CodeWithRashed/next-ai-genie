@@ -3,6 +3,7 @@ import { saveSupportRequest } from "@/helpers/saveSupportRequest";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const SupportPage = ({ supportData}:any) => {
   const supportRequests = supportData;
@@ -14,6 +15,7 @@ const SupportPage = ({ supportData}:any) => {
     const form = event.target;
     const name = session?.user.name;
     const email = session?.user.email;
+    const image = session?.user.image;
     const subject = form.subject.value;
     const message = form.message.value;
     const status = "Pending";
@@ -21,13 +23,14 @@ const SupportPage = ({ supportData}:any) => {
     const supportRequestData = {
       name,
       email,
+      image,
       subject,
       message,
       status,
     };
 
     const response = await saveSupportRequest(supportRequestData);
-    console.log(response);
+    toast.success("Request Created Successfully!")
     form.reset();
   };
 
@@ -70,15 +73,15 @@ const SupportPage = ({ supportData}:any) => {
                               className="w-10 h-10 rounded-full"
                               width={40}
                               height={40}
-                              src={session?.user.image}
-                              alt={session?.user.name}
+                              src={request?.image}
+                              alt={request?.name}
                             />
                             <div className="ps-3">
                               <div className="text-base font-semibold">
-                                {session?.user.name}
+                              {request?.name}
                               </div>
                               <div className="font-normal text-gray-500">
-                                {session?.user.email}
+                                {request?.email}
                               </div>
                             </div>
                           </th>
