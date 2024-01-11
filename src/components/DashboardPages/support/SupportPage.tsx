@@ -112,7 +112,7 @@ const SupportPage = ({ supportData}:any) => {
                   </table>
                 </div>
               ) : (
-                <div>No Support Request Found!!!</div>
+                <div className="h-[60vh] w-full flex justify-center items-center text-red-500">No Support Request Found!!!</div>
               )}
             </div>
           )
