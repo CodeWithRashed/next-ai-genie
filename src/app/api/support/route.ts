@@ -6,9 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 // Main POST function
 export async function POST(request: NextRequest) {
   try {
-    // Connect to the database
-    connectToDatabase();
-
+  
     // Parse the request body
     const reqBody = await request.json();
 const supportRequest = reqBody.supportRequestData

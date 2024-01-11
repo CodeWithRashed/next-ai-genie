@@ -1,5 +1,4 @@
 // Import necessary modules and functions
-import { connectToDatabase } from "@/db/dbConfig";
 import Package from "@/models/packageModels";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
@@ -9,10 +8,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 export async function POST(request: NextRequest) {
   const session = await getServerSession();
   try {
-    // Connect to the database
-    connectToDatabase();
-
-    // Parse the request body
+       // Parse the request body
     const reqBody = await request.json();
     console.log("Received request body:", reqBody);
     if (!reqBody.sessionId || !reqBody?.packageName) {

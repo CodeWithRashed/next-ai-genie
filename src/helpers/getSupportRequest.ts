@@ -4,7 +4,6 @@ import { GetUserData } from "./getUserData";
 import { cache } from 'react'
 export const GetSupportData = cache(async () => {
   try {
-    connectToDatabase();
     const userData: any = await GetUserData();
     const role = userData?.role;
     let searchQuery: any = { email: userData?.email };

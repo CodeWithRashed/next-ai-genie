@@ -5,9 +5,7 @@ import bcryptjs from "bcryptjs";
 
 export async function POST(request: NextRequest) {
     try {
-      connectToDatabase();
-  
-      // Get Body Data
+     
       const reqBody = await request.json();
       console.log("Received request body:", reqBody);
   

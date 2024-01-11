@@ -4,7 +4,6 @@ import { connectToDatabase } from "@/db/dbConfig"
 import Package from "@/models/packageModels"
 
 export const GetPackageData = async () => {
-    connectToDatabase()
     const session = await getServerSession(options)
     if(!session){
         return

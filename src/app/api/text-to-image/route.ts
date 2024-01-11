@@ -10,9 +10,7 @@ import responseImage from "../../../assets/contact-image.png";
 export async function POST(request: NextRequest) {
   const session = await getServerSession();
   try {
-    // Connect to the database
-    connectToDatabase();
-
+  
     // Parse the request body
     const reqBody = await request.json();
     console.log("Received request body:", reqBody);
