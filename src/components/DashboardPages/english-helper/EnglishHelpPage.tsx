@@ -3,13 +3,14 @@ import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 import loadingImage from "../../../assets/loading.gif";
-
+import { useRouter } from "next/navigation";
 
 const EnglishHelpPage = () => {
   const [resData, setResData] = useState();
   const [loading, setLoading] = useState(false);
   const [promptError, setPromptError] = useState("");
-const [bigData, setBigData]= useState(false)
+  const [bigData, setBigData] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -21,7 +22,7 @@ const [bigData, setBigData]= useState(false)
     const res = await axios.post("/api/english-helper", { prompt });
     const result = res.data.result;
     setResData(result);
-    setBigData(result)
+    setBigData(result);
     if (res.data.error) {
       setPromptError(res.data.error);
     }
@@ -46,7 +47,19 @@ const [bigData, setBigData]= useState(false)
           <div>
             {promptError ? (
               <div className="h-[70vh] w-full flex justify-center items-center">
-                You Do Not Have Any Prompt Available
+                <div className="flex flex-col gap-3 text-xl text-red-500">
+                  <p>You Do Not Have Any Prompt Available!!</p>
+                  <div className="flex gap-3 justify-center items-center mx-auto">
+                    <button
+                      onClick={() => {
+                        router.push("/checkout?package=golden");
+                      }}
+                      className="bg-color-primary text-white rounded-main px-3 py-2"
+                    >
+                      Upgrade Now
+                    </button>
+                  </div>
+                </div>
               </div>
             ) : (
               <div> {resData}</div>

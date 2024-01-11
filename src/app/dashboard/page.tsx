@@ -113,7 +113,7 @@ const DashboardPage = async () => {
             </div>
 
             <div className="mt-4 flex gap-3 justify-center items-center mx-auto">
-              <Link href="checkout?package=free" className="bg-color-primary rounded-main px-3 py-2">
+              <Link href="checkout?package=golden" className="bg-color-primary rounded-main px-3 py-2">
                 Upgrade Now
               </Link>
             </div>

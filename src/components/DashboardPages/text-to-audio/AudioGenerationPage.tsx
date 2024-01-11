@@ -3,14 +3,14 @@ import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 import loadingImage from "../../../assets/loading.gif";
-
+import { useRouter } from "next/navigation";
 
 const AudioGenerationPage = () => {
   const [audioUrl, setAudioUrl] = useState();
-  const [responseResult, setResponseResult] = useState()
+  const [responseResult, setResponseResult] = useState();
   const [loading, setLoading] = useState(false);
   const [promptError, setPromptError] = useState("");
-  
+  const router = useRouter();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const AudioGenerationPage = () => {
     const res = await axios.post("/api/text-to-audio", { prompt });
     const result = res?.data?.result;
     setAudioUrl(result);
-    setResponseResult(result)
+    setResponseResult(result);
     if (res.data.error) {
       setPromptError(res.data.error);
     }
@@ -33,9 +33,7 @@ const AudioGenerationPage = () => {
   return (
     <div>
       {/* RESULT WILL APPEAR HERE */}
-      <div
-        className={`result-container w-full h-[70vh]`}
-      >
+      <div className={`result-container w-full h-[70vh]`}>
         {loading ? (
           <div className="w-full h-full flex justify-center items-center">
             <Image width={50} height={50} src={loadingImage} alt="Loading" />
@@ -44,17 +42,28 @@ const AudioGenerationPage = () => {
           <div className="w-full h-full flex justify-center items-center">
             {promptError ? (
               <div className="h-[70vh] w-full flex justify-center items-center">
-                You Do Not Have Any Prompt Available
+                <div className="flex flex-col gap-3 text-xl text-red-500">
+                  <p>You Do Not Have Any Prompt Available!!</p>
+                  <div className="flex gap-3 justify-center items-center mx-auto">
+                    <button
+                      onClick={() => {
+                        router.push("/checkout?package=golden");
+                      }}
+                      className="bg-color-primary text-white rounded-main px-3 py-2"
+                    >
+                      Upgrade Now
+                    </button>
+                  </div>
+                </div>
               </div>
             ) : (
               <div className="flex justify-center items-center">
-                {
-                    audioUrl && <div className="flex justify-center items-center" >
-                      <audio controls src={audioUrl}></audio>
-                    </div>
-                }
-                
-                 </div>
+                {audioUrl && (
+                  <div className="flex justify-center items-center">
+                    <audio controls src={audioUrl}></audio>
+                  </div>
+                )}
+              </div>
             )}
           </div>
         )}
