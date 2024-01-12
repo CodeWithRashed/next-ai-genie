@@ -2,6 +2,7 @@
 import { connectToDatabase } from "@/db/dbConfig";
 import { GetPackageData } from "@/helpers/getPackageData";
 import Package from "@/models/packageModels";
+import axios from "axios";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -12,7 +13,6 @@ export async function POST(request: NextRequest) {
    
     // Parse the request body
     const reqBody = await request.json();
-    console.log("Received request body:", reqBody);
 
     if (!session?.user) {
       return NextResponse.json({ error: "Invalid Request" });
@@ -29,13 +29,37 @@ export async function POST(request: NextRequest) {
       { $set: { promptCount: previousPackage?.promptCount - 1 } },
       { new: true }
     );
-    const audio =
-      "https://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg";
-    return NextResponse.json({
-      success: "Audio Generated",
+    interface Result {
+      success: string;
+      code: number;
+      result: string;
+    }
+
+    const options = {
+      method: "POST",
+      url: "https://api.edenai.run/v2/audio/text_to_speech",
+      headers: {
+        authorization:
+        `Bearer ${process.env.EDEN_AI_API_KEY}`,
+      },
+      data: {
+        providers: "openai",
+        option: "FEMALE",
+        language: "en",
+        text: reqBody.prompt,
+        fallback_providers: "",
+      },
+    };
+
+    const response = await axios.request(options);
+    const audio = response.data.openai.audio
+    const result: Result = {
+      success: "Got Text to Audio Ai Response",
       code: 200,
       result: audio,
-    });
+    };
+
+    return NextResponse.json(result);
   } catch (error) {
     console.error("Error during generating audio:", error);
     return NextResponse.json({ error: "Something went wrong! Try Again!" });

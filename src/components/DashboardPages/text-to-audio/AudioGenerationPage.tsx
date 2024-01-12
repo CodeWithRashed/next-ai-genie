@@ -6,7 +6,7 @@ import loadingImage from "../../../assets/loading.gif";
 import { useRouter } from "next/navigation";
 
 const AudioGenerationPage = () => {
-  const [audioUrl, setAudioUrl] = useState();
+  const [audioData, setAudioData] = useState();
   const [responseResult, setResponseResult] = useState();
   const [loading, setLoading] = useState(false);
   const [promptError, setPromptError] = useState("");
@@ -20,13 +20,12 @@ const AudioGenerationPage = () => {
 
     const res = await axios.post("/api/text-to-audio", { prompt });
     const result = res?.data?.result;
-    setAudioUrl(result);
+    setAudioData(result);
     setResponseResult(result);
     if (res.data.error) {
       setPromptError(res.data.error);
     }
     e.target.reset();
-    console.log(res);
     setLoading(false);
   };
 
@@ -58,9 +57,9 @@ const AudioGenerationPage = () => {
               </div>
             ) : (
               <div className="flex justify-center items-center">
-                {audioUrl && (
+                {audioData && (
                   <div className="flex justify-center items-center">
-                    <audio controls src={audioUrl}></audio>
+                  <audio controls src={`data:audio/wav;base64,${audioData}`}></audio>
                   </div>
                 )}
               </div>
