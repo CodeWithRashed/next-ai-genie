@@ -10,8 +10,8 @@ const AssistantPage = () => {
   const [resData, setResData] = useState();
   const [loading, setLoading] = useState(false);
   const [promptError, setPromptError] = useState("");
-const router = useRouter()
-const bigData = false
+  const router = useRouter();
+  const bigData = false;
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
@@ -22,7 +22,7 @@ const bigData = false
     const res = await axios.post("/api/assistant", { prompt });
     const result = res.data.result;
     setResData(result);
-
+    console.log(result);
     if (res.data.error) {
       setPromptError(res.data.error);
     }
@@ -50,10 +50,10 @@ const bigData = false
                 <div className="flex flex-col gap-3 text-xl text-red-500">
                   <p>You Do Not Have Any Prompt Available!!</p>
                   <div className="flex gap-3 justify-center items-center mx-auto">
-                    <button onClick={()=>{
-                      router.push("/checkout?package=golden")
-                    }}
-                     
+                    <button
+                      onClick={() => {
+                        router.push("/checkout?package=golden");
+                      }}
                       className="bg-color-primary text-white rounded-main px-3 py-2"
                     >
                       Upgrade Now
