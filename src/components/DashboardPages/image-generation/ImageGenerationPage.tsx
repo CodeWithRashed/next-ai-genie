@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 
 const ImageGenerationPage = () => {
-  const [imageUrl, setImageUrl] = useState();
+  const [imageData, setImageData] = useState();
   const [responseResult, setResponseResult] = useState()
   const [loading, setLoading] = useState(false);
   const [promptError, setPromptError] = useState("");
@@ -22,7 +22,7 @@ const ImageGenerationPage = () => {
 
     const res = await axios.post("/api/text-to-image", { prompt });
     const result = res?.data?.result;
-    setImageUrl(result?.src);
+    setImageData(result);
     setResponseResult(result)
     if (res.data.error) {
       setPromptError(res.data.error);
@@ -63,7 +63,7 @@ const ImageGenerationPage = () => {
             ) : (
               <div className="flex justify-center items-center">
                 {
-                    imageUrl && <Image className="flex justify-center items-center object-cover" src={imageUrl} width={300} height={300} alt="Image"/>
+                    imageData && <Image className="flex justify-center items-center object-cover" src={`data:image/png;base64, ${imageData}`} width={300} height={300} alt="Image"/>
                 }
                 
                  </div>

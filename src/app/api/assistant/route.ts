@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
       url: "https://api.edenai.run/v2/text/chat",
       headers: {
         authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYzdmYTZlM2MtYmU0OC00YWViLWFhNDktN2U1ZjQ3OGEzOWQyIiwidHlwZSI6InNhbmRib3hfYXBpX3Rva2VuIn0.QNXSr1XfAlCWpvlR12SjWSqCL1VCQxSU90_fMctNgGA",
+          `Bearer ${process.env.EDEN_AI_API_KEY}`,
       },
       data: {
         providers: "openai",
