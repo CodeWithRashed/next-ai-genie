@@ -2,6 +2,7 @@
 import { connectToDatabase } from "@/db/dbConfig";
 import { GetPackageData } from "@/helpers/getPackageData";
 import Package from "@/models/packageModels";
+import axios from "axios";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -9,8 +10,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
   const session = await getServerSession();
   try {
-    // Connect to the database
-    connectToDatabase();
+    
 
     // Parse the request body
     const reqBody = await request.json();
@@ -32,11 +32,38 @@ export async function POST(request: NextRequest) {
       { new: true }
     );
 
-    return NextResponse.json({
-      success: "Article Summarization Complete",
+    interface Result {
+      success: string;
+      code: number;
+      result: string;
+    }
+
+    const options = {
+      method: "POST",
+      url: "https://api.edenai.run/v2/text/summarize",
+      headers: {
+        authorization:
+        `Bearer ${process.env.EDEN_AI_API_KEY}`,
+      },
+      data: {
+        output_sentences: 2,
+        providers: "openai",
+        language: "en",
+
+        text: reqBody.prompt,
+        fallback_providers: "",
+      },
+    };
+
+    const response = await axios.request(options);
+    const output = response.data.openai.result
+    const result: Result = {
+      success: "Got Summarize Response",
       code: 200,
-      result: `Summarize ${reqBody.prompt}`,
-    });
+      result: output,
+    };
+
+    return NextResponse.json(result);
   } catch (error) {
     console.error("Error during Article Summarization:", error);
     return NextResponse.json({ error: "Something went wrong! Try Again!" });
