@@ -5,7 +5,7 @@ import Link from "next/link";
 import { GetPackageData } from "@/helpers/getPackageData";
 
 const HomeBanner = async () => {
-  const packageData = await GetPackageData()
+  const packageData = await GetPackageData();
   return (
     <div className="banner hero-section h-screen">
       {/* Banner Content */}
@@ -14,16 +14,33 @@ const HomeBanner = async () => {
         {/* Banner Text Content */}
         <div className="text-center lg:space-y-5 lg:text-left space-y-3 md:order-first order-last">
           <h1 className="leading-normal font-bold text-color-title text-2xl md:text-5xl lg:text-6xl ">
-            AI Genie One of the Best Generative < br />
+            AI Genie One of the Best Generative <br />
             AI Tool
           </h1>
           <p className="text-color-subtitle py-5">No Credit Card Required</p>
           <div className="cta mx-auto w-4/5 lg:w-full flex flex-col lg:flex-row gap-3">
-            {
-              !packageData ? <Link href="/checkout?package=free"className="bg-color-primary hover:bg-color-primary-dark px-5 py-2 rounded-main text-white">Free Trial</Link> : <Link href="/dashboard" className="bg-color-primary hover:bg-color-primary-dark px-5 py-2 rounded-main text-white">Dashboard</Link>
-            }
-            
-            <ButtonOutline>Watch How It Works</ButtonOutline>
+            {!packageData ? (
+              <Link
+                href="/checkout?package=free"
+                className="bg-color-primary hover:bg-color-primary-dark px-5 py-2 rounded-main text-white"
+              >
+                Free Trial
+              </Link>
+            ) : (
+              <Link
+                href="/dashboard"
+                className="bg-color-primary hover:bg-color-primary-dark px-5 py-2 rounded-main text-white"
+              >
+                Dashboard
+              </Link>
+            )}
+
+            <Link
+              className="hover:bg-color-primary-light text-color-title  border-2  border-color-primary px-5 py-2 rounded-main transition-all ease-in-out"
+              href="https://youtu.be/_GQggGqlcDs"
+            >
+              Watch How It Works
+            </Link>
           </div>
         </div>
 

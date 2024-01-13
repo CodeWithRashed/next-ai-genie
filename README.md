@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AI Genie
 
-## Getting Started
+AI Genie is a versatile generative AI website that empowers users to create images, convert text to audio, utilize an AI assistant, and more. Leveraging cutting-edge technologies such as NEXT JS, NEXT AUTH, Mongoose, Tailwind, Stripe, bcryptjs, and nodemailer, AI Genie provides an interactive and seamless experience for users.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Image Generation:** AI Genie allows users to generate images with the help of advanced generative AI models.
+- **Text to Audio Conversion:** Transform text into audio with the built-in text-to-speech capabilities, offering a dynamic and engaging user experience.
+- **AI Assistant:** Benefit from an AI-powered assistant that can assist users with queries, tasks, and information retrieval.
+- **User Authentication:** Secure and personalized user experience with NEXT AUTH for authentication.
+- **Database Integration:** Mongoose is employed for efficient database management, ensuring data integrity and persistence.
+- **Responsive Design:** Tailwind CSS ensures a responsive and visually appealing design across various devices and screen sizes.
+- **Payment Integration:** Stripe integration allows seamless and secure online transactions for premium features.
+- **Password Hashing:** bcryptjs is utilized for secure password hashing, enhancing user account security.
+- **Email Communication:** Nodemailer facilitates email communication, ensuring smooth user interaction and feedback.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Live Demo
+Check out the live demo on [Vercel Link](https://next-ai-genie.vercel.app/).
+## Video Intro
+Check out the live demo on [Video Intro](https://youtu.be/_GQggGqlcDs).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+To set up the project locally, follow these steps:
 
-## Learn More
+1. Clone the repository:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   git clone https://github.com/your-username/ai-genie.git
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Live Demo
 
-## Deploy on Vercel
+Check out the live demo on [Vercel](https://next-ai-genie.vercel.app/).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Installation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+To set up the project locally, follow these steps:
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/ai-genie.git
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   cd ai-genie
+   npm install
+   ```
+
+3. Configure Environment Variables:
+
+   Create a `.env` file and add the necessary environment variables, such as API keys and database connection strings.
+
+4. Run the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+Visit `http://localhost:3000` in your browser to see AI Genie in action.
+
