@@ -11,14 +11,14 @@ const FreePackage = () => {
                 Free
               </h1>
 
-              <h1>
-                <span className="text-4xl font-medium group-hover:text-white transition-all ease-in-out duration-700">
+              <h1 className="group-hover:text-white transition-all ease-in-out">
+                <span className="text-4xl font-medium ">
                   $0/
                 </span>
                 mo
               </h1>
             </div>
-            <div className="card-body text-left my-5 text-color-primary space-y-8 group-hover:text-white">
+            <div className="card-body text-left my-5 text-color-primary space-y-8 group-hover:text-white transition-all ease-in-out duration-700">
               <ul className="space-y-2 my-8">
                 <li className="flex items-center">
                   <FaRegCheckCircle className="mr-2" />
