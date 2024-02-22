@@ -31,7 +31,7 @@ export const MobileDropdownMenu = () => {
   }, []);
 
   return (
-    <div id="mobile-menu" className="z-[500">
+    <div id="mobile-menu" className="z-[500]">
       <button
         onClick={toggleMobileMenu}
         className={`border border-color-subtitle text-color-title p-2 rounded-full active:scale-105`}
@@ -41,7 +41,7 @@ export const MobileDropdownMenu = () => {
       {isMobileMenuOpen && (
         <div
           onClick={toggleMobileMenu}
-          className="absolute right-0 bg-white p-5 mr-5 mt-5"
+          className="absolute right-0 bg-white p-5 mr-5 mt-5 shadow-lg "
         >
           <ul className="flex lg:flex-row flex-col w-full justify-center items-center gap-4 text-color-subtitle  font-bold">
             <li className="flex flex-col">
