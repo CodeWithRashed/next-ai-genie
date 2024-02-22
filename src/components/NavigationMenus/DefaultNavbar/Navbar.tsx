@@ -11,7 +11,7 @@ const Navbar = () => {
   const router = useRouter();
   const [activeMenu, setActiveMenu] = useState("home");
   const { data: session } = useSession();
-  console.log("session data", session);
+
   //Menu Items Desktop
   const menuItems = (
     <ul className="flex lg:flex-row flex-col w-full justify-center items-center gap-4 text-color-subtitle  font-bold transition-all ease-in-out">
@@ -95,8 +95,8 @@ const Navbar = () => {
   );
 
   return (
-    <div className="bg-[#FFF] mx-auto shadow">
-      <div className="fixed w-[90%] md:w-[95%] lg:w-[1200px] flex justify-between items-center py-3 backdrop-blur-3xl z-[500]">
+    <div className="bg-[#FFF] mx-auto shadow-md">
+      <div className="max-w-[1240px] mx-auto flex justify-between items-center py-3 px-5">
         {/* Nav Start */}
         <div className="logo">
           <Link href="/">

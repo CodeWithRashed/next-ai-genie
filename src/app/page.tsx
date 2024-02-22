@@ -16,7 +16,7 @@ export default function Home() {
       <header className="header bg-[#F9FDFF] mb-20" id="home">
         <div>
           <div className="z-[500]">
-            <div className="max-w-[1240px] px-5 mx-auto">
+            <div className="fixed w-full z-[999]">
               <Navbar></Navbar>
             </div>
           </div>
