@@ -29,6 +29,7 @@ export async function POST(request: NextRequest) {
         role: reqBody.role || "User",
         password: hashedPass,
         image: reqBody.image,
+        stripe_customer_id: ""
       });
   
       console.log("New user object:", newUser);

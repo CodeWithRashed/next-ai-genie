@@ -18,6 +18,9 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
   },
+  stripe_customer_id: {
+    type: String
+  }
 });
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
