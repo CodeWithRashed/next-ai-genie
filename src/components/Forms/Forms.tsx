@@ -41,6 +41,7 @@ export const UserRegisterFrom = () => {
         email: email,
         password: password,
         role: ROLE.USER,
+        stripe_customer_id: ""
       };
 
       console.log(rawFormData);

@@ -126,22 +126,18 @@ const Navbar = () => {
           <div>
             {!session?.user && (
               <div className="cta-buttons flex gap-2">
-                <button
-                  onClick={() => {
-                    router.push("/login");
-                  }}
+                <Link
+                  href="/login"
                   className="lg:block hidden hover:bg-color-primary-light text-color-title  border-2  border-color-primary px-5 py-2 rounded-main transition-all ease-in-out"
                 >
                   Sign In
-                </button>
-                <button
-                  onClick={() => {
-                    router.push("/register");
-                  }}
+                </Link>
+                <Link
+                 href="/register"
                   className="lg:block hidden bg-color-primary hover:bg-color-primary-dark px-5 py-2 rounded-main text-white"
                 >
                   Free Trial
-                </button>
+                </Link>
               </div>
             )}
           </div>

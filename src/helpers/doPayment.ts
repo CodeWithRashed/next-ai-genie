@@ -13,16 +13,16 @@ export const stripe = new Stripe(String(process.env.STRIPE_SECRET), {
 export async function hasSubscription() {
     const session = await getServerSession(options);
 
-    if (session) {
-        const user = await User.findOne({email: session?.user.email }).lean()
-        const subscriptions = await stripe.subscriptions.list({
-            customer: String(user?.stripe_customer_id?)
-        })
+    // if (session) {
+    //     const user = await User.findOne({email: session?.user.email }).lean()
+    //     const subscriptions = await stripe.subscriptions.list({
+    //         customer: String(user?.stripe_customer_id)
+    //     })
 
-        console.log("subscriptions", subscriptions)
-        console.log("user", user)
-        return subscriptions.data.length > 0;
-    }
+    //     console.log("subscriptions", subscriptions)
+    //     console.log("user", user)
+    //     return subscriptions.data.length > 0;
+    // }
 
     return false;
 }
@@ -49,28 +49,28 @@ export async function createCustomerIfNull() {
     if (session) {
         // Find user in MongoDB
         const user = await User.findOne({ email: session?.user?.email }).lean();
+        console.log(user)
+        // if (user && !user.stripe_customer_id) {
+        //     try {
+        //         // Create customer in Stripe
+        //         const customer = await stripe.customers.create({
+        //             email: user.email
+        //         });
     
-        if (user && !user.stripe_customer_id) {
-            try {
-                // Create customer in Stripe
-                const customer = await stripe.customers.create({
-                    email: user.email
-                });
-    
-                // Update user in MongoDB with Stripe customer ID
-                await User.updateOne(
-                    { _id: user._id }, 
-                    { stripe_customer_id: customer.id }
-                );
-            } catch (error) {
-                console.error("Error creating Stripe customer:", error);
+        //         // Update user in MongoDB with Stripe customer ID
+        //         await User.updateOne(
+        //             { _id: user._id }, 
+        //             { stripe_customer_id: customer.id }
+        //         );
+        //     } catch (error) {
+        //         console.error("Error creating Stripe customer:", error);
                 
-            }
-        }
+        //     }
+        // }
     
         
-        const newUser = await User.findOne({email: session.user?.email });
-        return newUser?.stripe_customer_id;
+        // const newUser = await User.findOne({email: session.user?.email });
+        // return newUser?.stripe_customer_id;
     }
     
 }

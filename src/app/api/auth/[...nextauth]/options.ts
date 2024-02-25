@@ -23,6 +23,7 @@ export const options: NextAuthOptions = {
           email: profile.email,
           image: profile.picture,
           role: userInDatabase ? userInDatabase.role : "User",
+          stripe_customer_id: userInDatabase.stripe_customer_id || ""
         };
       },
       clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -57,6 +58,7 @@ export const options: NextAuthOptions = {
               email: user.email,
               role: user.role,
               password:user.password,
+              stripe_customer_id: user.stripe_customer_id
             };
           }
         } catch (err: any) {
@@ -79,6 +81,7 @@ export const options: NextAuthOptions = {
             image: profile.user.image || profile?.profile?.image,
             email: profile.user.email,
             role: profile.user.role,
+            stripe_customer_id: "",
             password: "Google User",
           });
           console.log(newUser);
@@ -95,6 +98,7 @@ export const options: NextAuthOptions = {
           email: existingUser.email,
           role: existingUser.role,
           password: existingUser.password,
+          stripe_customer_id: existingUser.stripe_customer_id
         };
       } catch (error) {
         console.error("Google sign-in error:", error);
