@@ -3,7 +3,7 @@
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import getStipePromise from "@/lib/stripe";
+
 const Checkout = () => {
   const { data: session } = useSession();
   console.log(session);
@@ -23,27 +23,15 @@ const Checkout = () => {
     promptCount = 100;
   }
 
-  const packageData = [
-    {
-      packageName,
-      packagePrice,
-      promptCount,
-      packageFor: session?.user.email,
-    },
-  ];
+  const packageData = {
+    packageName,
+    packagePrice,
+    promptCount,
+    packageFor: session?.user.email,
+  };
 
   const doCheckout = async () => {
-    const stripe = await getStipePromise();
     const res = await axios.post("/api/checkout", packageData);
-
-    if (res.data.session) {
-      stripe?.redirectToCheckout({
-        sessionId: res.data.session.id,
-      });
-    
-     const paymentId = res.data.session.id
-     console.log(paymentId)
-    }
   };
   return (
     <div>

@@ -1,76 +1,88 @@
+import { getServerSession } from "next-auth";
+import Stripe from "stripe";
 
-import { getServerSession } from 'next-auth';
-import Stripe from 'stripe';
+import { options } from "@/app/api/auth/[...nextauth]/options";
+import User from "@/models/userModels";
+import { connectToDatabase } from "@/db/dbConfig";
 
-import { options } from '@/app/api/auth/[...nextauth]/options';
-import User from '@/models/userModels';
-
-
-export const stripe = new Stripe(String(process.env.STRIPE_SECRET), {
-    apiVersion: '2023-10-16',
+export const stripe = new Stripe(String(process.env.STRIPE_SECRET_KEY), {
+  apiVersion: "2023-10-16",
 });
 
 export async function hasSubscription() {
-    const session = await getServerSession(options);
+  const session = await getServerSession(options);
 
-    // if (session) {
-    //     const user = await User.findOne({email: session?.user.email }).lean()
-    //     const subscriptions = await stripe.subscriptions.list({
-    //         customer: String(user?.stripe_customer_id)
-    //     })
+  if (session) {
+      const user = await User.findOne({email: session?.user.email }).lean()
+      const subscriptions = await stripe.subscriptions.list({
+          customer: String(user?.stripe_customer_id)
+      })
 
-    //     console.log("subscriptions", subscriptions)
-    //     console.log("user", user)
-    //     return subscriptions.data.length > 0;
-    // }
+      console.log("subscriptions", subscriptions)
+      console.log("user", user)
+      return subscriptions.data.length > 0;
+  }
 
-    return false;
+  return false;
 }
 
 export async function createCheckoutLink(customer: string) {
-    const checkout = await stripe.checkout.sessions.create({
-        success_url: "http://localhost:3000/dashboard/billing?success=true",
-        cancel_url: "http://localhost:3000/dashboard/billing?success=true",
-        customer: customer,
-        line_items: [
-            {
-                price: 'price_1NarR3APMZcBliJSoefCKTi5'
-            }
-        ],
-        mode: "subscription"
-    })
+  const checkout = await stripe.checkout.sessions.create({
+    success_url: "http://localhost:3000/dashboard/billing?success=true",
+    cancel_url: "http://localhost:3000/dashboard/billing?success=true",
+    customer: customer,
+    line_items: [
+      {
+        price: "price_1NarR3APMZcBliJSoefCKTi5",
+      },
+    ],
+    mode: "subscription",
+  });
 
-    return checkout.url;
+  return checkout.url;
 }
 
-export async function createCustomerIfNull() {
-    const session = await getServerSession(options);
+export async function createCustomerIfNull(userEmail: string) {
+  connectToDatabase();
+  const user = await User.findOne({ email: userEmail }).lean();
+  try {
+   
+    if (!user?.stripe_customer_id) {
+      // Create customer in Stripe
+      const customer = await stripe.customers.create({
+        email: userEmail,
+      });
 
-    if (session) {
-        // Find user in MongoDB
-        const user = await User.findOne({ email: session?.user?.email }).lean();
-        console.log(user)
-        // if (user && !user.stripe_customer_id) {
-        //     try {
-        //         // Create customer in Stripe
-        //         const customer = await stripe.customers.create({
-        //             email: user.email
-        //         });
-    
-        //         // Update user in MongoDB with Stripe customer ID
-        //         await User.updateOne(
-        //             { _id: user._id }, 
-        //             { stripe_customer_id: customer.id }
-        //         );
-        //     } catch (error) {
-        //         console.error("Error creating Stripe customer:", error);
-                
-        //     }
-        // }
-    
-        
-        // const newUser = await User.findOne({email: session.user?.email });
-        // return newUser?.stripe_customer_id;
+      console.log("Stripe customer", customer);
+      // Update user in MongoDB with Stripe customer ID
+      await User.findOneAndUpdate(
+        { email: userEmail },
+        { stripe_customer_id: customer.id }
+      );
+
+      const user = await User.findOne({ email: userEmail }).lean();
+      return user?.stripe_customer_id;
     }
-    
+  } catch (error) {
+    console.error("Error creating Stripe customer:", error);
+  }
+
+  return user?.stripe_customer_id;
+}
+
+export async function generateCustomerPortalLink(customerId: string) {
+  try {
+      
+      const portalSession = await stripe.billingPortal.sessions.create({
+          customer: customerId,
+          return_url: process.env.NEXTAUTH_URL + "/dashboard/settings/billing", 
+      });
+
+      console.log()
+
+      return portalSession.url;
+  } catch (error) {
+      console.log(error)
+      return undefined;
+  }
 }
