@@ -34,6 +34,7 @@ export async function createCheckoutLink(customer: string, stripePackageId:strin
     line_items: [
       {
         price: stripePackageId,
+        quantity: 1
       },
     ],
     mode: "subscription",
