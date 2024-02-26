@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@stripe/stripe-js": "^2.2.2",
+    "apexcharts": "^3.46.0",
     "axios": "^1.6.3",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
@@ -20,6 +21,7 @@
     "next-auth": "^4.24.5",
     "nodemailer": "^6.9.8",
     "react": "^18.2.0",
+    "react-apexcharts": "^1.4.1",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.12.0",
