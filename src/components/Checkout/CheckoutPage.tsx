@@ -1,26 +1,33 @@
 "use client";
 
+import { createCheckoutLink, createCustomerIfNull } from "@/helpers/doPayment";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const Checkout = () => {
   const { data: session } = useSession();
+  const router = useRouter()
   console.log(session);
   const searchData = useSearchParams();
   const selectedPackage = searchData.get("package")?.toUpperCase();
   const packageName = selectedPackage;
   let promptCount: number;
   let packagePrice: number;
+  let stripePackageId: string;
   if (selectedPackage === "FREE") {
     packagePrice = 0.0;
     promptCount = 3;
+    stripePackageId = "price_1Oo4KoFKwGa2QKQKoegNM2Js"
   } else if (packageName === "PREMIUM") {
     packagePrice = 9.0;
     promptCount = 10;
+    stripePackageId = "price_1Oo673FKwGa2QKQKAxm2S6pw"
   } else {
     packagePrice = 19.0;
     promptCount = 100;
+    stripePackageId = "price_1Oo67ZFKwGa2QKQKoji4Gmpo"
   }
 
   const packageData = {
@@ -31,7 +38,12 @@ const Checkout = () => {
   };
 
   const doCheckout = async () => {
-    const res = await axios.post("/api/checkout", packageData);
+    const customer = await createCustomerIfNull()
+    const checkoutLink = await createCheckoutLink(customer, stripePackageId)
+    if(checkoutLink){
+      router.push(checkoutLink)
+    }
+    
   };
   return (
     <div>

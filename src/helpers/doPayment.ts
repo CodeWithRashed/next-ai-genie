@@ -26,14 +26,14 @@ export async function hasSubscription() {
   return false;
 }
 
-export async function createCheckoutLink(customer: string) {
+export async function createCheckoutLink(customer: string, stripePackageId:string) {
   const checkout = await stripe.checkout.sessions.create({
-    success_url: "http://localhost:3000/dashboard/billing?success=true",
-    cancel_url: "http://localhost:3000/dashboard/billing?success=true",
+    success_url: "http://localhost:3000/checkout/success",
+    cancel_url: "http://localhost:3000/",
     customer: customer,
     line_items: [
       {
-        price: "price_1NarR3APMZcBliJSoefCKTi5",
+        price: stripePackageId,
       },
     ],
     mode: "subscription",
