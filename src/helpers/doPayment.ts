@@ -42,7 +42,10 @@ export async function createCheckoutLink(customer: string) {
   return checkout.url;
 }
 
-export async function createCustomerIfNull(userEmail: string) {
+export async function createCustomerIfNull() {
+const session = await getServerSession(options) 
+  const userEmail = session?.user.email
+  console.log("userEmail from server", userEmail)
   connectToDatabase();
   const user = await User.findOne({ email: userEmail }).lean();
   try {
@@ -70,11 +73,12 @@ export async function createCustomerIfNull(userEmail: string) {
   return user?.stripe_customer_id;
 }
 
-export async function generateCustomerPortalLink(customerId: string) {
+export async function generateCustomerPortalLink(stripeCustomerId:string) {
+  console.log("stripeCustomerId1", stripeCustomerId)
   try {
       
       const portalSession = await stripe.billingPortal.sessions.create({
-          customer: customerId,
+          customer: stripeCustomerId,
           return_url: process.env.NEXTAUTH_URL + "/dashboard/settings/billing", 
       });
 

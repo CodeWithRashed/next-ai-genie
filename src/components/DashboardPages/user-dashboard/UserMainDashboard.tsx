@@ -1,11 +1,16 @@
+import { generateCustomerPortalLink } from "@/helpers/doPayment";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import React from "react";
 
 const ChartComp = dynamic(() => import("@/components/ChartsComp/ChartsComp"), {
   ssr: false,
 });
 
-const UserMainDashboard = () => {
+const UserMainDashboard = async ({stripeCustomerId}:{stripeCustomerId: string}) => {
+
+  const customerPortalLink = await generateCustomerPortalLink(stripeCustomerId)
+
   const packageName = "Free";
   const availablePrompt = 20;
   const promptUsed = 12;
@@ -41,11 +46,17 @@ const UserMainDashboard = () => {
             <ChartComp />
           </div>
         </div>
-        <div className="shadow-md p-5 rounded-main h-full w-full bg-white">
-          <p>Payment History</p>
-          <div className="p-2 border mt-3 rounded-main">
-            <p className="font-medium">Payment Successful</p>
-            <p>Sunday, December 03, 2023 at 9:00 AM</p>
+        <div className="shadow-md p-5 rounded-main h-full w-full bg-white flex flex-col justify-between">
+          <div>
+            <p>Payment History</p>
+            <div className="p-2 border mt-3 rounded-main">
+              <p className="font-medium">Payment Successful</p>
+              <p>Sunday, December 03, 2023 at 9:00 AM</p>
+            </div>
+          </div>
+
+          <div className="w-full">
+            <Link className={`${!customerPortalLink && "cursor-not-allowed"} underline underline-offset-4 hover:text-blue-500 transition-all ease-in-out`} href={customerPortalLink|| ""}>Manage Payment</Link>
           </div>
         </div>
       </div>
