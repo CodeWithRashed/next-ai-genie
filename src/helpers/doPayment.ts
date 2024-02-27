@@ -17,10 +17,7 @@ export async function hasSubscription() {
       const subscriptions = await stripe.subscriptions.list({
           customer: String(user?.stripe_customer_id)
       })
-
-      console.log("subscriptions", subscriptions)
-      console.log("user", user)
-      return subscriptions.data.length > 0;
+      return subscriptions.data[0].plan;
   }
 
   return false;
@@ -55,6 +52,7 @@ const session = await getServerSession(options)
       // Create customer in Stripe
       const customer = await stripe.customers.create({
         email: userEmail,
+        name: session?.user.name
       });
 
       console.log("Stripe customer", customer);

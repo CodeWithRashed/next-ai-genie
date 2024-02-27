@@ -1,8 +1,6 @@
-import axios from "axios"
+import axios from "axios";
 
-export const savePackage = async (sessionData:any, packageName:any) => {
-    if(!sessionData){
-        return
-    }
-    const res = await axios.post("/api/checkout/success", {sessionId : sessionData, packageName: packageName})
-}
+export const savePackage = async (packageData: any) => {
+  const res = await axios.post("http://localhost:3000/api/checkout/success", {packageData});
+  return res.data;
+};

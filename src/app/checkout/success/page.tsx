@@ -1,10 +1,47 @@
-"use client";
-
+import { options } from "@/app/api/auth/[...nextauth]/options";
+import { hasSubscription } from "@/helpers/doPayment";
+import { savePackage } from "@/helpers/savePackageData";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
+const PaymentSuccess = async () => {
 
+  const session = await getServerSession(options);
+  if (!session || !session.user || !session.user.email) {
+    console.error('Invalid session or missing user information');
+    return;
+  }
 
-const PaymentSuccess = () => {
+  const data = await hasSubscription();
+  
+  if (!data.active) {
+    console.log('Subscription is not active');
+    return;
+  }
 
+  let packageName = "FREE";
+  let promptCount = 3;
+
+  if (data.amount === 900) {
+    packageName = "PREMIUM";
+    promptCount = 10;
+  } else if (data.amount === 1900) {
+    packageName = "GOLDEN";
+    promptCount = 100;
+  }
+
+  const packageData = {
+    packageName: packageName,
+    promptCount: promptCount,
+    packageFor: session.user.email,
+    packagePrice: data.amount / 100
+  };
+
+  try {
+    const res = await savePackage(packageData);
+    console.log('Package saved successfully:', res);
+  } catch (error) {
+    console.error('Error saving package:', error);
+  }
 
   return (
     <div>
