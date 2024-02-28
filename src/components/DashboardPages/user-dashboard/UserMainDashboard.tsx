@@ -1,39 +1,44 @@
-import { generateCustomerPortalLink } from "@/helpers/doPayment";
+"use client";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import React from "react";
+import DashBoardLoading from "./DashBoardLoading";
+import DashboardDataCard from "./DashboardDataCard";
+import PaymentHistory from "./PaymentHistory";
 
 const ChartComp = dynamic(() => import("@/components/ChartsComp/ChartsComp"), {
   ssr: false,
 });
 
-const UserMainDashboard = async ({stripeCustomerId}:{stripeCustomerId: string}) => {
+const UserMainDashboard = () => {
+  const [data, setData] = React.useState(null);
+  const [isLoading, setLoading] = React.useState(true);
 
-  const customerPortalLink = await generateCustomerPortalLink(stripeCustomerId)
+  React.useEffect(() => {
+    fetch("/api/get/packages")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setData(data.packageData);
+        setLoading(false);
+      });
+  }, []);
 
-  const packageName = "Free";
-  const availablePrompt = 20;
-  const promptUsed = 12;
+  const promptUsed = 5
+  if (isLoading)
+    return (
+      <DashBoardLoading></DashBoardLoading>
+    );
+  if (!data) return <p>No profile data</p>;
 
   return (
     <div className="bg-gray-100 rounded-main overflow-hidden p-3">
       <div className="header grid md:grid-cols-2 lg:grid-cols-3 gap-3 mb-5">
+        <DashboardDataCard title="Current Package" data={data?.packageName} />
+        <DashboardDataCard title="Available Prompt" data={data?.packageName} />
         <div className="shadow-md p-5 rounded-main bg-white">
-          <p>Current Package</p>
+          <p>Prompt Used</p>
           <p className="text-5xl my-5 font-bold text-color-primary">
-            {packageName}
-          </p>
-        </div>
-        <div className="shadow-md p-5 rounded-main bg-white">
-          <p>Available Prompt</p>
-          <p className="text-5xl my-5 font-bold text-color-primary">
-            {availablePrompt}
-          </p>
-        </div>
-        <div className="shadow-md p-5 rounded-main bg-white">
-          <p> Prompt Used</p>
-          <p className="text-5xl my-5 font-bold text-color-primary">
-            {promptUsed}
+            {promptUsed || "-"}
           </p>
         </div>
       </div>
@@ -47,17 +52,7 @@ const UserMainDashboard = async ({stripeCustomerId}:{stripeCustomerId: string}) 
           </div>
         </div>
         <div className="shadow-md p-5 rounded-main h-full w-full bg-white flex flex-col justify-between">
-          <div>
-            <p>Payment History</p>
-            <div className="p-2 border mt-3 rounded-main">
-              <p className="font-medium">Payment Successful</p>
-              <p>Sunday, December 03, 2023 at 9:00 AM</p>
-            </div>
-          </div>
-
-          <div className="w-full">
-            <Link className={`${!customerPortalLink && "cursor-not-allowed"} underline underline-offset-4 hover:text-blue-500 transition-all ease-in-out`} href={customerPortalLink|| ""}>Manage Payment</Link>
-          </div>
+         <PaymentHistory/>
         </div>
       </div>
     </div>

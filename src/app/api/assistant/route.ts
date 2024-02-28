@@ -1,6 +1,6 @@
 // Import necessary modules and functions
 import { connectToDatabase } from "@/db/dbConfig";
-import { GetPackageData } from "@/helpers/getPackageData";
+import { getPackageData } from "@/helpers/getPackageData";
 import Package from "@/models/packageModels";
 import axios from "axios";
 import { getServerSession } from "next-auth";
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid Request" });
     }
 
-    const previousPackage: any = await GetPackageData();
+    const previousPackage: any = await getPackageData();
 
     if (!previousPackage || previousPackage?.promptCount < 1) {
       return NextResponse.json({ error: "You Do Not have any prompt left!!" });

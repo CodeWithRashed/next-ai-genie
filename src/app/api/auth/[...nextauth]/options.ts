@@ -69,7 +69,7 @@ export const options: NextAuthOptions = {
   ],
   callbacks: {
     async signIn(profile): Promise<any | null> {
-      connectToDatabase();
+       connectToDatabase();
       try {
         // Check if the user already exists in your database
         let existingUser = await User.findOne({ email: profile.user.email });

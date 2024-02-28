@@ -1,5 +1,6 @@
 "use client";
 
+import { useDataContext } from "@/Context/DataContext";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -10,6 +11,9 @@ const Checkout = () => {
   const selectedPackage = searchData.get("package")?.toUpperCase();
   const router = useRouter();
   let packagePrice, promptCount, stripePackageId;
+
+  const {testData} = useDataContext()
+  console.log("testData",testData)
 
   if (selectedPackage === "FREE") {
     packagePrice = 0.0;

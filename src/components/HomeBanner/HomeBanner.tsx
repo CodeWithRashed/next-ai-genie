@@ -2,10 +2,10 @@ import Image from "next/image";
 import bannerImage from "../../assets/banner.png";
 import { ButtonOutline, ButtonPrimary } from "../ui/Button";
 import Link from "next/link";
-import { GetPackageData } from "@/helpers/getPackageData";
+import { getPackageData } from "@/helpers/getPackageData";
 
 const HomeBanner = async () => {
-  const packageData = await GetPackageData();
+  const packageData = await getPackageData();
   return (
     <div className="banner hero-section h-screen">
       {/* Banner Content */}

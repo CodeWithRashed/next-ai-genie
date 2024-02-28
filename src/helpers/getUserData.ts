@@ -7,10 +7,10 @@ export const GetUserData = async () => {
     connectToDatabase()
     const session = await getServerSession(options)
     if(!session){
-        return
+        return {message: "User Session Not Found!"}
     }
 
-    const userData = await User.findOne({email: session?.user.email }).select('-_id role email name image').lean()
+    const userData = await User.findOne({email: session?.user.email }).select('-_id role email name image stripe_customer_id').lean()
 
    return userData
     

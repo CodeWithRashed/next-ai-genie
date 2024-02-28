@@ -8,9 +8,11 @@ import FeedbackSection from "@/components/Sections/ReviewSection/FeedbackSection
 import Subscribe from "@/components/Sections/Subscribe/Subscribe";
 import WhyChooseUs from "@/components/Sections/WhyChooseUs/WhyChooseUs";
 import SectionTitle from "@/components/Shared/SectionTitle";
+import { GetUserData } from "@/helpers/getUserData";
 import { Toaster } from "react-hot-toast";
 
-export default function Home() {
+export default async function Home() {
+  const dbUserData = await GetUserData()
   return (
     <main>
       <header className="header bg-[#F9FDFF] mb-20" id="home">

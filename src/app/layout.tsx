@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import AuthContext from '@/AuthContext/AuthContext'
+import AuthContext from '@/Context/AuthContext'
 import { Toaster } from 'react-hot-toast'
+import { DataContextProvider } from '@/Context/DataContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,7 +23,11 @@ export default function RootLayout({
       <div>
           <Toaster position="top-center" reverseOrder={false} />
         </div>
-      <AuthContext>{children}</AuthContext>
+      <AuthContext>
+        <DataContextProvider>
+        {children}
+        </DataContextProvider>
+        </AuthContext>
         
         </body>
     </html>

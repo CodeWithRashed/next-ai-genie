@@ -3,8 +3,8 @@ import { options } from "../app/api/auth/[...nextauth]/options"
 import { connectToDatabase } from "@/db/dbConfig"
 import Package from "@/models/packageModels"
 
-export const GetPackageData = async () => {
-    connectToDatabase()
+export const getPackageData = async () => {
+    
     const session = await getServerSession(options)
     if(!session){
         return

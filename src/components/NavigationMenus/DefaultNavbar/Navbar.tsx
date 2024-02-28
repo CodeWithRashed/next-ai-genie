@@ -5,10 +5,10 @@ import Image from "next/image";
 import { MobileDropdownMenu, ProfileDropdownMenu } from "../../ui/DropdownMenu";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+
 
 const Navbar = () => {
-  const router = useRouter();
+
   const [activeMenu, setActiveMenu] = useState("home");
   const { data: session } = useSession();
 

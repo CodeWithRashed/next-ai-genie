@@ -1,9 +1,17 @@
 // dbConfig.ts
 import mongoose from "mongoose";
+import userSchema from "../models/userModels"; 
+
+let isConnected: boolean = false;
 
 export const connectToDatabase = async () => {
+  if (isConnected) {
+    console.log("Already connected to the database");
+    return;
+  }
+
   try {
-     mongoose.connect(process.env.DATABASE_URI!, {
+    await mongoose.connect(process.env.DATABASE_URI!, {
       dbName: "ai_genie",
     });
 
@@ -11,6 +19,7 @@ export const connectToDatabase = async () => {
 
     connection.on("connected", () => {
       console.log("Connected to Database");
+      // isConnected = true;
     });
 
     connection.on("error", (err: any) => {

@@ -13,6 +13,7 @@ export async function hasSubscription() {
   const session = await getServerSession(options);
 
   if (session) {
+    await connectToDatabase()
       const user = await User.findOne({email: session?.user.email }).lean()
       const subscriptions = await stripe.subscriptions.list({
           customer: String(user?.stripe_customer_id)

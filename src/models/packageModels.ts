@@ -9,6 +9,10 @@ const packageSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  promptUsed: {
+    type: Number,
+    default: 0
+  },
   packageFor: {
     type: String,
     required: true
