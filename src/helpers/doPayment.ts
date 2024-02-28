@@ -18,7 +18,7 @@ export async function hasSubscription() {
       const subscriptions = await stripe.subscriptions.list({
           customer: String(user?.stripe_customer_id)
       })
-      return subscriptions.data[0].plan;
+      return subscriptions.data[0];
   }
 
   return false;

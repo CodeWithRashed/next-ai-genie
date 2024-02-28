@@ -11,7 +11,9 @@ const PaymentSuccess = async () => {
     return;
   }
 
-  const data = await hasSubscription();
+  const rawData = await hasSubscription();
+
+  const data = rawData?.items?.data[0]?.plan
   
   if (!data.active) {
     console.log('Subscription is not active');

@@ -4,6 +4,7 @@ import React from "react";
 import DashBoardLoading from "./DashBoardLoading";
 import DashboardDataCard from "./DashboardDataCard";
 import PaymentHistory from "./PaymentHistory";
+import ActiveFreeTrial from "./ActiveFreeTrial";
 
 const ChartComp = dynamic(() => import("@/components/ChartsComp/ChartsComp"), {
   ssr: false,
@@ -28,7 +29,7 @@ const UserMainDashboard = () => {
     return (
       <DashBoardLoading></DashBoardLoading>
     );
-  if (!data) return <p>No profile data</p>;
+  if (!data) return <div className="overflow-hidden"><ActiveFreeTrial/></div>;
 
   return (
     <div className="bg-gray-100 rounded-main overflow-hidden p-3">

@@ -1,31 +1,28 @@
 import { connectToDatabase } from "@/db/dbConfig";
+import { createCustomerIfNull, generateCustomerPortalLink, hasSubscription } from "@/helpers/doPayment";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  connectToDatabase()
-  const { searchParams } = new URL(request.url)
-  const data = searchParams.get('data')
-  let fruit = "Apple";
-
   try {
+    connectToDatabase();
 
-  switch (fruit) {
-    case "Banana":
-        console.log("Banana is yellow.");
-        break;
-    case "Apple":
-        console.log("Apple is red.");
-        break;
-    case "Orange":
-        console.log("Orange is orange.");
-        break;
-    default:
-        console.log("Unknown fruit.");
-}
-    return NextResponse.json({ success: "payment route hit", data});
-  } catch {
+    const { searchParams } = new URL(request.url);
+    const query = searchParams.get("data");
+    let data = null;
+    let currentPackage = null;
+
+    if ("customer_portal_link") {
+      const stripeCustomerId = await createCustomerIfNull()
+      data = await generateCustomerPortalLink(stripeCustomerId);
+      return NextResponse.json({ success: "payment route hit", data });
+    }
+
+    data = await hasSubscription();
+    return NextResponse.json({ success: "payment route hit", data });
+  } catch (error) {
+    console.error(error);
     return NextResponse.json({
-      error: "Something went wrong while getting packages! Try Again!",
+      error: "Something went wrong while getting payment data! Try Again!",
     });
   }
 }
