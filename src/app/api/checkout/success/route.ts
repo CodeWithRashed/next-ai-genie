@@ -3,6 +3,7 @@ import Package from "@/models/packageModels";
 import User from "@/models/userModels";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+
 export const stripe = new Stripe(String(process.env.STRIPE_SECRET_KEY), {
   apiVersion: "2023-10-16",
 });
@@ -31,14 +32,13 @@ export async function POST(request: NextRequest) {
 
     const subscriptionPlan = subscriptions.data[0].items.data[0].plan;
 
-    if(!subscriptionPlan.active){
+    if (!subscriptionPlan.active) {
       return NextResponse.json({ message: "Package is not activated!!!" });
     }
 
-  
     let packageName = "FREE";
     let promptCount = 3;
-  
+
     if (subscriptionPlan.amount === 900) {
       packageName = "PREMIUM";
       promptCount = 10;
@@ -46,14 +46,14 @@ export async function POST(request: NextRequest) {
       packageName = "GOLDEN";
       promptCount = 100;
     }
-  
+
     const packageData = {
       packageName: packageName,
       promptCount: promptCount,
       packageFor: reqBody.userEmail,
-      packagePrice: subscriptionPlan?.amount! / 100
+      packagePrice: subscriptionPlan?.amount! / 100,
     };
-  
+
     const newPackageData = new Package(packageData);
     const savePackageData = await newPackageData.save();
 
