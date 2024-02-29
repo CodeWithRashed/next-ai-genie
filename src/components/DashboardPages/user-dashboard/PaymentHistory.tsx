@@ -30,11 +30,17 @@ const PaymentHistory = () => {
       });
   }, []);
 
-  const formatTimestamp = (timestamp) => {
-    const date = new Date(timestamp * 1000);
-    return date.toLocaleString();
-  }
+  const convertData = (timestamp) => {
+    let date = new Date(timestamp * 1000);
 
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+    return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`
+  }
   if (isLoading)  return 
 
   return (
@@ -43,8 +49,8 @@ const PaymentHistory = () => {
         <p>Payment History</p>
         <div className="p-2 border mt-3 rounded-main">
           <p className="font-medium">Payment Successful</p>
-          <p>Subscribed at: {formatTimestamp(paymentData?.plan?.created)}</p>
-          <p>Next Payment Cycle: {formatTimestamp(paymentData?.current_period_end)}</p>
+          <p>Subscribed at: {convertData(paymentData?.plan?.created)}</p>
+          <p>Next Payment Cycle: {convertData(paymentData?.current_period_end)}</p>
         </div>
       </div>
 

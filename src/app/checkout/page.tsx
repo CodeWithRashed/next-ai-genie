@@ -1,3 +1,4 @@
+"use client"
 import Checkout from "@/components/Checkout/CheckoutPage"
 import Navbar from "@/components/NavigationMenus/DefaultNavbar/Navbar"
 

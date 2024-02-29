@@ -4,7 +4,11 @@ import dynamic from "next/dynamic";
 import React from "react";
 import DashBoardLoading from "./DashBoardLoading";
 import DashboardDataCard from "./DashboardDataCard";
-import PaymentHistory from "./PaymentHistory";
+
+const PaymentHistory = dynamic(() => import("./PaymentHistory"), {
+  ssr: false,
+});
+
 import ActiveFreeTrial from "./ActiveFreeTrial";
 
 const ChartComp = dynamic(() => import("@/components/ChartsComp/ChartsComp"), {
