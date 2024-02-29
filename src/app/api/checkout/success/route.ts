@@ -1,39 +1,27 @@
+// @ts-nocheck
 import { connectToDatabase } from "@/db/dbConfig";
+import { stripe } from "@/helpers/doPayment";
 import Package from "@/models/packageModels";
 import User from "@/models/userModels";
 import { NextRequest, NextResponse } from "next/server";
-import Stripe from "stripe";
 
-export const stripe = new Stripe(String(process.env.STRIPE_SECRET_KEY), {
-  apiVersion: "2023-10-16",
-});
-
-// Main POST function
 export async function POST(request: NextRequest) {
   connectToDatabase();
+
   try {
-    // Parse the request body
-    const reqBody = await request.json();
+    const requestBody = await request.json();
 
-    const dBPackageData = await Package.findOne({
-      packageFor: reqBody.userEmail,
-    });
-
-    if (dBPackageData) {
-      console.log("Package already exists:", dBPackageData);
-      return NextResponse.json({ error: "Package Already Exists" });
-    }
-
-    const user = await User.findOne({ email: reqBody.userEmail }).lean();
+    const dbPackageData = await Package.findOne({ packageFor: requestBody.userEmail }).lean();
+    const user = await User.findOne({ email: requestBody.userEmail }).lean();
 
     const subscriptions = await stripe.subscriptions.list({
       customer: String(user?.stripe_customer_id),
     });
 
-    const subscriptionPlan = subscriptions.data[0].items.data[0].plan;
+    const subscriptionPlan = subscriptions.data[0]?.items?.data[0]?.plan;
 
-    if (!subscriptionPlan.active) {
-      return NextResponse.json({ message: "Package is not activated!!!" });
+    if (!subscriptionPlan || !subscriptionPlan.active) {
+      return NextResponse.json({ message: "Subscription is not active!" });
     }
 
     let packageName = "FREE";
@@ -47,19 +35,45 @@ export async function POST(request: NextRequest) {
       promptCount = 100;
     }
 
-    const packageData = {
-      packageName: packageName,
-      promptCount: promptCount,
-      packageFor: reqBody.userEmail,
-      packagePrice: subscriptionPlan?.amount! / 100,
-    };
+    const newPackagePrice = subscriptionPlan.amount / 100;
 
-    const newPackageData = new Package(packageData);
-    const savePackageData = await newPackageData.save();
+    if (dbPackageData) {
+      if (dbPackageData.packagePrice !== newPackagePrice) {
+        // Update the package if the prices are different
+        await Package.findOneAndUpdate(
+          { packageFor: requestBody.userEmail },
+          {
+            $set: {
+              packageName,
+              promptCount,
+              packagePrice: newPackagePrice,
+            },
+          },
+          { new: true }
+        );
 
-    console.log("User saved:", savePackageData._doc);
+        console.log("Package updated with new price:", newPackagePrice);
+        return NextResponse.json({ success: "Package Updated Successfully" });
+      } else {
+        // If the prices are the same, return
+        console.log("Package price is already up to date:", newPackagePrice);
+        return NextResponse.json({ message: "Package price is already up to date" });
+      }
+    } else {
+      // Create a new package if it doesn't exist
+      const packageData = {
+        packageName,
+        promptCount,
+        packageFor: requestBody.userEmail,
+        packagePrice: newPackagePrice,
+      };
 
-    return NextResponse.json({ success: "Package Activated Successfully" });
+      const newPackage = new Package(packageData);
+      await newPackage.save();
+
+      console.log("New package created with price:", newPackagePrice);
+      return NextResponse.json({ success: "Package Activated Successfully" });
+    }
   } catch (error) {
     console.error("Error during package activation:", error);
     return NextResponse.json({ error: "Something went wrong! Try Again!" });
