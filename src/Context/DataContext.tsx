@@ -24,14 +24,8 @@ export const DataContextProvider = ({ children }: DataContextProviderProps) => {
   const { data: session } = useSession();
 const [testData, setTestData] = useState<string>("");
   useEffect(() => {
-    console.log("DATA CONTEXT RENDERED");
+
     setTestData("Hello ")
-    // GetUserData().then(result => {
-    //   console.log(result);
-    // })
-    // .catch(error => {
-    //   console.error('Error fetching data:', error);
-    // });
   }, []);
 
  

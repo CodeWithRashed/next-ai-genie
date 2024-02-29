@@ -19,7 +19,6 @@ const UserMainDashboard = () => {
     fetch("/api/get/packages")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setData(data.packageData);
         setLoading(false);
       });

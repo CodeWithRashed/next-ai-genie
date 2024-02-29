@@ -1,6 +1,5 @@
 import Image from "next/image";
 import bannerImage from "../../assets/banner.png";
-import { ButtonOutline, ButtonPrimary } from "../ui/Button";
 import Link from "next/link";
 import { getPackageData } from "@/helpers/getPackageData";
 

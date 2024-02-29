@@ -16,14 +16,13 @@ export const POST = async (request: NextRequest) => {
     );
 
     if (checkoutLink) {
-      // const redirectUrl = new URL(checkoutLink).toString(); // Convert URL object to string
-      // console.log(redirectUrl);
+
       return NextResponse.json(checkoutLink);
     }
 
     return NextResponse.json({ message: "success" });
   } catch (error) {
-    console.error("Error:", error);
+
     return NextResponse.json({ error: "Internal Server Error" });
   }
 };

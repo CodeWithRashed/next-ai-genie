@@ -17,7 +17,7 @@ const EnglishHelpPage = () => {
     setLoading(true);
 
     const prompt = e.target.elements.input.value;
-    console.log(prompt);
+
 
     const res = await axios.post("/api/english-helper", { prompt });
     const result = res.data.result;
@@ -27,7 +27,6 @@ const EnglishHelpPage = () => {
       setPromptError(res.data.error);
     }
     e.target.reset();
-    console.log(res);
     setLoading(false);
   };
 

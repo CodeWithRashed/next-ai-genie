@@ -2,7 +2,7 @@
 
 //React Icons
 import { FaLanguage, FaRegUserCircle } from "react-icons/fa";
-import { MdSummarize, MdDashboard, MdInbox } from "react-icons/md";
+import { MdSummarize, MdInbox } from "react-icons/md";
 import { IoCodeWorking } from "react-icons/io5";
 import { SiAudiomack } from "react-icons/si";
 import { TbPhotoCog } from "react-icons/tb";
@@ -14,8 +14,6 @@ import { usePathname } from "next/navigation";
 //Functions Components
 export default function UserDashboardNavbar() {
   const routes = usePathname()
-  console.log(routes)
-  const isPro = false;
   return (
     <div className="flex flex-col gap-1 transition-all ease-in-out">
             {/* //Image Generation// */}

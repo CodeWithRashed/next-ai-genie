@@ -1,6 +1,5 @@
 import { getServerSession } from "next-auth"
 import { options } from "../app/api/auth/[...nextauth]/options"
-import { connectToDatabase } from "@/db/dbConfig"
 import Package from "@/models/packageModels"
 
 export const getPackageData = async () => {

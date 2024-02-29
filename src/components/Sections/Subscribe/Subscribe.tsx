@@ -7,7 +7,6 @@ const Subscribe = () => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value
-    console.log(email)
     form.reset()
     toast.success("Thanks for your Subscription")
   };

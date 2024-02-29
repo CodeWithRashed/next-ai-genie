@@ -29,7 +29,6 @@ export async function RegisterUser(prevState: any, formData: FormData) {
       role: ROLE.USER,
     };
 
-    console.log(rawFormData);
 
     const response = axios.post("/api/user/register", rawFormData);
 

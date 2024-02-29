@@ -6,14 +6,10 @@ const PaymentSuccess = async () => {
 
   const session = await getServerSession(options);
   if (!session || !session.user || !session.user.email) {
-    console.error('Invalid session or missing user information');
     return;
   }
   const userEmail = session.user.email
   const res = await axios.post(`${process.env.NEXTAUTH_URL}/api/checkout/success`, {userEmail})
-
-  console.log(res.data)
-
   
   return (
     <div>

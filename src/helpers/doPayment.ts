@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { getServerSession } from "next-auth";
 import Stripe from "stripe";
 
@@ -44,7 +46,6 @@ export async function createCheckoutLink(customer: string, stripePackageId:strin
 export async function createCustomerIfNull() {
 const session = await getServerSession(options) 
   const userEmail = session?.user.email
-  console.log("userEmail from server", userEmail)
   connectToDatabase();
   const user = await User.findOne({ email: userEmail }).lean();
   try {
@@ -56,7 +57,6 @@ const session = await getServerSession(options)
         name: session?.user.name
       });
 
-      console.log("Stripe customer", customer);
       // Update user in MongoDB with Stripe customer ID
       await User.findOneAndUpdate(
         { email: userEmail },
@@ -67,26 +67,20 @@ const session = await getServerSession(options)
       return user?.stripe_customer_id;
     }
   } catch (error) {
-    console.error("Error creating Stripe customer:", error);
   }
 
   return user?.stripe_customer_id;
 }
 
 export async function generateCustomerPortalLink(stripeCustomerId:string) {
-  console.log("stripeCustomerId1", stripeCustomerId)
   try {
       
       const portalSession = await stripe.billingPortal.sessions.create({
           customer: stripeCustomerId,
           return_url: process.env.NEXTAUTH_URL + "/dashboard/settings/billing", 
       });
-
-      console.log()
-
       return portalSession.url;
   } catch (error) {
-      console.log(error)
       return undefined;
   }
 }

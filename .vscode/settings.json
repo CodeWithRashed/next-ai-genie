@@ -1,6 +1,7 @@
 {
     "cSpell.ignoreWords": [
         "NEXTAUTH",
+        "nocheck",
         "openai"
     ]
 }

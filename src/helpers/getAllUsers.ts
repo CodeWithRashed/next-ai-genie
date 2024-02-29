@@ -1,4 +1,3 @@
-import { connectToDatabase } from "@/db/dbConfig";
 import User from "@/models/userModels";
 
 export const getAllUsers = async () => {

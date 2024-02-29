@@ -1,4 +1,3 @@
-import { connectToDatabase } from "@/db/dbConfig";
 import Support from "@/models/supportModels";
 import { GetUserData } from "./getUserData";
 import { cache } from 'react'
@@ -19,6 +18,5 @@ export const GetSupportData = cache(async () => {
       .lean();
     return supportData;
   } catch (error) {
-    console.log(error);
   }
 });

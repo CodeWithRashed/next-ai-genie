@@ -12,8 +12,7 @@ const Checkout = () => {
   const router = useRouter();
   let packagePrice, promptCount, stripePackageId;
 
-  const {testData} = useDataContext()
-  console.log("testData",testData)
+  const { testData } = useDataContext();
 
   if (selectedPackage === "FREE") {
     packagePrice = 0.0;
@@ -40,10 +39,10 @@ const Checkout = () => {
   const doCheckout = async () => {
     try {
       const res = await axios.post("/api/checkout", packageData);
-      console.log("Response from server:", res.data);
+
       router.push(res.data);
     } catch (error) {
-      console.error("Error:", error);
+      ("");
     }
   };
 

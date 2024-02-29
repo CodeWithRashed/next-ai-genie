@@ -2,7 +2,6 @@
 import Image from "next/image";
 import contactBanner from "../../../assets/contact-image.png";
 import { useState } from "react";
-import { FaSpinner } from "react-icons/fa";
 import { sendEmail } from "@/helpers/sendEmail";
 import toast from "react-hot-toast";
 

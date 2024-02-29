@@ -9,7 +9,6 @@ import User from "@/models/userModels";
 import { connectToDatabase } from "@/db/dbConfig";
 
 export const options: NextAuthOptions = {
-  
   session: {
     strategy: "jwt",
   },
@@ -18,21 +17,25 @@ export const options: NextAuthOptions = {
       profile: async (profile) => {
         connectToDatabase();
         try {
-          const userInDatabase = await User.findOne({ email: profile.email }, { maxTimeMS: 15000 });
-    
+          const userInDatabase = await User.findOne(
+            { email: profile.email },
+            { maxTimeMS: 15000 }
+          );
+
           // Perform null check on userInDatabase
-          const stripeCustomerId = userInDatabase ? userInDatabase.stripe_customer_id || "" : "";
-    
+          const stripeCustomerId = userInDatabase
+            ? userInDatabase.stripe_customer_id || ""
+            : "";
+
           return {
             id: profile.sub,
             name: `${profile.given_name} ${profile.family_name}`,
             email: profile.email,
             image: profile.picture,
             role: userInDatabase ? userInDatabase.role : "User",
-            stripe_customer_id: stripeCustomerId
+            stripe_customer_id: stripeCustomerId,
           };
         } catch (error) {
-          console.error("Error parsing Google profile:", error);
           throw new Error("Error parsing Google profile");
         }
       },
@@ -44,9 +47,8 @@ export const options: NextAuthOptions = {
       name: "Credentials",
       credentials: {},
       async authorize(credentials: any): Promise<any | null> {
-       
         try {
-          connectToDatabase();         
+          connectToDatabase();
           const { email, password } = credentials;
 
           // Find user by email in your MongoDB database
@@ -67,24 +69,24 @@ export const options: NextAuthOptions = {
               image: user.image,
               email: user.email,
               role: user.role,
-              password:user.password,
-              stripe_customer_id: user.stripe_customer_id
+              password: user.password,
+              stripe_customer_id: user.stripe_customer_id,
             };
           }
         } catch (err: any) {
-          console.log("email auth error");
+          ("");
         }
       },
     }),
   ],
   callbacks: {
     async signIn(profile): Promise<any | null> {
-       connectToDatabase();
+      connectToDatabase();
       try {
         // Check if the user already exists in your database
         let existingUser = await User.findOne({ email: profile.user.email });
-        console.log("old user", existingUser?._doc);
-    
+
+
         if (!existingUser) {
           const newUser = new User({
             name: profile.user.name,
@@ -94,31 +96,30 @@ export const options: NextAuthOptions = {
             stripe_customer_id: "",
             password: "Google User",
           });
-          console.log(newUser);
+
           // Save the new user to the database
           await newUser.save();
-    
+
           // Update the existingUser with the newly created user
           existingUser = newUser;
         }
-    
+
         return {
           name: existingUser.name,
           image: existingUser.image,
           email: existingUser.email,
           role: existingUser.role,
           password: existingUser.password,
-          stripe_customer_id: existingUser.stripe_customer_id
+          stripe_customer_id: existingUser.stripe_customer_id,
         };
       } catch (error) {
-        console.error("Google sign-in error:", error);
+
         return Promise.resolve(false);
       }
     },
 
     jwt({ token, user }) {
       return { ...token, ...user };
-
     },
     session({ session, token }) {
       session.user.role = token?.role || session.user.role;

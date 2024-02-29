@@ -52,11 +52,9 @@ export async function POST(request: NextRequest) {
           { new: true }
         );
 
-        console.log("Package updated with new price:", newPackagePrice);
         return NextResponse.json({ success: "Package Updated Successfully" });
       } else {
-        // If the prices are the same, return
-        console.log("Package price is already up to date:", newPackagePrice);
+
         return NextResponse.json({ message: "Package price is already up to date" });
       }
     } else {
@@ -70,12 +68,9 @@ export async function POST(request: NextRequest) {
 
       const newPackage = new Package(packageData);
       await newPackage.save();
-
-      console.log("New package created with price:", newPackagePrice);
       return NextResponse.json({ success: "Package Activated Successfully" });
     }
   } catch (error) {
-    console.error("Error during package activation:", error);
     return NextResponse.json({ error: "Something went wrong! Try Again!" });
   }
 }

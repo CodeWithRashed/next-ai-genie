@@ -1,5 +1,3 @@
-// Import necessary modules and functions
-import { connectToDatabase } from "@/db/dbConfig";
 import { getPackageData } from "@/helpers/getPackageData";
 import Package from "@/models/packageModels";
 import axios from "axios";
@@ -62,7 +60,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(result);
   } catch (error) {
-    console.error("Error during generating audio:", error);
+
     return NextResponse.json({ error: "Something went wrong! Try Again!" });
   }
 }

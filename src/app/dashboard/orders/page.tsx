@@ -1,6 +1,4 @@
 import { getOrdersData } from "@/helpers/getOrdersData";
-import Image from "next/image";
-
 const OrdersPage = async () => {
   const orders = await getOrdersData();
   return (

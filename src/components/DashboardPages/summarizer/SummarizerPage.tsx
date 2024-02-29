@@ -17,7 +17,7 @@ const SummarizerPage = () => {
     setLoading(true);
 
     const prompt = e.target.elements.input.value;
-    console.log(prompt);
+
 
     const res = await axios.post("/api/summarizer", { prompt });
     const result = res.data.result;
@@ -27,7 +27,6 @@ const SummarizerPage = () => {
       setPromptError(res.data.error);
     }
     e.target.reset();
-    console.log(res);
     setLoading(false);
   };
 

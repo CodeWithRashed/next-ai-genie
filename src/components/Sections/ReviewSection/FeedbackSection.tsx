@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaLongArrowAltRight, FaRegStar, FaStar } from "react-icons/fa";
-import Rating from "react-rating";
+import { FaLongArrowAltRight } from "react-icons/fa";
 import { RatingComponent } from "./Ratting";
 
 const FeedbackSection = () => {

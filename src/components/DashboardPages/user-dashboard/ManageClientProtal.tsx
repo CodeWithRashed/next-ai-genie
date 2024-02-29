@@ -14,7 +14,6 @@ const ManageClientPortal = () => {
           setLoading(false);
         })
         .catch((error) => {
-          console.error("Error fetching customer portal link:", error);
           setLoading(false);
         });
     }, []);

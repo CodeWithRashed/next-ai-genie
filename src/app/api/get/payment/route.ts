@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
     data = await hasSubscription();
     return NextResponse.json({ success: "payment route hit", data });
   } catch (error) {
-    console.error(error);
+
     return NextResponse.json({
       error: "Something went wrong while getting payment data! Try Again!",
     });

@@ -44,10 +44,7 @@ export const UserRegisterFrom = () => {
         stripe_customer_id: ""
       };
 
-      console.log(rawFormData);
-
       const response = await axios.post("/api/user/register", rawFormData);
-      console.log(response);
 
       if (response.status === 200) {
         toast.success("Account Created Successfully! Redirecting");
@@ -208,7 +205,6 @@ export const UserLoginFrom = () => {
         }, 2000);
       }
     } finally {
-      console.log(isPending);
       setIsPending(false);
     }
   };

@@ -6,7 +6,6 @@ import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { MdDashboard } from "react-icons/md";
 import { options } from "../api/auth/[...nextauth]/options";
-import User from "@/models/userModels";
 import { GetUserData } from "@/helpers/getUserData";
 
 export const metadata: Metadata = {
@@ -23,7 +22,6 @@ export default async function RootLayout({
 
   const databaseUser: any = await GetUserData();
   const role = databaseUser?.role;
-  console.log(role)
 
   return (
     <div>

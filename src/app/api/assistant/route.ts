@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   try {
     // Parse the request body
     const reqBody = await request.json();
-    console.log("Received request body:", reqBody.prompt);
+
 
     if (!session?.user) {
       return NextResponse.json({ error: "Invalid Request" });
@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(result);
   } catch (error) {
-    console.error("Error during package activation:", error);
+
     return NextResponse.json({ error: "Something went wrong! Try Again!" });
   }
 }

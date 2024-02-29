@@ -7,14 +7,14 @@ export async function POST(request: NextRequest) {
     try {
      connectToDatabase()
       const reqBody = await request.json();
-      console.log("Received request body:", reqBody);
+
   
       // Check for Duplicate User
       const dbUser = await User.findOne({ email: reqBody.email });
   
       // Handle Existing User
       if (dbUser) {
-        console.log("User already exists:", dbUser);
+
         return NextResponse.json({ message: "User Already Exist!!" });
       }
   
@@ -32,17 +32,17 @@ export async function POST(request: NextRequest) {
         stripe_customer_id: ""
       });
   
-      console.log("New user object:", newUser);
+
   
       // Saving User
       const saveUser = await newUser.save();
   
-      console.log("User saved:", saveUser);
+
   
       // Send Response
       return NextResponse.json({ message: "User Created Successfully" });
     } catch (err: any) {
-      console.error("Error during signup:", err);
+
       return NextResponse.json({ error: "Something went wrong! Try Again!" });
     }
   }

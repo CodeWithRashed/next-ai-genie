@@ -18,7 +18,6 @@ const ImageGenerationPage = () => {
     e.preventDefault();
     setLoading(true);
     const prompt = e.target.elements.input.value;
-    console.log(prompt);
 
     const res = await axios.post("/api/text-to-image", { prompt });
     const result = res?.data?.result;
@@ -28,7 +27,6 @@ const ImageGenerationPage = () => {
       setPromptError(res.data.error);
     }
     e.target.reset();
-    console.log(res);
     setLoading(false);
   };
 

@@ -9,7 +9,6 @@ import Subscribe from "@/components/Sections/Subscribe/Subscribe";
 import WhyChooseUs from "@/components/Sections/WhyChooseUs/WhyChooseUs";
 import SectionTitle from "@/components/Shared/SectionTitle";
 import { GetUserData } from "@/helpers/getUserData";
-import { Toaster } from "react-hot-toast";
 
 export default async function Home() {
   const dbUserData = await GetUserData()

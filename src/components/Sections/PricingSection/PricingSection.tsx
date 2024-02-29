@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { FaRegCheckCircle } from "react-icons/fa";
 import FreePackage from "./FreePackage";
 import PremiumPackage from "./PremiumPackage";
 import GoldenPackage from "./GoldenPackage";

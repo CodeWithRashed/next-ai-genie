@@ -1,5 +1,3 @@
-// Import necessary modules and functions
-import { connectToDatabase } from "@/db/dbConfig";
 import { getPackageData } from "@/helpers/getPackageData";
 import Package from "@/models/packageModels";
 import axios from "axios";
@@ -14,7 +12,6 @@ export async function POST(request: NextRequest) {
 
     // Parse the request body
     const reqBody = await request.json();
-    console.log("Received request body:", reqBody);
 
     if (!session?.user) {
       return NextResponse.json({ error: "Invalid Request" });
@@ -65,7 +62,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(result);
   } catch (error) {
-    console.error("Error during Article Summarization:", error);
+
     return NextResponse.json({ error: "Something went wrong! Try Again!" });
   }
 }

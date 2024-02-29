@@ -16,17 +16,17 @@ const AssistantPage = () => {
     setLoading(true);
 
     const prompt = e.target.elements.input.value;
-    console.log(prompt);
+
 
     const res = await axios.post("/api/assistant", { prompt });
     const result = res.data.result;
     setResData(result);
-    console.log(result);
+
     if (res.data.error) {
       setPromptError(res.data.error);
     }
     e.target.reset();
-    console.log(res);
+
     setLoading(false);
   };
 

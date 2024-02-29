@@ -16,7 +16,6 @@ const AudioGenerationPage = () => {
     e.preventDefault();
     setLoading(true);
     const prompt = e.target.elements.input.value;
-    console.log(prompt);
 
     const res = await axios.post("/api/text-to-audio", { prompt });
     const result = res?.data?.result;
