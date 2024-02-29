@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 import dynamic from "next/dynamic";
 import React from "react";
@@ -24,7 +25,7 @@ const UserMainDashboard = () => {
       });
   }, []);
 
-const useParentage = (data?.promptUsed / data?.promptCount) * 100
+const useParentage = Math.round((data?.promptUsed / data?.promptCount) * 100)
   if (isLoading)
     return (
       <DashBoardLoading></DashBoardLoading>
