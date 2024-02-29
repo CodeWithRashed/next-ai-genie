@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     let data = null;
     let currentPackage = null;
 
-    if ("customer_portal_link") {
+    if (query == "customer_portal_link") {
       const stripeCustomerId = await createCustomerIfNull()
       data = await generateCustomerPortalLink(stripeCustomerId);
       return NextResponse.json({ success: "payment route hit", data });

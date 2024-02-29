@@ -24,7 +24,7 @@ const UserMainDashboard = () => {
       });
   }, []);
 
-  const promptUsed = 5
+const useParentage = (data?.promptUsed / data?.promptCount) * 100
   if (isLoading)
     return (
       <DashBoardLoading></DashBoardLoading>
@@ -35,13 +35,8 @@ const UserMainDashboard = () => {
     <div className="bg-gray-100 rounded-main overflow-hidden p-3">
       <div className="header grid md:grid-cols-2 lg:grid-cols-3 gap-3 mb-5">
         <DashboardDataCard title="Current Package" data={data?.packageName} />
-        <DashboardDataCard title="Available Prompt" data={data?.packageName} />
-        <div className="shadow-md p-5 rounded-main bg-white">
-          <p>Prompt Used</p>
-          <p className="text-5xl my-5 font-bold text-color-primary">
-            {promptUsed || "-"}
-          </p>
-        </div>
+        <DashboardDataCard title="Available Prompt" data={data?.promptCount - data?.promptUsed} />
+        <DashboardDataCard title="Prompt Count" data={data?.promptCount} />
       </div>
 
       {/* Data */}
@@ -49,7 +44,7 @@ const UserMainDashboard = () => {
         <div className="shadow-md p-5 rounded-main h-full w-full bg-white">
           <p>Prompt History</p>
           <div>
-            <ChartComp />
+            <ChartComp series={[useParentage]}/>
           </div>
         </div>
         <div className="shadow-md p-5 rounded-main h-full w-full bg-white flex flex-col justify-between">

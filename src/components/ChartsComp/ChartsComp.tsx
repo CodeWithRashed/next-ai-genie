@@ -8,7 +8,7 @@ class ChartComp extends Component {
 
     this.state = {
       options: {
-        labels: ["Median Ratio"],
+        labels: ["Prompt Used"],
 
         plotOptions: {
           radialBar: {
@@ -46,7 +46,7 @@ class ChartComp extends Component {
           dashArray: 4,
         },
       },
-      series: [68],
+      series: props.series || [1],
     };
   }
 
