@@ -3,7 +3,6 @@ import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 import loadingImage from "../../../assets/loading.gif";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const AssistantPage = () => {
