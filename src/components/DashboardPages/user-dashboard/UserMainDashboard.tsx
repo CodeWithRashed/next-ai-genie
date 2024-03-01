@@ -14,7 +14,6 @@ const ChartComp = dynamic(() => import("@/components/ChartsComp/ChartsComp"), {
 const UserMainDashboard = () => {
   const [data, setData] = React.useState(null);
   const [isLoading, setLoading] = React.useState(true);
-  const [paymentData, setPaymentData] = React.useState(null);
   const [customerPortalLink, setCustomerPortalLink] = React.useState(null);
 
   React.useEffect(() => {
@@ -24,15 +23,7 @@ const UserMainDashboard = () => {
         setData(data.packageData);
         setLoading(false);
       });
-    fetch("/api/get/payment")
-      .then((res) => res.json())
-      .then((data) => {
-        setPaymentData(data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setLoading(false);
-      });
+
     fetch("/api/get/payment?data=customer_portal_link")
       .then((res) => res.json())
       .then((data) => {
@@ -44,23 +35,30 @@ const UserMainDashboard = () => {
       });
   }, []);
 
-  const convertData = (timestamp) => {
-    let date = new Date(timestamp * 1000);
-
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
-    console.log(data);
-    console.log(timestamp);
-    console.log(date);
+  const convertDate = (timestamp) => {
+    const date = new Date(timestamp);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const seconds = date.getSeconds().toString().padStart(2, "0");
     return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
   };
 
-  const useParentage = Math.round((data?.promptUsed / data?.promptCount) * 100);
+  const addOneMonth = (timestamp) => {
+    const date = new Date(timestamp);
+    date.setMonth(date.getMonth() + 1);
+    return date;
+  };
+
   if (isLoading) return <DashBoardLoading></DashBoardLoading>;
+
+  const useParentage = Math.round((data?.promptUsed / data?.promptCount) * 100);
+  const subscribedAt = convertDate(data?.updatedAt);
+  const nextPaymentData = addOneMonth(data?.updatedAt);
+  const nextPaymentAt = convertDate(nextPaymentData);
+
   if (!data)
     return (
       <div className="overflow-hidden">
@@ -94,10 +92,8 @@ const UserMainDashboard = () => {
               <p>Payment History</p>
               <div className="p-2 border mt-3 rounded-main">
                 <p className="font-medium">Payment Successful</p>
-                <p>Subscribed at: {convertData(paymentData?.plan?.created)}</p>
-                <p>
-                  Next Payment Cycle: {convertData(paymentData?.current_period_end)}
-                </p>
+                <p>Subscribed at: {subscribedAt}</p>
+                <p>Next Payment Cycle: {nextPaymentAt}</p>
               </div>
             </div>
 
